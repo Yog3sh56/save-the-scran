@@ -1,2 +1,2 @@
-# save-the-scran
+# Save The Scran
 App for reducing the food waste
