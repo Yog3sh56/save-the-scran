@@ -1,6 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-camera=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\camera-0.7.0+2\\
-path_provider=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.27\\
-path_provider_linux=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
-path_provider_macos=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+8\\
-path_provider_windows=C:\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-0.0.4+3\\
+camera=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\camera-0.7.0+2\\
+firebase_analytics=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_analytics-5.0.16\\
+firebase_analytics_web=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_analytics_web-0.1.1\\
+firebase_core=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.5\\
+firebase_core_web=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
+path_provider=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.27\\
+path_provider_linux=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
+path_provider_macos=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+8\\
+path_provider_windows=D:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-0.0.4+3\\

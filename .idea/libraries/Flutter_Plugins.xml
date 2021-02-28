@@ -1,11 +1,15 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.7.0+2" />
-      <root url="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2" />
-      <root url="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+8" />
-      <root url="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.27" />
-      <root url="file://$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+3" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.7.0+2" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+3" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+8" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.27" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_analytics-5.0.16" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.5" />
+      <root url="file://D:/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_analytics_web-0.1.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
