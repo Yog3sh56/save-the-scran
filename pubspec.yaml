@@ -23,6 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.4.0+9
+  firebase_analytics: ^5.0.2
+
   camera:
   path_provider:
   path:
