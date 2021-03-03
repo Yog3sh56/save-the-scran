@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class CommunityMarketScreen extends StatelessWidget {
+
+  static const String id = "market_screen";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

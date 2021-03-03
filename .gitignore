@@ -5,7 +5,7 @@
 .packages
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+#pubspec.lock
 
 #Ignore .flutter-plugins
 .flutter-plugins

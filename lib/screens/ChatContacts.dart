@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ChatContacts extends StatelessWidget {
+class ChatScreen extends StatelessWidget {
+  static const String id = "chat_screen";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

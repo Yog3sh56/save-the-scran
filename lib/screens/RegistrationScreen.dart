@@ -1,13 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:save_the_scran/constants.dart';
+import 'package:save_the_scran/screens/FridgeScreen.dart';
+
+import '../main.dart';
+
 
 class RegistrationScreen extends StatefulWidget {
+
+  static const String id = "registration_screen";
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  String email, password;
+  String email, password,passwordRepeat, uid;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,55 +29,46 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           children: <Widget>[
             Container(
               height: 200.0,
-              child: Image.asset('images/logo.png'),
+              child: Image.asset('images/heartLogo.png'),
             ),
             SizedBox(
               height: 48.0,
             ),
             TextField(
+            style: TextStyle(color: Colors.black),
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               onChanged: (value) {
                 email = value;
               },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+              decoration:
+                  inputDecoration.copyWith(hintText: 'Enter your email')),
             SizedBox(
               height: 8.0,
             ),
             TextField(
+              style: TextStyle(color: Colors.black),
+              obscureText: true,
+              textAlign: TextAlign.center,
+              obscuringCharacter: "*",
               onChanged: (value) {
                 password = value;
               },
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
+              decoration: inputDecoration.copyWith(hintText: "Password")
+            ),
+
+                        SizedBox(
+              height: 8.0,
+            ),
+            TextField(
+              style: TextStyle(color: Colors.black),
+              obscureText: true,
+              textAlign: TextAlign.center,
+              obscuringCharacter: "*",
+              onChanged: (value) {
+                passwordRepeat = value;
+              },
+              decoration: inputDecoration.copyWith(hintText: "Repeat Password")
             ),
             SizedBox(
               height: 24.0,
@@ -81,16 +81,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async {
+
+                    /* removed registration as to not create too many users during testin
                     try {
                       final newUser =
                           await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
                       if (newUser != null) {
                         print("succesfull registration");
+                        uid = _auth.currentUser.uid;
+
+                        //create fridge for user
+                      
+                        print(uid);
+                        Navigator.popAndPushNamed(context, FridgeScreen.id);
                       }
                     } catch (e) {
                       print(e);
                     }
+                    */
+                    Navigator.pop(context);
                   },
                   minWidth: 200.0,
                   height: 42.0,

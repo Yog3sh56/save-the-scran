@@ -1,14 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'fridge/FridgeScreen.dart';
-import 'market/CommunityMarket.dart';
-import 'chat/ChatContacts.dart';
-import 'camera/TakePictureScreen.dart';
+import 'package:save_the_scran/screens/LoginScreen.dart';
+import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'screens/FridgeScreen.dart';
+import 'screens/CommunityMarket.dart';
+import 'screens/ChatContacts.dart';
+import 'screens/TakePictureScreen.dart';
 
 
 void main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -16,11 +20,12 @@ void main() async {
 
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
-
+  await Firebase.initializeApp();
   return runApp(MyApp(firstCamera));
 }
 
 class MyApp extends StatelessWidget{
+  static const String id = "my_app";
   final camera;
   MyApp(this.camera);
 
@@ -36,10 +41,13 @@ class MyApp extends StatelessWidget{
         // When navigating to the "/" route, build the FridgeScreen widget.
         // '/': (context) => MyBottomNavigationBar(),
         // When navigating to the "/market" route, build the SecondScreen widget.
-        '/market': (context) => CommunityMarketScreen(),
-        '/fridge': (context) => FridgeScreen(),
-        '/chat': (context) => ChatContacts(),
-        '/camera': (context) => TakePictureScreen(camera: camera),
+        MyApp.id: (context) => MyApp(context),
+        CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
+        FridgeScreen.id: (context) => FridgeScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
+        TakePictureScreen.id: (context) => TakePictureScreen(camera: camera),
+        RegistrationScreen.id: (context)=>RegistrationScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
       },
     );
   }
@@ -58,7 +66,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     FridgeScreen(),
     CommunityMarketScreen(),
-    ChatContacts(),
+    ChatScreen(),
+    LoginScreen(),
   ];
 
   void onTappedBar(int index){
@@ -82,15 +91,15 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         currentIndex: _index,
         items: [
           BottomNavigationBarItem(
-            title: Text('Fridge'),
+            label: 'Fridge',
             icon: Icon(Icons.kitchen),
           ),
           BottomNavigationBarItem(
-            title: Text('Market'),
+            label: 'Market',
             icon: Icon(Icons.storefront),
           ),
           BottomNavigationBarItem(
-            title: Text('Saviours'),
+          label:'Saviours',
             icon: Icon(Icons.chat),
           ),
         ],
