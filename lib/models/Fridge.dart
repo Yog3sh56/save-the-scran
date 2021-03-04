@@ -10,9 +10,6 @@ class Fridge {
   Fridge(this.ownerId) {
     this.items = new List<Item>();
   }
-
-
-
   //get for fridge items (unordered)
   List<Item> get getItems => this.items;
 }

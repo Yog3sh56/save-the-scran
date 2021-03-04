@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
+import 'package:save_the_scran/models/Fridge.dart';
+import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
 
 import '../main.dart';
@@ -15,8 +18,23 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+
+  //firebase instances
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
+  //variables to store
   String email, password,passwordRepeat, uid;
+
+  void addMockItems(String uid){
+    List<String> items = ["yoghurt","milk","bread","cheese","lasagna","pizza"];
+    for (var i in items){
+      Item item = Item(uid,i);
+      _firestore.collection("items").add({"ownerid":uid,"name":i,"buyDate":item.buyDate,"expiryDate":item.expiry});
+    }
+  }
+
+  //build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +100,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: MaterialButton(
                   onPressed: () async {
 
-                    /* removed registration as to not create too many users during testin
+                    //removed registration as to not create too many users during testin
                     try {
                       final newUser =
                           await _auth.createUserWithEmailAndPassword(
@@ -91,15 +109,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         print("succesfull registration");
                         uid = _auth.currentUser.uid;
 
-                        //create fridge for user
-                      
+                        addMockItems(uid);
+
                         print(uid);
                         Navigator.popAndPushNamed(context, FridgeScreen.id);
                       }
                     } catch (e) {
                       print(e);
                     }
-                    */
+                    
                     Navigator.pop(context);
                   },
                   minWidth: 200.0,
