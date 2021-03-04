@@ -24,6 +24,8 @@ class _FridgeScreenState extends State<FridgeScreen>{
     final _firestore = FirebaseFirestore.instance;
     User loggedInUser;
 
+
+  //basic example of how objects are fetched
   void getUserItems() async{
     final userItems = await _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).get();
     for (var item in userItems.docs){
@@ -32,6 +34,8 @@ class _FridgeScreenState extends State<FridgeScreen>{
   }
 
 
+
+  //example of how streams are handled
   void itemStream() async{
     //_firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()
     await for(var snapshot in _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()){
@@ -41,6 +45,8 @@ class _FridgeScreenState extends State<FridgeScreen>{
     }
   }
 
+
+  //add item function
   void addItem() {
     Item i = Item(_auth.currentUser.uid,"asyncFood");
     _firestore.collection("items").add({"ownerid":i.ownerid,"name":i.name,"buyDate":i.buyDate,"expiryDate":i.expiry});
@@ -70,11 +76,7 @@ class _FridgeScreenState extends State<FridgeScreen>{
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //Navigator.pushNamed(context, TakePictureScreen.id);
-          //_auth.currentUser.uid;
-          //Future<QuerySnapshot> userFridge = _firestore.collection("fridges").where("ownerid",isEqualTo: _auth.currentUser.uid).get();
-          //getUserItems();
-          //itemStream();
+          Navigator.pushNamed(context, TakePictureScreen.id);
           addItem();
           
         },
