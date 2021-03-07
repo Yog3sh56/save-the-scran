@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_scran/models/Fridge.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
-import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';
+import 'package:save_the_scran/widgets/FoodWidget.dart';
 
 
 
@@ -77,7 +76,7 @@ class _FridgeScreenState extends State<FridgeScreen>{
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, TakePictureScreen.id);
-          addItem();
+          //addItem();
           
         },
         child: Icon(Icons.add),
@@ -96,22 +95,29 @@ class _FridgeScreenState extends State<FridgeScreen>{
             stream: _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots(),
             //the builder takes in the stream
             builder: (context,snapshot){
+               List<Widget> itemText = [];
               //make sure snapshot has data
               if (snapshot.hasData){
                 //declare vars
                 final snapshotDocs = snapshot.data.docs;
                 List<Item> itemsList = [];
-                List<Widget> itemText = [];
-
+              
                 //parse data
                 for (var item in snapshotDocs){
+                  
+
+                  
 
                   Item i = Item(item['ownerid'],item['name'],buyDate: item['buyDate'].toDate(),expiry:item['expiryDate'].toDate());
                   itemsList.add(i);
-                  itemText.add(Text(item['name']));
+                  final fw = FoodWidget(name: i.name,expiry: i.expiry,bought: i.buyDate);
+                  itemText.add(fw);
+                  //itemText.add(Text(item['name']));
                 }
-                return Column(children: itemText);
+                return ListView(children: itemText);
               }
+              return ListView(children: itemText);
+              
             }),
             
           
