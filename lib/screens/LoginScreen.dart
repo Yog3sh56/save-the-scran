@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
-import 'package:save_the_scran/screens/FridgeScreen.dart';
+
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 
-import '../main.dart';
+
+
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";

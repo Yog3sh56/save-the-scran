@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
+import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
 
-import '../main.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
@@ -13,8 +14,28 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+
+  //firebase instances
   final _auth = FirebaseAuth.instance;
+<<<<<<< HEAD
   String email, password, passwordRepeat, uid;
+=======
+  final _firestore = FirebaseFirestore.instance;
+
+  //variables to store
+  String email, password,passwordRepeat, uid;
+
+  void addMockItems(String uid){
+    List<String> items = ["yoghurt","milk","bread","cheese","lasagna","pizza"];
+    for (var i in items){
+      Item item = Item(uid,i);
+      _firestore.collection("items").add({"ownerid":uid,"name":i,"buyDate":item.buyDate,"expiryDate":item.expiry});
+    }
+  }
+
+  //build
+  @override
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -76,7 +97,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async {
+<<<<<<< HEAD
                     // removed registration as to not create too many users during testin
+=======
+
+                    //removed registration as to not create too many users during testin
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                     try {
                       if (password != passwordRepeat) {
                         showDialog(
@@ -98,6 +124,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           print("succesfull registration");
                           uid = _auth.currentUser.uid;
 
+<<<<<<< HEAD
                           //create fridge for user
 
                           print(uid);
@@ -135,11 +162,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 });
                             print("Password is too weak");
                           }
+=======
+                        addMockItems(uid);
+
+                        print(uid);
+                        Navigator.popAndPushNamed(context, FridgeScreen.id);
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                       }
                     } catch (e) {
                       print(e);
                     }
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                     Navigator.pop(context);
                   },
                   minWidth: 200.0,

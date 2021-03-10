@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget{
         // When navigating to the "/" route, build the FridgeScreen widget.
         // '/': (context) => MyBottomNavigationBar(),
         // When navigating to the "/market" route, build the SecondScreen widget.
-        MyApp.id: (context) => MyApp(context),
+        MyApp.id:(context) => MyApp(context),
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),
         ChatScreen.id: (context) => ChatScreen(),
