@@ -6,9 +6,7 @@ import 'package:save_the_scran/screens/RegistrationScreen.dart';
 
 import '../main.dart';
 
-
 class LoginScreen extends StatefulWidget {
-
   static const String id = "login_screen";
 
   @override
@@ -36,27 +34,26 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextField(
-            style: TextStyle(color: Colors.black),
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
-              decoration:
-                  inputDecoration.copyWith(hintText: 'Enter your email')),
+                style: TextStyle(color: Colors.black),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration:
+                    inputDecoration.copyWith(hintText: 'Enter your email')),
             SizedBox(
               height: 8.0,
             ),
             TextField(
-              style: TextStyle(color: Colors.black),
-              obscureText: true,
-              textAlign: TextAlign.center,
-              obscuringCharacter: "*",
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: inputDecoration.copyWith(hintText: "Password")
-            ),
+                style: TextStyle(color: Colors.black),
+                obscureText: true,
+                textAlign: TextAlign.center,
+                obscuringCharacter: "*",
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: inputDecoration.copyWith(hintText: "Password")),
             SizedBox(
               height: 24.0,
             ),
@@ -69,17 +66,45 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: MaterialButton(
                   onPressed: () async {
                     try {
-                      final user =
-                          await _auth.signInWithEmailAndPassword(email: email, password: password);
-                              
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+
                       if (user != null) {
                         print("succesfull login");
                         Navigator.pop(context);
-                                  
-                                  
-
-
-
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      switch (e.code) {
+                        case "user-not-found":
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Container(
+                                      child: Text(
+                                          "No account exists associated with provided email."),
+                                    ),
+                                  );
+                                });
+                            print("Wrong email provided");
+                          }
+                          break;
+                        case "wrong-password":
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Container(
+                                      child:
+                                          Text("Password Invalid. Try again."),
+                                    ),
+                                  );
+                                });
+                            print("Wrong password provided");
+                          }
+                          break;
                       }
                     } catch (e) {
                       print(e);
@@ -95,11 +120,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             new GestureDetector(
-          onTap: () {
-              Navigator.popAndPushNamed(context, RegistrationScreen.id);
-            },
-            child: new Text("Don't have an account? Register here"),
-          )
+              onTap: () {
+                Navigator.popAndPushNamed(context, RegistrationScreen.id);
+              },
+              child: new Text("Don't have an account? Register here"),
+            )
           ],
         ),
       ),
