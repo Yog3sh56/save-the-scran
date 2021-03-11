@@ -86,8 +86,8 @@ class FoodWidgetProfile extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.person),
-                          Text("Message Owner"),
+                          Icon(Icons.home),
+                          Text("Return to Fridge"),
                         ],
                       ),
                       onTap: () {

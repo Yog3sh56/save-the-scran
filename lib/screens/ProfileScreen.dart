@@ -71,6 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
+            Text("Items in Community",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
             Expanded(
                           child: StreamBuilder(
                   //the stream provides a snapshot, to pass onto the builder
@@ -101,11 +102,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         itemText.add(fw);
                         //itemText.add(Text(item['name']));
                       }
+                      if (itemsList.length == 0){
+                        return Text("no items in market, you can add them from your fridge");
+                      }
                       return ListView(
                         children: itemText,
                       );
                     }
-                    return ListView(children: itemText);
+                    else{
+                      return Text("no items");
+                    }
+                    
                   }),
             ),
           ],
