@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
+import 'package:save_the_scran/screens/LoginScreen.dart';
 
 
 
@@ -22,13 +23,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _firestore = FirebaseFirestore.instance;
 
   //variables to store
-  String email, password,passwordRepeat, uid;
+  String email,password,passwordRepeat,uid;
 
   void addMockItems(String uid){
     List<String> items = ["yoghurt","milk","bread","cheese","lasagna","pizza"];
     for (var i in items){
       Item item = Item(uid,i);
-      _firestore.collection("items").add({"ownerid":uid,"name":i,"buyDate":item.buyDate,"expiryDate":item.expiry});
+      _firestore.collection("items").add({"ownerid":uid,"name":i,"buyDate":item.buyDate,"expiryDate":item.expiry,"inCommunity":false});
     }
   }
 
@@ -36,6 +37,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+       appBar: AppBar(
+        
+        backgroundColor: Color(0xFF00E676),
+        title: Text("Community Market", style: TextStyle(color: Colors.white)),
+      ),
+
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -86,9 +94,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               },
               decoration: inputDecoration.copyWith(hintText: "Repeat Password")
             ),
-            SizedBox(
-              height: 24.0,
-            ),
+
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
@@ -124,9 +130,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
+                  
                 ),
               ),
             ),
+            GestureDetector(
+                    child:Text("Already have an account? Login",textAlign: TextAlign.center),
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, LoginScreen.id);
+                    }
+                  ),
           ],
         ),
       ),

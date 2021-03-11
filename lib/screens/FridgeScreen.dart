@@ -22,11 +22,12 @@ class _FridgeScreenState extends State<FridgeScreen>{
     final _auth = FirebaseAuth.instance;
     final _firestore = FirebaseFirestore.instance;
     User loggedInUser;
+    
 
 
   //basic example of how objects are fetched
   void getUserItems() async{
-    final userItems = await _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).get();
+    final userItems = await _firestore.collection("items").where("ownerid",isEqualTo: (_auth.currentUser==null)?"":_auth.currentUser.uid).get();
     for (var item in userItems.docs){
       print(item.data());
     }
@@ -37,7 +38,7 @@ class _FridgeScreenState extends State<FridgeScreen>{
   //example of how streams are handled
   void itemStream() async{
     //_firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()
-    await for(var snapshot in _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()){
+    await for(var snapshot in _firestore.collection("items").where("ownerid",isEqualTo:  (_auth.currentUser==null)?"":_auth.currentUser.uid).snapshots()){
       for (var i in snapshot.docs){
         print(i.data());
       }
@@ -47,9 +48,10 @@ class _FridgeScreenState extends State<FridgeScreen>{
 
   //add item function
   void addItem() {
-    Item i = Item(_auth.currentUser.uid,"asyncFood");
-    _firestore.collection("items").add({"ownerid":i.ownerid,"name":i.name,"buyDate":i.buyDate,"expiryDate":i.expiry});
+    Item i = Item((_auth.currentUser==null)?"":_auth.currentUser.uid,"asyncFood");
+    _firestore.collection("items").add({"ownerid":i.ownerid,"name":i.name,"buyDate":i.buyDate,"expiryDate":i.expiry,"inCommunity":i.inCommunity});
   }
+
 
 
 
@@ -65,7 +67,7 @@ class _FridgeScreenState extends State<FridgeScreen>{
         backgroundColor: Color(0xFF00E676),
         title: Text('My Fridge', style: TextStyle(color: Colors.white)),
         actions: [IconButton(icon: Icon(Icons.person), onPressed:(){ 
-          if (loggedInUser == null){
+          if (_auth.currentUser == null){
             Navigator.pushNamed(context,LoginScreen.id);
           }
           else{Navigator.pushNamed(context,ProfileScreen.id);}
@@ -92,7 +94,7 @@ class _FridgeScreenState extends State<FridgeScreen>{
           // ),
           child: StreamBuilder(
             //the stream provides a snapshot, to pass onto the builder
-            stream: _firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots(),
+            stream: _firestore.collection("items").where("ownerid",isEqualTo: (_auth.currentUser==null)?"":_auth.currentUser.uid).where("inCommunity",isEqualTo: false).snapshots(),
             //the builder takes in the stream
             builder: (context,snapshot){
                List<Widget> itemText = [];
@@ -104,17 +106,16 @@ class _FridgeScreenState extends State<FridgeScreen>{
               
                 //parse data
                 for (var item in snapshotDocs){
+                  Item i = Item(item['ownerid'],item['name'],buyDate: item['buyDate'].toDate(),expiry:item['expiryDate'].toDate(),inCommunity: item['inCommunity']);
                   
-
-                  
-
-                  Item i = Item(item['ownerid'],item['name'],buyDate: item['buyDate'].toDate(),expiry:item['expiryDate'].toDate());
                   itemsList.add(i);
-                  final fw = FoodWidget(name: i.name,expiry: i.expiry,bought: i.buyDate);
+                  String objectId = item.id;
+                  
+                  final fw = FoodWidget(item:i,id: objectId);
                   itemText.add(fw);
                   //itemText.add(Text(item['name']));
                 }
-                return ListView(children: itemText);
+                
               }
               return ListView(children: itemText);
               

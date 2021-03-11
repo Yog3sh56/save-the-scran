@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
+import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
@@ -27,6 +29,7 @@ void main() async {
 class MyApp extends StatelessWidget{
   static const String id = "my_app";
   final camera;
+  
   MyApp(this.camera);
 
   @override
@@ -48,6 +51,7 @@ class MyApp extends StatelessWidget{
         TakePictureScreen.id: (context) => TakePictureScreen(camera: camera),
         RegistrationScreen.id: (context)=>RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        ProfileScreen.id: (context) => ProfileScreen(),
       },
     );
   }
@@ -62,18 +66,20 @@ class MyBottomNavigationBar extends StatefulWidget{
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+  final _auth = FirebaseAuth.instance;
+
+
   int _index = 0;
   final List<Widget> _children = [
     FridgeScreen(),
     CommunityMarketScreen(),
     ChatScreen(),
-    LoginScreen(),
   ];
 
   void onTappedBar(int index){
-    setState(() {
-      _index = index;
-    });
+      setState(() {
+        _index = index;
+      });
   }
 
   @override

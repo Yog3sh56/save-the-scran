@@ -5,8 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/models/Item.dart';
 
-// ignore: must_be_immutable
-class FoodWidget extends StatelessWidget{
+class FoodWidgetMarket extends StatelessWidget{
 
   final _firestore = FirebaseFirestore.instance;
 
@@ -16,7 +15,7 @@ class FoodWidget extends StatelessWidget{
   double foodProgress;
   Color progressColor;
 
-  FoodWidget({this.item,this.id}); 
+  FoodWidgetMarket({this.item,this.id}); 
 
 
   void setExpiryProgress(){
@@ -42,30 +41,7 @@ class FoodWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     setExpiryProgress();
-    return Dismissible(
-      background: Padding(
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child:Container(
-          padding: EdgeInsets.all(20),
-          alignment: AlignmentDirectional.centerStart,
-          child: Icon(Icons.delete),
-          color:Colors.red
-        )
-      ),
-      secondaryBackground: Padding(
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child:Container(
-          padding: EdgeInsets.all(20),
-          alignment: AlignmentDirectional.centerEnd,
-          child: Icon(Icons.delete),
-          color:Colors.red
-        )
-      ),
-      key: UniqueKey(),
-      onDismissed:(DismissDirection direction){
-         _firestore.collection("items").doc(id).delete();
-      },
-      child:Card(
+    return Card(
         margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
         child: Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
           child:Column(
@@ -118,7 +94,7 @@ class FoodWidget extends StatelessWidget{
           )
         )
       )
-    );
+    ;
   }
 
 }
