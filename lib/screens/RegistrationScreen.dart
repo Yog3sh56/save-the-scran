@@ -7,9 +7,7 @@ import 'package:save_the_scran/screens/FridgeScreen.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 
 
-
 class RegistrationScreen extends StatefulWidget {
-
   static const String id = "registration_screen";
 
   @override
@@ -20,6 +18,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   //firebase instances
   final _auth = FirebaseAuth.instance;
+<<<<<<< HEAD
+  String email, password, passwordRepeat, uid;
+=======
   final _firestore = FirebaseFirestore.instance;
 
   //variables to store
@@ -35,6 +36,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   //build
   @override
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
   Widget build(BuildContext context) {
     return Scaffold(
 
@@ -59,32 +61,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
-            style: TextStyle(color: Colors.black),
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
-              decoration:
-                  inputDecoration.copyWith(hintText: 'Enter your email')),
+                style: TextStyle(color: Colors.black),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration:
+                    inputDecoration.copyWith(hintText: 'Enter your email')),
             SizedBox(
               height: 8.0,
             ),
             TextField(
-              style: TextStyle(color: Colors.black),
-              obscureText: true,
-              textAlign: TextAlign.center,
-              obscuringCharacter: "*",
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: inputDecoration.copyWith(hintText: "Password")
-            ),
-
-                        SizedBox(
+                style: TextStyle(color: Colors.black),
+                obscureText: true,
+                textAlign: TextAlign.center,
+                obscuringCharacter: "*",
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: inputDecoration.copyWith(hintText: "Password")),
+            SizedBox(
               height: 8.0,
             ),
             TextField(
+<<<<<<< HEAD
               style: TextStyle(color: Colors.black),
               obscureText: true,
               textAlign: TextAlign.center,
@@ -95,6 +96,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               decoration: inputDecoration.copyWith(hintText: "Repeat Password")
             ),
 
+=======
+                style: TextStyle(color: Colors.black),
+                obscureText: true,
+                textAlign: TextAlign.center,
+                obscuringCharacter: "*",
+                onChanged: (value) {
+                  passwordRepeat = value;
+                },
+                decoration:
+                    inputDecoration.copyWith(hintText: "Repeat Password")),
+            SizedBox(
+              height: 24.0,
+            ),
+>>>>>>> 7b0eccba397894a68ab5f828fc04be85f3819033
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
@@ -103,25 +118,86 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async {
+<<<<<<< HEAD
+                    // removed registration as to not create too many users during testin
+=======
 
                     //removed registration as to not create too many users during testin
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                     try {
-                      final newUser =
-                          await _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
-                      if (newUser != null) {
-                        print("succesfull registration");
-                        uid = _auth.currentUser.uid;
+                      if (password != passwordRepeat) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: Container(
+                                  child: Text("The passwords do not match"),
+                                ),
+                              );
+                            });
+                        print("Password do not match");
+                      } else {
+                        final newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                                email: email, password: password);
 
+                        if (newUser != null) {
+                          print("succesfull registration");
+                          uid = _auth.currentUser.uid;
+
+<<<<<<< HEAD
+                          //create fridge for user
+
+                          print(uid);
+                          Navigator.popAndPushNamed(context, FridgeScreen.id);
+                        }
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      switch (e.code) {
+                        case "email-already-in-use":
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Container(
+                                      child:
+                                          Text("The email is already in use."),
+                                    ),
+                                  );
+                                });
+                            print("Email already in use");
+                          }
+                          break;
+                        case "weak-password":
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Container(
+                                      child: Text(
+                                          "The password has to be atleast 6 characters"),
+                                    ),
+                                  );
+                                });
+                            print("Password is too weak");
+                          }
+=======
                         addMockItems(uid);
 
                         print(uid);
                         Navigator.popAndPushNamed(context, FridgeScreen.id);
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                       }
                     } catch (e) {
                       print(e);
                     }
+<<<<<<< HEAD
+
+=======
                     
+>>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                     Navigator.pop(context);
                   },
                   minWidth: 200.0,
