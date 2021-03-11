@@ -71,7 +71,6 @@ class _FridgeScreenState extends State<FridgeScreen>{
             Navigator.pushNamed(context,LoginScreen.id);
           }
           else{Navigator.pushNamed(context,ProfileScreen.id);}
-
           })],
       ),
 
@@ -85,13 +84,6 @@ class _FridgeScreenState extends State<FridgeScreen>{
         backgroundColor: Color(0xFFFF4081),
       ),
       body: Center(
-          // child: ElevatedButton(
-          //   child: Text('Community Market'),
-          //   onPressed: () {
-          //     // Navigate to the second screen using a named route.
-          //     Navigator.pushNamed(context, '/market');
-          //   },
-          // ),
           child: StreamBuilder(
             //the stream provides a snapshot, to pass onto the builder
             stream: _firestore.collection("items").where("ownerid",isEqualTo: (_auth.currentUser==null)?"":_auth.currentUser.uid).where("inCommunity",isEqualTo: false).snapshots(),
@@ -107,15 +99,11 @@ class _FridgeScreenState extends State<FridgeScreen>{
                 //parse data
                 for (var item in snapshotDocs){
                   Item i = Item(item['ownerid'],item['name'],buyDate: item['buyDate'].toDate(),expiry:item['expiryDate'].toDate(),inCommunity: item['inCommunity']);
-                  
                   itemsList.add(i);
                   String objectId = item.id;
-                  
                   final fw = FoodWidget(item:i,id: objectId);
                   itemText.add(fw);
-                  //itemText.add(Text(item['name']));
                 }
-                
               }
               return ListView(children: itemText);
               

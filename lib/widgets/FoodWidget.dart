@@ -43,8 +43,9 @@ class FoodWidget extends StatelessWidget{
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Dismissible(
+      
       background: Padding(
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+        padding: EdgeInsets.fromLTRB(5, 8, 0,8),
         child:Container(
           padding: EdgeInsets.all(20),
           alignment: AlignmentDirectional.centerStart,
@@ -53,7 +54,7 @@ class FoodWidget extends StatelessWidget{
         )
       ),
       secondaryBackground: Padding(
-        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+        padding: EdgeInsets.fromLTRB(5, 8, 0,8),
         child:Container(
           padding: EdgeInsets.all(20),
           alignment: AlignmentDirectional.centerEnd,
@@ -67,46 +68,57 @@ class FoodWidget extends StatelessWidget{
       },
       child:Card(
         margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-        child: Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           child:Column(
             children:[
             Row(
+            
             mainAxisSize: MainAxisSize.max,
               children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: new BoxDecoration(
-                    color: progressColor,
-                    shape: BoxShape.circle,
-                  ),),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: new BoxDecoration(
+                      color: progressColor,
+                      shape: BoxShape.circle,
+                    ),),
+                ),
                 Padding(padding: EdgeInsets.only(left: 15)),
-                Text(item.name),
+                
+                Expanded(
+                  flex: 1,
+                  child: Text(item.name)
+                ),
                 Padding(padding: EdgeInsets.only(left: 15)),
-                Column(children: [
-                  Text("Expiry"),
-                  Text(item.expiry.day.toString() +"/"+ item.expiry.month.toString()+"/"+item.expiry.year.toString()),
-                ],),  
+                Expanded(flex: 1,
+                  child: Column(
+                  children: [
+                    Text("Expiry"),
+                    Text(
+                      item.expiry.day.toString() +"/"+ item.expiry.month.toString()+"/"+item.expiry.year.toString(),
+                      style: TextStyle(fontSize: 11),
+                    ),
+                  ],),
+                ),  
                 Padding(padding: EdgeInsets.only(right: 40)),
                 
-              InkResponse(
+                Expanded(flex: 2,
+                  child: InkResponse(
                   radius: 50,
-                  child:
-                Column(mainAxisAlignment: MainAxisAlignment.end,
-                  
+                  child: Column(mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                  (item.inCommunity) ? Icon(Icons.person) : Icon(Icons.storefront),
-                  (item.inCommunity) ? Text("Message Owner") : Text("Send to community"),
-                ],),
-                onTap: (
-                
-                ){
-                  bool changeTo = true;
-                  if(item.inCommunity) changeTo = false;
-                  _firestore.collection("items").doc(id).update({"inCommunity":changeTo});
-                })
-                
-                
+                    Icon(Icons.storefront),
+                    Text("Send to community"),
+                  ],),
+                  onTap: (){
+                    bool changeTo = true;
+                    if(item.inCommunity) changeTo = false;
+                    _firestore.collection("items").doc(id).update({"inCommunity":changeTo});
+                  }),
+                )
               ]
             ),
             Padding(padding: EdgeInsets.only(bottom:20)),
