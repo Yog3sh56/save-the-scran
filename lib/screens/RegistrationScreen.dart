@@ -6,7 +6,6 @@ import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 
-
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
 
@@ -15,37 +14,42 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
   //firebase instances
   final _auth = FirebaseAuth.instance;
-<<<<<<< HEAD
-  String email, password, passwordRepeat, uid;
-=======
   final _firestore = FirebaseFirestore.instance;
 
   //variables to store
-  String email,password,passwordRepeat,uid;
+  String email, password, passwordRepeat, uid;
 
-  void addMockItems(String uid){
-    List<String> items = ["yoghurt","milk","bread","cheese","lasagna","pizza"];
-    for (var i in items){
-      Item item = Item(uid,i);
-      _firestore.collection("items").add({"ownerid":uid,"name":i,"buyDate":item.buyDate,"expiryDate":item.expiry,"inCommunity":false});
+  void addMockItems(String uid) {
+    List<String> items = [
+      "yoghurt",
+      "milk",
+      "bread",
+      "cheese",
+      "lasagna",
+      "pizza"
+    ];
+    for (var i in items) {
+      Item item = Item(uid, i);
+      _firestore.collection("items").add({
+        "ownerid": uid,
+        "name": i,
+        "buyDate": item.buyDate,
+        "expiryDate": item.expiry,
+        "inCommunity": false
+      });
     }
   }
 
   //build
   @override
->>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
   Widget build(BuildContext context) {
     return Scaffold(
-
-       appBar: AppBar(
-        
+      appBar: AppBar(
         backgroundColor: Color(0xFF00E676),
         title: Text("Community Market", style: TextStyle(color: Colors.white)),
       ),
-
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -58,7 +62,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Image.asset('images/heartLogo.png'),
             ),
             SizedBox(
-              height: 48.0,
+              height: 43.0,
             ),
             TextField(
                 style: TextStyle(color: Colors.black),
@@ -85,18 +89,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
-<<<<<<< HEAD
-              style: TextStyle(color: Colors.black),
-              obscureText: true,
-              textAlign: TextAlign.center,
-              obscuringCharacter: "*",
-              onChanged: (value) {
-                passwordRepeat = value;
-              },
-              decoration: inputDecoration.copyWith(hintText: "Repeat Password")
-            ),
-
-=======
                 style: TextStyle(color: Colors.black),
                 obscureText: true,
                 textAlign: TextAlign.center,
@@ -109,7 +101,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 24.0,
             ),
->>>>>>> 7b0eccba397894a68ab5f828fc04be85f3819033
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
@@ -118,22 +109,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () async {
-<<<<<<< HEAD
-                    // removed registration as to not create too many users during testin
-=======
-
                     //removed registration as to not create too many users during testin
->>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
+
                     try {
                       if (password != passwordRepeat) {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                content: Container(
-                                  child: Text("The passwords do not match"),
-                                ),
-                              );
+                                  content: Container(
+                                    child: Text("The passwords do not match."),
+                                  ),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop(); // dismisses only the dialog and returns nothing
+                                      },
+                                      child: new Text('OK'),
+                                    ),
+                                  ]);
                             });
                         print("Password do not match");
                       } else {
@@ -145,9 +141,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           print("succesfull registration");
                           uid = _auth.currentUser.uid;
 
-<<<<<<< HEAD
                           //create fridge for user
-
                           print(uid);
                           Navigator.popAndPushNamed(context, FridgeScreen.id);
                         }
@@ -183,21 +177,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 });
                             print("Password is too weak");
                           }
-=======
-                        addMockItems(uid);
 
-                        print(uid);
-                        Navigator.popAndPushNamed(context, FridgeScreen.id);
->>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
+                          addMockItems(uid);
+
+                          print(uid);
+                          Navigator.popAndPushNamed(context, FridgeScreen.id);
                       }
                     } catch (e) {
                       print(e);
                     }
-<<<<<<< HEAD
-
-=======
-                    
->>>>>>> 89cf685c2d76ee0fbacd77514a00f7b607e4110b
                     Navigator.pop(context);
                   },
                   minWidth: 200.0,
@@ -206,16 +194,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
-                  
                 ),
               ),
             ),
             GestureDetector(
-                    child:Text("Already have an account? Login",textAlign: TextAlign.center),
-                    onTap: () {
-                      Navigator.popAndPushNamed(context, LoginScreen.id);
-                    }
-                  ),
+                child: Text("Already have an account? Login",
+                    textAlign: TextAlign.center),
+                onTap: () {
+                  Navigator.popAndPushNamed(context, LoginScreen.id);
+                }),
           ],
         ),
       ),
