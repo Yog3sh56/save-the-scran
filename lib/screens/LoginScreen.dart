@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
+import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 
@@ -68,43 +69,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: MaterialButton(
                     onPressed: () async {
                       try {
-                        final user = await _auth.signInWithEmailAndPassword(
-                            email: email, password: password);
+                        if (email.isEmpty || !EmailValidator.validate(email)) {
+                          showAlert("Please type in valid email");
+                        } else {
+                          final user = await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
 
-                        if (user != null) {
-                          print("succesfull login");
-                          Navigator.pop(context);
+                          if (user != null) {
+                            print("succesfull login");
+                            Navigator.pop(context);
+                          }
                         }
                       } on FirebaseAuthException catch (e) {
                         switch (e.code) {
                           case "user-not-found":
                             {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      content: Container(
-                                        child: Text(
-                                            "No account exists associated with provided email."),
-                                      ),
-                                    );
-                                  });
-                              print("Wrong email provided");
+                              showAlert(
+                                  "No account exists associated with provided email.");
                             }
                             break;
                           case "wrong-password":
                             {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      content: Container(
-                                        child: Text(
-                                            "Password Invalid. Try again."),
-                                      ),
-                                    );
-                                  });
-                              print("Wrong password provided");
+                              showAlert("Password Invalid. Try again.");
                             }
                             break;
                         }
@@ -131,5 +117,31 @@ class _LoginScreenState extends State<LoginScreen> {
             ]),
       ),
     );
+  }
+
+  void showAlert(String message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32))),
+              content: Container(
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              elevation: 24.0,
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .pop(); // dismisses only the dialog and returns nothing
+                  },
+                  child: new Text('OK'),
+                ),
+              ]);
+        });
   }
 }

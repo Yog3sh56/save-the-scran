@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
-import 'package:save_the_scran/screens/LoginScreen.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
@@ -36,8 +36,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         "ownerid": uid,
         "name": i,
         "buyDate": item.buyDate,
-        "expiryDate": item.expiry,
-        "inCommunity": false
+        "expiryDate": item.expiry
       });
     }
   }
@@ -46,10 +45,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF00E676),
-        title: Text("Community Market", style: TextStyle(color: Colors.white)),
-      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -62,7 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Image.asset('images/heartLogo.png'),
             ),
             SizedBox(
-              height: 43.0,
+              height: 48.0,
             ),
             TextField(
                 style: TextStyle(color: Colors.black),
@@ -110,28 +105,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: MaterialButton(
                   onPressed: () async {
                     //removed registration as to not create too many users during testin
-
                     try {
-                      if (password != passwordRepeat) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                  content: Container(
-                                    child: Text("The passwords do not match."),
-                                  ),
-                                  actions: <Widget>[
-                                    new FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .pop(); // dismisses only the dialog and returns nothing
-                                      },
-                                      child: new Text('OK'),
-                                    ),
-                                  ]);
-                            });
-                        print("Password do not match");
+                      if (email.isEmpty || !EmailValidator.validate(email)) {
+                        showAlert("Please type in valid email");
+                      } else if (password.isEmpty) {
+                        showAlert("Please enter valid password");
+                      } else if (passwordRepeat.isEmpty) {
+                        showAlert("Please type your password again to confirm");
+                      } else if (password != passwordRepeat) {
+                        showAlert("The passwords do not match.");
                       } else {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
@@ -150,43 +132,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       switch (e.code) {
                         case "email-already-in-use":
                           {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Container(
-                                      child:
-                                          Text("The email is already in use."),
-                                    ),
-                                  );
-                                });
-                            print("Email already in use");
+                            showAlert(
+                                "Provided email is associated with different account. Try different email");
                           }
                           break;
                         case "weak-password":
                           {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: Container(
-                                      child: Text(
-                                          "The password has to be atleast 6 characters"),
-                                    ),
-                                  );
-                                });
-                            print("Password is too weak");
+                            showAlert(
+                                "The password has to be atleast 6 characters. Try different password");
                           }
 
-                          addMockItems(uid);
+                        // addMockItems(uid);
 
-                          print(uid);
-                          Navigator.popAndPushNamed(context, FridgeScreen.id);
                       }
                     } catch (e) {
                       print(e);
                     }
-                    Navigator.pop(context);
                   },
                   minWidth: 200.0,
                   height: 42.0,
@@ -197,15 +158,35 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
             ),
-            GestureDetector(
-                child: Text("Already have an account? Login",
-                    textAlign: TextAlign.center),
-                onTap: () {
-                  Navigator.popAndPushNamed(context, LoginScreen.id);
-                }),
           ],
         ),
       ),
     );
+  }
+
+  void showAlert(String message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32))),
+              content: Container(
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              elevation: 24.0,
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true)
+                        .pop(); // dismisses only the dialog and returns nothing
+                  },
+                  child: new Text('OK'),
+                ),
+              ]);
+        });
   }
 }
