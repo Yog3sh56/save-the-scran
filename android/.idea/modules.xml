@@ -5,6 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/99510297/android.camera.iml" filepath="$PROJECT_DIR$/.idea/modules/99510297/android.camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1820952612/android.firebase_analytics.iml" filepath="$PROJECT_DIR$/.idea/modules/-1820952612/android.firebase_analytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/905943624/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/905943624/android.firebase_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1162302768/android.firebase_ml_vision.iml" filepath="$PROJECT_DIR$/.idea/modules/-1162302768/android.firebase_ml_vision.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1145974584/android.flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/1145974584/android.flutter_plugin_android_lifecycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/94923270/android.image_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/94923270/android.image_picker.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1818563387/android.path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/1818563387/android.path_provider.iml" />
     </modules>
   </component>

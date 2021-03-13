@@ -26,5 +26,10 @@
       <option name="name" value="Google3" />
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://google.bintray.com/exoplayer/" />
+    </remote-repository>
   </component>
 </project>
