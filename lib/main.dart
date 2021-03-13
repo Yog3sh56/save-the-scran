@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Save the Scran',
+      title: 'Scran Goods Detect',
       home: MyBottomNavigationBar(),
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
