@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-import 'package:save_the_scran/camera/widget/text_recognition.dart';
+import 'package:save_the_scran/screens/widget/text_recognition.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 

@@ -46,7 +46,6 @@ class FoodWidget extends StatelessWidget {
     setExpiryProgress();
     return Dismissible(
       
-<<<<<<< HEAD
       
         background: Padding(
             padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
@@ -134,94 +133,5 @@ class FoodWidget extends StatelessWidget {
                     backgroundColor: Colors.black,
                   )
                 ]))));
-=======
-      background: Padding(
-        padding: EdgeInsets.fromLTRB(5, 8, 0,8),
-        child:Container(
-          padding: EdgeInsets.all(20),
-          alignment: AlignmentDirectional.centerStart,
-          child: Icon(Icons.delete),
-          color:Colors.red
-        )
-      ),
-      secondaryBackground: Padding(
-        padding: EdgeInsets.fromLTRB(5, 8, 0,8),
-        child:Container(
-          padding: EdgeInsets.all(20),
-          alignment: AlignmentDirectional.centerEnd,
-          child: Icon(Icons.delete),
-          color:Colors.red
-        )
-      ),
-      key: UniqueKey(),
-      onDismissed:(DismissDirection direction){
-         _firestore.collection("items").doc(id).delete();
-      },
-      child:Card(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child:Column(
-            children:[
-            Row(
-            
-            mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: new BoxDecoration(
-                      color: progressColor,
-                      shape: BoxShape.circle,
-                    ),),
-                ),
-                Padding(padding: EdgeInsets.only(left: 15)),
-                
-                Expanded(
-                  flex: 1,
-                  child: Text(item.name)
-                ),
-                Padding(padding: EdgeInsets.only(left: 15)),
-                Expanded(flex: 1,
-                  child: Column(
-                  children: [
-                    Text("Expiry"),
-                    Text(
-                      item.expiry.day.toString() +"/"+ item.expiry.month.toString()+"/"+item.expiry.year.toString(),
-                      style: TextStyle(fontSize: 11),
-                    ),
-                  ],),
-                ),  
-                Padding(padding: EdgeInsets.only(right: 40)),
-                
-                Expanded(flex: 2,
-                  child: InkResponse(
-                  radius: 50,
-                  child: Column(mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(Icons.storefront),
-                    Text("Send to community"),
-                  ],),
-                  onTap: (){
-                    bool changeTo = true;
-                    if(item.inCommunity) changeTo = false;
-                    _firestore.collection("items").doc(id).update({"inCommunity":changeTo});
-                  }),
-                )
-              ]
-            ),
-            Padding(padding: EdgeInsets.only(bottom:20)),
-            LinearProgressIndicator(
-              value: this.foodProgress,
-              valueColor:  AlwaysStoppedAnimation<Color>(this.progressColor,),
-              backgroundColor: Colors.black,
-            )]
-          )
-        )
-      )
-    );
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
   }
 }

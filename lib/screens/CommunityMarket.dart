@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/widgets/FoodWidgetMarket.dart';
 

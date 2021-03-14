@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/FridgeScreen.dart';
-import 'package:email_validator/email_validator.dart';
+
+import 'LoginScreen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = "registration_screen";
@@ -46,7 +47,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-<<<<<<< HEAD
       body: SingleChildScrollView(
               child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -63,23 +63,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               TextField(
               style: TextStyle(color: Colors.black),
-=======
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/heartLogo.png'),
-            ),
-            SizedBox(
-              height: 48.0,
-            ),
-            TextField(
-                style: TextStyle(color: Colors.black),
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -87,17 +70,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
                 decoration:
                     inputDecoration.copyWith(hintText: 'Enter your email')),
-<<<<<<< HEAD
               SizedBox(
                 height: 8.0,
               ),
               TextField(
-=======
-            SizedBox(
-              height: 8.0,
-            ),
-            TextField(
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
                 style: TextStyle(color: Colors.black),
                 obscureText: true,
                 textAlign: TextAlign.center,
@@ -105,7 +81,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 onChanged: (value) {
                   password = value;
                 },
-<<<<<<< HEAD
                 decoration: inputDecoration.copyWith(hintText: "Password")
               ),
 
@@ -113,13 +88,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 8.0,
               ),
               TextField(
-=======
-                decoration: inputDecoration.copyWith(hintText: "Password")),
-            SizedBox(
-              height: 8.0,
-            ),
-            TextField(
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
                 style: TextStyle(color: Colors.black),
                 obscureText: true,
                 textAlign: TextAlign.center,
@@ -127,7 +95,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 onChanged: (value) {
                   passwordRepeat = value;
                 },
-<<<<<<< HEAD
                 decoration: inputDecoration.copyWith(hintText: "Repeat Password")
               ),
 
@@ -145,41 +112,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
-=======
-                decoration:
-                    inputDecoration.copyWith(hintText: "Repeat Password")),
-            SizedBox(
-              height: 24.0,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () async {
-                    //removed registration as to not create too many users during testin
-                    try {
-                      if (email.isEmpty || !EmailValidator.validate(email)) {
-                        showAlert("Please type in valid email");
-                      } else if (password.isEmpty) {
-                        showAlert("Please enter valid password");
-                      } else if (passwordRepeat.isEmpty) {
-                        showAlert("Please type your password again to confirm");
-                      } else if (password != passwordRepeat) {
-                        showAlert("The passwords do not match.");
-                      } else {
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: email, password: password);
-
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
                         if (newUser != null) {
                           print("succesfull registration");
                           uid = _auth.currentUser.uid;
 
-<<<<<<< HEAD
                           addMockItems(uid);
 
                           print(uid);
@@ -209,44 +145,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
             ],
           ),
-=======
-                          //create fridge for user
-                          print(uid);
-                          Navigator.popAndPushNamed(context, FridgeScreen.id);
-                        }
-                      }
-                    } on FirebaseAuthException catch (e) {
-                      switch (e.code) {
-                        case "email-already-in-use":
-                          {
-                            showAlert(
-                                "Provided email is associated with different account. Try different email");
-                          }
-                          break;
-                        case "weak-password":
-                          {
-                            showAlert(
-                                "The password has to be atleast 6 characters. Try different password");
-                          }
-
-                        // addMockItems(uid);
-
-                      }
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ],
->>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
         ),
       ),
     );
