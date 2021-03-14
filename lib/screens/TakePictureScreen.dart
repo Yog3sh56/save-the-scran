@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-import 'package:save_the_scran/camera/widget/text_recognition.dart';
+import 'package:save_the_scran/screens/widget/text_recognition.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
@@ -13,6 +13,10 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
+
+
+  static const String id = "picture_screen";
+
   final CameraDescription camera;
 
   //final String title = 'Scran goods recognition';

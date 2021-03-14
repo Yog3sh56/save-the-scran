@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1070982601652",
-    "project_id": "scran-b8970",
-    "storage_bucket": "scran-b8970.appspot.com"
+    "project_number": "654806604583",
+    "project_id": "savethescran",
+    "storage_bucket": "savethescran.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1070982601652:android:7374c9bb67d9f9abe930e1",
+        "mobilesdk_app_id": "1:654806604583:android:66ec7775b5b4895b05e702",
         "android_client_info": {
           "package_name": "com.dsc_team.save_the_scran"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1070982601652-a6prr4sreu60m1hrd2tr4d0hpu3tumit.apps.googleusercontent.com",
+          "client_id": "654806604583-vllv2va1lqnrpkn3d8fgdio72ctbssr9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWgldsCAlfC5alv70faa-iTe0ENiQ91OA"
+          "current_key": "AIzaSyCyPm4tuJTTVucECKYIrbCAJ-4aw5yealI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1070982601652-a6prr4sreu60m1hrd2tr4d0hpu3tumit.apps.googleusercontent.com",
+              "client_id": "654806604583-vllv2va1lqnrpkn3d8fgdio72ctbssr9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
