@@ -34,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+<<<<<<< HEAD
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text('Your Profile', style: TextStyle(color: Colors.black)),
@@ -53,6 +54,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
             Text(_auth.currentUser.email),
             Padding(
+=======
+        backgroundColor: Color(0xFF00E676),
+        title: Text("Your Profile", style: TextStyle(color: Colors.white)),
+      ),
+      
+      body: Center(
+          child: Column(
+            children:[
+              Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(color:Colors.lightBlue,shape: BoxShape.circle),
+                child:Icon(
+                  Icons.person,
+                  size: 200,
+                ) // This trailing comma makes auto-formatting nicer for build methods.
+              ),
+              Text(_auth.currentUser.email),
+              Padding(
+>>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
                 color: Colors.red,
@@ -72,6 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
+<<<<<<< HEAD
             Text("Items in Community",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
             Expanded(
                           child: StreamBuilder(
@@ -118,6 +140,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }),
             ),
           ],
+=======
+            ]
+>>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
         ),
       ),
     );

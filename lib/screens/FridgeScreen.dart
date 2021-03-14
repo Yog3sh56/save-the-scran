@@ -62,6 +62,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.3),
       appBar: AppBar(
+<<<<<<< HEAD
         centerTitle: true,
         backgroundColor: Colors.white,
         title: Text('My Fridge', style: TextStyle(color: Colors.black)),
@@ -76,6 +77,16 @@ class _FridgeScreenState extends State<FridgeScreen> {
                 }
               })
         ],
+=======
+        backgroundColor: Color(0xFF00E676),
+        title: Text('My Fridge', style: TextStyle(color: Colors.white)),
+        actions: [IconButton(icon: Icon(Icons.person), onPressed:(){ 
+          if (_auth.currentUser == null){
+            Navigator.pushNamed(context,LoginScreen.id);
+          }
+          else{Navigator.pushNamed(context,ProfileScreen.id);}
+          })],
+>>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -86,7 +97,11 @@ class _FridgeScreenState extends State<FridgeScreen> {
         backgroundColor: Color(0xFFFF4081),
       ),
       body: Center(
+<<<<<<< HEAD
         child: StreamBuilder(
+=======
+          child: StreamBuilder(
+>>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
             //the stream provides a snapshot, to pass onto the builder
             stream: _firestore
                 .collection("items")
@@ -106,6 +121,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                 List<Item> itemsList = [];
 
                 //parse data
+<<<<<<< HEAD
                 for (var item in snapshotDocs) {
                   Item i = Item(item['ownerid'], item['name'],
                       buyDate: item['buyDate'].toDate(),
@@ -114,6 +130,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   itemsList.add(i);
                   String objectId = item.id;
                   final fw = FoodWidget(item: i, id: objectId);
+=======
+                for (var item in snapshotDocs){
+                  Item i = Item(item['ownerid'],item['name'],buyDate: item['buyDate'].toDate(),expiry:item['expiryDate'].toDate(),inCommunity: item['inCommunity']);
+                  itemsList.add(i);
+                  String objectId = item.id;
+                  final fw = FoodWidget(item:i,id: objectId);
+>>>>>>> 75ab9ae4f65b99dfe3a442344d302c9ad92bf40b
                   itemText.add(fw);
                 }
               }
