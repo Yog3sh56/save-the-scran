@@ -1,14 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'fridge/FridgeScreen.dart';
-import 'market/CommunityMarket.dart';
-import 'chat/ChatContacts.dart';
-import 'camera/TakePictureScreen.dart';
+import 'package:save_the_scran/screens/LoginScreen.dart';
+import 'package:save_the_scran/screens/ProfileScreen.dart';
+import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'screens/FridgeScreen.dart';
+import 'screens/CommunityMarket.dart';
+import 'screens/ChatContacts.dart';
+import 'screens/TakePictureScreen.dart';
 
 
 void main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -16,18 +21,22 @@ void main() async {
 
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
-
+  await Firebase.initializeApp();
   return runApp(MyApp(firstCamera));
 }
 
 class MyApp extends StatelessWidget{
+  static const String id = "my_app";
   final camera;
+
+  
   MyApp(this.camera);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Scran Goods Detect',
+      debugShowCheckedModeBanner: false,
+      title: 'Save the Scran',
       home: MyBottomNavigationBar(),
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
@@ -36,10 +45,14 @@ class MyApp extends StatelessWidget{
         // When navigating to the "/" route, build the FridgeScreen widget.
         // '/': (context) => MyBottomNavigationBar(),
         // When navigating to the "/market" route, build the SecondScreen widget.
-        '/market': (context) => CommunityMarketScreen(),
-        '/fridge': (context) => FridgeScreen(),
-        '/chat': (context) => ChatContacts(),
-        '/camera': (context) => TakePictureScreen(camera: camera),
+        MyApp.id:(context) => MyApp(context),
+        CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
+        FridgeScreen.id: (context) => FridgeScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
+        TakePictureScreen.id: (context) => TakePictureScreen(camera: camera),
+        RegistrationScreen.id: (context)=>RegistrationScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        ProfileScreen.id: (context) => ProfileScreen(),
       },
     );
   }
@@ -54,17 +67,20 @@ class MyBottomNavigationBar extends StatefulWidget{
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+  
+
+
   int _index = 0;
   final List<Widget> _children = [
     FridgeScreen(),
     CommunityMarketScreen(),
-    ChatContacts(),
+    ChatScreen(),
   ];
 
   void onTappedBar(int index){
-    setState(() {
-      _index = index;
-    });
+      setState(() {
+        _index = index;
+      });
   }
 
   @override
@@ -73,24 +89,24 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       body: _children[_index],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF00E676),
-        selectedItemColor: Color(0xFFFF4081),
-        unselectedItemColor: Colors.white.withOpacity(.60),
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
         selectedFontSize: 14,
         unselectedFontSize: 14,
         onTap: onTappedBar,
         currentIndex: _index,
         items: [
           BottomNavigationBarItem(
-            title: Text('Fridge'),
+            label: 'Fridge',
             icon: Icon(Icons.kitchen),
           ),
           BottomNavigationBarItem(
-            title: Text('Market'),
+            label: 'Market',
             icon: Icon(Icons.storefront),
           ),
           BottomNavigationBarItem(
-            title: Text('Saviours'),
+          label:'Saviours',
             icon: Icon(Icons.chat),
           ),
         ],

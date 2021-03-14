@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
-import 'package:save_the_scran/camera/TakePictureScreen.dart';
-import 'package:save_the_scran/camera/widget/text_area.dart';
-import 'package:save_the_scran/camera/widget/push_to_market.dart';
+import 'package:save_the_scran/screens/TakePictureScreen.dart';
+import 'package:save_the_scran/screens/widget/text_area.dart';
+import 'package:save_the_scran/screens/widget/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../TakePictureScreen.dart';
 import 'control.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
