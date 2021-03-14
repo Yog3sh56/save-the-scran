@@ -60,13 +60,14 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent[100],
+      backgroundColor: Colors.grey.withOpacity(0.3),
       appBar: AppBar(
-        backgroundColor: Color(0xFF00E676),
-        title: Text('My Fridge', style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text('My Fridge', style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person,color: Colors.black,),
               onPressed: () {
                 if (_auth.currentUser == null) {
                   Navigator.pushNamed(context, LoginScreen.id);

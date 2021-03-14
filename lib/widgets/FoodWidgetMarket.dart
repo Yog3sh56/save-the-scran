@@ -21,6 +21,7 @@ class FoodWidgetMarket extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
+    print(progress);
     //this.foodProgress = progress;
     this.foodProgress = Random().nextDouble();
 

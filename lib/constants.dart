@@ -38,8 +38,8 @@ const inputDecoration = InputDecoration(
 
 
 Widget dismissibleBackground = Padding(
-        
           padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
           child:Container(
             child: Text("Send to community"),
             color:Colors.red));
+

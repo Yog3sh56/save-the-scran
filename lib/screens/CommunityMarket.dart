@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/widgets/FoodWidgetMarket.dart';
 
@@ -23,11 +24,12 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
     return Scaffold(
       backgroundColor: Colors.greenAccent[100],
       appBar: AppBar(
-        backgroundColor: Color(0xFF00E676),
-        title: Text("Community Market", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text('Community Market', style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person,color: Colors.black,),
               onPressed: () {
                 if (_auth.currentUser == null) {
                   Navigator.pushNamed(context, LoginScreen.id);

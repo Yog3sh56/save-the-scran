@@ -28,12 +28,14 @@ void main() async {
 class MyApp extends StatelessWidget{
   static const String id = "my_app";
   final camera;
+
   
   MyApp(this.camera);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Save the Scran',
       home: MyBottomNavigationBar(),
       // Start the app with the "/" named route. In this case, the app starts
@@ -87,9 +89,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       body: _children[_index],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF00E676),
-        selectedItemColor: Color(0xFFFF4081),
-        unselectedItemColor: Colors.white.withOpacity(.60),
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
         selectedFontSize: 14,
         unselectedFontSize: 14,
         onTap: onTappedBar,

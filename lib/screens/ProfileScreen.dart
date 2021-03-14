@@ -34,8 +34,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF00E676),
-        title: Text("Your Profile", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text('Your Profile', style: TextStyle(color: Colors.black)),
       ),
       body: Center(
         child: Column(
@@ -106,6 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return Text("no items in market, you can add them from your fridge");
                       }
                       return ListView(
+                        padding: EdgeInsets.all(5),
                         children: itemText,
                       );
                     }
