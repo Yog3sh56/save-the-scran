@@ -1,3 +1,6 @@
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'com.android.application'
+//apply plugin: 'com.google.gms.google-services'
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -38,7 +41,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.dsc_team.save_the_scran"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -51,6 +54,12 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 flutter {
@@ -58,9 +67,31 @@ flutter {
 }
 
 dependencies {
+
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-analytics'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //firebase modules
     implementation platform('com.google.firebase:firebase-bom:26.6.0')
     implementation 'com.google.firebase:firebase-analytics'
+    def camerax_version = "1.0.0-beta07"
+// CameraX core library using camera2 implementation
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+// CameraX Lifecycle Library
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+// CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha14"
+
+    implementation 'com.google.android.gms:play-services-vision:20.1.1'
+    implementation 'com.google.android.gms:play-services-vision-common:19.1.1'
+
+//    implementation 'com.google.android.gms:play-services-vision:20.0.0'
+//
+//    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+    //api 'com.google.firebase:firebase-ml-vision-image-label-model:17.0.2'
+
 }
+apply plugin: 'com.google.gms.google-services'
+

@@ -4,6 +4,11 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:save_the_scran/camera/widget/text_recognition.dart';
+
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
 
 
 // A screen that allows users to take a picture using a given camera.
@@ -13,6 +18,8 @@ class TakePictureScreen extends StatefulWidget {
   static const String id = "picture_screen";
 
   final CameraDescription camera;
+
+  //final String title = 'Scran goods recognition';
 
   const TakePictureScreen({
     Key key,
@@ -86,45 +93,101 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // where it was saved.
             final image = await _controller.takePicture();
 
-            // If the picture was taken, display it on a new screen.
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
-                  imagePath: image?.path,
-                ),
-              ),
-            );
+            final result = await ImageGallerySaver.saveFile(image?.path);
+            print('result:$result');
+
+            if(result){
+              print('Failed to save！');
+            }else{
+              print('Save successfully!');
+            }
+
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);
           }
+
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DisplayRecognition(),
+            ),
+          );
         },
+
       ),
+
     );
   }
 }
 
-// A widget that displays the picture taken by the user.
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
 
-  const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
+class DisplayRecognition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color(0xFF00E676),
-          title: Text('Display the Picture')
+        title: Text("Recognition"),
       ),
-
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            const SizedBox(height: 25),
+            TextRecognitionWidget(),
+            const SizedBox(height: 15),
+          ],
+        ),
+      ),
     );
   }
+
+
 }
+
+
+//FirebaseMLApi text recognise
+class FirebaseMLApi {
+  static Future<String> recogniseText(File imageFile) async {
+    //check if there is a image or not
+    if (imageFile == null) {
+      return 'No selected image';
+    } else {
+      final visionImage = FirebaseVisionImage.fromFile(imageFile);
+      final textRecognizer = FirebaseVision.instance.textRecognizer();
+      try {
+        final visionText = await textRecognizer.processImage(visionImage);
+        await textRecognizer.close();
+
+        final text = extractText(visionText);
+        return text.isEmpty ? 'No text found in the image' : text;
+      } catch (error) {
+        return error.toString();
+      }
+    }
+  }
+
+  static extractText(VisionText visionText) {
+    String text = '';
+
+    for (TextBlock block in visionText.blocks) {
+      for (TextLine line in block.lines) {
+        for (TextElement word in line.elements) {
+          text = text + word.text + ' ';
+        }
+        text = text + '\n';
+      }
+    }
+
+    return text;
+  }
+}
+
+
+
+
+
+
 

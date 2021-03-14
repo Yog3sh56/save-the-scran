@@ -23,6 +23,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core:
+  firebase_analytics:
+
+  #text recognition
+  firebase_ml_vision: ^0.9.7
+
+  image_picker: ^0.6.7+11
+  clipboard: ^0.1.2+8
+
+  image_gallery_saver: ^1.2.2
+
   camera:
   path_provider:
   path:
