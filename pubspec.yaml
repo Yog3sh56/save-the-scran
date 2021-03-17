@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.7.0
+  firebase_analytics:
 
   #text recognition
   firebase_ml_vision: ^0.9.7
@@ -35,7 +37,7 @@ dependencies:
   camera:
   path_provider:
   path:
-  firebase_core: ^0.7.0
+  # firebase_core: ^0.7.0
   firebase_auth: ^0.20.1
   cloud_firestore: ^0.16.0+1
   email_validator: '^1.0.5'
