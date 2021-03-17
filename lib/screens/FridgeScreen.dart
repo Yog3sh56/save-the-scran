@@ -67,12 +67,15 @@ class _FridgeScreenState extends State<FridgeScreen> {
         title: Text('My Fridge', style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
-              icon: Icon(Icons.person,color: Colors.black,),
+              icon: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
               onPressed: () {
                 if (_auth.currentUser == null) {
                   Navigator.pushNamed(context, LoginScreen.id);
                 } else {
-                  Navigator.pushNamed(context, ProfileScreen.id);
+                  Navigator.pushNamed(context, LoginScreen.id);
                 }
               })
         ],

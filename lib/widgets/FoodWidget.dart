@@ -45,8 +45,6 @@ class FoodWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Dismissible(
-      
-      
         background: Padding(
             padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
             child: Container(
@@ -66,7 +64,6 @@ class FoodWidget extends StatelessWidget {
           _firestore.collection("items").doc(id).delete();
         },
         child: Card(
-          
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
