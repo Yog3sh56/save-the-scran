@@ -1,6 +1,11 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:save_the_scran/constants.dart';
+import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';
 import 'package:save_the_scran/screens/widget/text_area.dart';
 import 'package:save_the_scran/screens/widget/push_to_market.dart';
@@ -20,38 +25,73 @@ class TextRecognitionWidget extends StatefulWidget {
 }
 
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   String text = '';
+  String itemName = "";
   File image;
+  DateTime expiry = DateTime.now();
 
   @override
   Widget build(BuildContext context) => Expanded(
-    child: Column(
-      children: [
-        Expanded(child: buildImage()),
-        const SizedBox(height: 16),
-        ControlsWidget(
-          onClickedPickImage: pickImage,
-          onClickedScanText: scanText,
-          onClickedClear: clear,
+        child: Column(
+          children: [
+            Expanded(child: buildImage()),
+            const SizedBox(height: 16),
+            ControlsWidget(
+              onClickedPickImage: pickImage,
+              onClickedScanText: scanText,
+              onClickedClear: clear,
+            ),
+            const SizedBox(height: 16),
+            TextAreaWidget(
+              text: text,
+              onClickedCopy: copyToClipboard,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              decoration: inputDecoration.copyWith(helperText: "item name"),
+              onChanged: (value) {
+                itemName = value;
+              },
+            ),
+            RaisedButton(
+                child: Text(expiry.toString().split(" ")[0]),
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime.now(),
+                      maxTime: DateTime(2030, 6, 7),
+                      theme: DatePickerTheme(
+                          headerColor: Colors.orange,
+                          backgroundColor: Colors.blue,
+                          itemStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          doneStyle:
+                              TextStyle(color: Colors.white, fontSize: 16)),
+                      onConfirm: (date) {
+                    print('confirm $date');
+                    setState(() {
+                      expiry = date;
+                    });
+                  }, currentTime: DateTime.now(), locale: LocaleType.en);
+                }),
+            PushtoMarketWidget(
+              onClickedPushtoMarket: pushtoMarket,
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
-        TextAreaWidget(
-          text: text,
-          onClickedCopy: copyToClipboard,
-        ),
-        const SizedBox(height: 16),
-        PushtoMarketWidget(
-          onClickedPushtoMarket: pushtoMarket,
-        ),
-      ],
-    ),
-  );
+      );
 
   Widget buildImage() => Container(
-    child: image != null
-        ? Image.file(image)
-        : Icon(Icons.photo_size_select_actual, size: 160, color: Colors.blue[300]),
-  );
+        child: image != null
+            ? Image.file(image)
+            : Icon(Icons.photo_size_select_actual,
+                size: 160, color: Colors.blue[300]),
+      );
 
   Future pickImage() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
@@ -73,10 +113,17 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     Navigator.of(context).pop();
   }
 
-
   //conect with Leon's Market
-  Future pushtoMarket() async {
+  void pushtoMarket() async {
+    if (_auth.currentUser == null) return;
 
+    _firestore.collection("items").add({
+      "ownerid": _auth.currentUser.uid,
+      "name": itemName,
+      "buyDate": DateTime.now(),
+      "expiryDate": expiry,
+      "inCommunity": false
+    });
   }
 
   void clear() {
