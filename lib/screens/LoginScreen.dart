@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
+import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 
@@ -22,10 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text("Community Market", style: TextStyle(color: Colors.white)),
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-              child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -37,28 +37,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48.0,
               ),
               TextField(
-              style: TextStyle(color: Colors.black),
-                keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  email = value;
-                },
-                decoration:
-                    inputDecoration.copyWith(hintText: 'Enter your email')),
+                  style: TextStyle(color: Colors.black),
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  decoration:
+                      inputDecoration.copyWith(hintText: 'Enter your email')),
               SizedBox(
                 height: 8.0,
               ),
               TextField(
-                style: TextStyle(color: Colors.black),
-                obscureText: true,
-                textAlign: TextAlign.center,
-                obscuringCharacter: "*",
-                onChanged: (value) {
-                  password = value;
-                },
-                decoration: inputDecoration.copyWith(hintText: "Password")
+                  style: TextStyle(color: Colors.black),
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  obscuringCharacter: "*",
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  decoration: inputDecoration.copyWith(hintText: "Password")),
+              SizedBox(
+                height: 24.0,
               ),
-
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Material(
@@ -68,12 +69,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: MaterialButton(
                     onPressed: () async {
                       try {
-                        final user =
-                            await _auth.signInWithEmailAndPassword(email: email, password: password);
-                                
-                        if (user != null) {
-                          print("succesfull login");
-                          Navigator.pop(context);
+                        if (email.isEmpty || !EmailValidator.validate(email)) {
+                          showAlert("Please type in valid email");
+                        } else {
+                          final user = await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
+
+                          if (user != null) {
+                            print("succesfull login");
+                            Navigator.pop(context);
+                          }
+                        }
+                      } on FirebaseAuthException catch (e) {
+                        switch (e.code) {
+                          case "user-not-found":
+                            {
+                              showAlert(
+                                  "No account exists associated with provided email.");
+                            }
+                            break;
+                          case "wrong-password":
+                            {
+                              showAlert("Password Invalid. Try again.");
+                            }
+                            break;
                         }
                       } catch (e) {
                         print(e);
@@ -92,11 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   Navigator.popAndPushNamed(context, RegistrationScreen.id);
                 },
-                child:Text("Don't have an account? Register here",textAlign: TextAlign.center),
-            )
-            ],
-          ),
-        ),
+                child: Text("Don't have an account? Register here",
+                    textAlign: TextAlign.center),
+              )
+            ]),
       ),
     );
   }
