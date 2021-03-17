@@ -23,8 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core:
-  firebase_analytics:
 
   #text recognition
   firebase_ml_vision: ^0.9.7
