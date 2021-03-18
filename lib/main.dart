@@ -8,6 +8,7 @@ import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
 import 'screens/ChatContacts.dart';
 import 'screens/TakePictureScreen.dart';
+import 'chat/ChatContactsScreen.dart';
 
 
 void main() async {
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget{
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),
         ChatScreen.id: (context) => ChatScreen(),
+        ChatContacts.id: (context) => ChatContacts(),
         TakePictureScreen.id: (context) => TakePictureScreen(camera: camera),
         RegistrationScreen.id: (context)=>RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
@@ -74,7 +76,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     FridgeScreen(),
     CommunityMarketScreen(),
-    ChatScreen(),
+    ChatContacts(),
   ];
 
   void onTappedBar(int index){
