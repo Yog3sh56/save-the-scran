@@ -32,7 +32,7 @@ class ControlsWidget extends StatelessWidget {
       RaisedButton(
         color: Color(0xFF82B1FF),
         onPressed: onClickedScanText,
-        child: Text('Scan'),
+        child: Text('DateScan'),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),

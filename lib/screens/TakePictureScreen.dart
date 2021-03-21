@@ -10,6 +10,8 @@ import 'package:save_the_scran/screens/widget/text_recognition.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
+import 'package:save_the_scran/screens/openfoodfacts.dart';
+
 
 
 // A screen that allows users to take a picture using a given camera.
@@ -201,7 +203,10 @@ class FirebaseBarcodeApi {
         await barcodeDetector.close();
         String Barcode_text = JsonEncoder().convert(barCodes);
 
-        final text = Barcode_text;
+
+        final foodname = await FoodApi.getProduct(Barcode_text);
+        final text = "Product name:"+foodname+"\n"+"Barcode:"+Barcode_text;
+
         return text.isEmpty ? 'No text found in the image' : text;
       } catch (error) {
         return error.toString();
