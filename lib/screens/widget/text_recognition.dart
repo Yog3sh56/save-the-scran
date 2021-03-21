@@ -33,6 +33,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
           onClickedPickImage: pickImage,
           onClickedScanText: scanText,
           onClickedClear: clear,
+          onClickedBar: decode,
         ),
         const SizedBox(height: 16),
         TextAreaWidget(
@@ -68,9 +69,28 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     );
 
     final text = await FirebaseMLApi.recogniseText(image);
-    setText(text);
+    setText(text+"\n");
 
     Navigator.of(context).pop();
+  }
+
+
+
+
+  //Barcode
+  Future decode() async {
+    showDialog(
+      context: context,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    final text = await FirebaseBarcodeApi.recogniseBar(image);
+    setText(text+"\n");
+
+    Navigator.of(context).pop();
+
   }
 
 
@@ -81,7 +101,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   void clear() {
     setImage(null);
-    setText('');
+    setTextClear('');
   }
 
   void copyToClipboard() {
@@ -98,7 +118,14 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   void setText(String newText) {
     setState(() {
+      text = text + newText;
+    });
+  }
+
+  void setTextClear(String newText) {
+    setState(() {
       text = newText;
     });
   }
+
 }

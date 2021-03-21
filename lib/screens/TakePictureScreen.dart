@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -183,6 +184,31 @@ class FirebaseMLApi {
 
     return text;
   }
+}
+
+
+//Barcode recognize
+class FirebaseBarcodeApi {
+  static Future<String> recogniseBar(File imageFile) async {
+    //check if there is a image or not
+    if (imageFile == null) {
+      return 'No selected image';
+    } else {
+      FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(imageFile);
+      BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
+      try {
+        final barCodes = await barcodeDetector.detectInImage(ourImage);
+        await barcodeDetector.close();
+        String Barcode_text = JsonEncoder().convert(barCodes);
+
+        final text = Barcode_text;
+        return text.isEmpty ? 'No text found in the image' : text;
+      } catch (error) {
+        return error.toString();
+      }
+    }
+  }
+
 }
 
 
