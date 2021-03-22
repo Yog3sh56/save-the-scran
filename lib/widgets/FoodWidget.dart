@@ -80,25 +80,20 @@ class FoodWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(left: 15)),
-                    Expanded(flex: 1, child: Text(item.name)),
-                    Padding(padding: EdgeInsets.only(left: 15)),
                     Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Text("Expiry"),
+                        flex: 1,
+                        child: Column(children: [
+                          Text(item.name),
                           Text(
-                            item.expiry.day.toString() +
+                            "Expiry" +
+                                item.expiry.day.toString() +
                                 "/" +
                                 item.expiry.month.toString() +
                                 "/" +
                                 item.expiry.year.toString(),
                             style: TextStyle(fontSize: 11),
                           ),
-                        ],
-                      ),
-                    ),
+                        ])),
                     Padding(padding: EdgeInsets.only(right: 40)),
                     Expanded(
                       flex: 2,

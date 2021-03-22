@@ -29,6 +29,7 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
+  XFile image;
 
   @override
   void initState() {
@@ -106,7 +107,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DisplayRecognition(),
+              builder: (context) => DisplayRecognition(image),
             ),
           );
         },
@@ -116,6 +117,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 }
 
 class DisplayRecognition extends StatelessWidget {
+  final result;
+
+  const DisplayRecognition(this.result);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,73 +132,11 @@ class DisplayRecognition extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 25),
-            TextRecognitionWidget(),
+            TextRecognitionWidget(result: result),
             const SizedBox(height: 15),
           ],
         ),
       ),
     );
-  }
-}
-
-//FirebaseMLApi text recognise
-class FirebaseMLApi {
-  static Future<String> recogniseText(File imageFile) async {
-    //check if there is a image or not
-    if (imageFile == null) {
-      return 'No selected image';
-    } else {
-      final visionImage = FirebaseVisionImage.fromFile(imageFile);
-      final textRecognizer = FirebaseVision.instance.textRecognizer();
-      try {
-        final visionText = await textRecognizer.processImage(visionImage);
-        await textRecognizer.close();
-
-        final text = extractText(visionText);
-
-        return text.isEmpty ? 'No text found in the image' : text;
-      } catch (error) {
-        return error.toString();
-      }
-    }
-  }
-
-  static extractText(VisionText visionText) {
-    String text = '';
-
-    for (TextBlock block in visionText.blocks) {
-      for (TextLine line in block.lines) {
-        for (TextElement word in line.elements) {
-          text = text + word.text + ' ';
-        }
-        text = text + '\n';
-      }
-    }
-    return extractDates(text);
-    return text;
-  }
-
-  static extractDates(String readText) {
-    RegExp regDate1 = RegExp(
-        r"\d?\d[/?|\b?]\d?\d[/?|\b?]\d?\d?\d\d"); //matches n|nn/n|nn/nnnn|nn
-    RegExp regDate2 = RegExp(r"\d\d?[/?|\b?]\d?\d?\d\d"); //matches n|nn/nn|nnnn
-    RegExp regDate3 =
-        RegExp(r"\d?\d?\d?\d?/?\s?[a-zA-Z][a-zA-Z][a-zA-Z]/?\s?\d?\d?\d?\d?");
-    List<Iterable<RegExpMatch>> matches = [
-      regDate1.allMatches(readText),
-      regDate2.allMatches(readText),
-      regDate3.allMatches(readText)
-    ];
-    List<String> possibleDates = [];
-    for (var iterable in matches) {
-      for (var regMatch in iterable) {
-        possibleDates.add(regMatch.group(0));
-      }
-    }
-    print(matches.toString());
-
-    return possibleDates.join("-or-");
-    ;
-    //Iterable<RegExpMatch> matches = exp.allMatches(str);
   }
 }
