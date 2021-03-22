@@ -75,7 +75,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                 if (_auth.currentUser == null) {
                   Navigator.pushNamed(context, LoginScreen.id);
                 } else {
-                  Navigator.pushNamed(context, LoginScreen.id);
+                  Navigator.pushNamed(context, ProfileScreen.id);
                 }
               })
         ],

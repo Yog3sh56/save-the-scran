@@ -123,13 +123,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           final newUser =
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
-
                           if (newUser != null) {
-                            print("succesfull registration");
                             uid = _auth.currentUser.uid;
-
-                            //create fridge for user
-                            print(uid);
                             Navigator.popAndPushNamed(context, FridgeScreen.id);
                           }
                         }
@@ -179,13 +174,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+              contentPadding: EdgeInsets.all(15),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32))),
-              content: Container(
-                child: Text(
-                  message,
-                  textAlign: TextAlign.center,
-                ),
+              content: Text(
+                message,
+                textAlign: TextAlign.center,
               ),
               elevation: 24.0,
               actions: <Widget>[

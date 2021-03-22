@@ -8,8 +8,8 @@ build/
 #pubspec.lock
 
 #Ignore .flutter-plugins
-#.flutter-plugins
-#.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.

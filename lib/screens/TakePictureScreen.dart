@@ -9,12 +9,8 @@ import 'package:save_the_scran/screens/widget/text_recognition.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-
-
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
-
-
   static const String id = "picture_screen";
 
   final CameraDescription camera;
@@ -33,6 +29,7 @@ class TakePictureScreen extends StatefulWidget {
 class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
+  XFile image;
 
   @override
   void initState() {
@@ -43,7 +40,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       // Get a specific camera from the list of available cameras.
       widget.camera,
       // Define the resolution to use.
-      ResolutionPreset.medium,
+      ResolutionPreset.ultraHigh,
     );
 
     // Next, initialize the controller. This returns a Future.
@@ -62,7 +59,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFF00E676),
-          title: Text('Add food to your fridge', style: TextStyle(color: Colors.white))),
+          title: Text('Add food to your fridge',
+              style: TextStyle(color: Colors.white))),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
@@ -80,7 +78,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.camera_alt),
-          backgroundColor: Color(0xFFFF4081),
+        backgroundColor: Color(0xFFFF4081),
         // Provide an onPressed callback.
         onPressed: () async {
           // Take the Picture in a try / catch block. If anything goes wrong,
@@ -96,34 +94,32 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             final result = await ImageGallerySaver.saveFile(image?.path);
             print('result:$result');
 
-            if(result){
+            if (result) {
               print('Failed to save！');
-            }else{
+            } else {
               print('Save successfully!');
             }
-
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);
           }
 
-
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DisplayRecognition(),
+              builder: (context) => DisplayRecognition(image),
             ),
           );
         },
-
       ),
-
     );
   }
-}
-
+}}
 
 class DisplayRecognition extends StatelessWidget {
+  final result;
+
+  const DisplayRecognition(this.result);
 
   @override
   Widget build(BuildContext context) {
@@ -136,58 +132,11 @@ class DisplayRecognition extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 25),
-            TextRecognitionWidget(),
+            TextRecognitionWidget(result: result),
             const SizedBox(height: 15),
           ],
         ),
       ),
     );
   }
-
-
 }
-
-
-//FirebaseMLApi text recognise
-class FirebaseMLApi {
-  static Future<String> recogniseText(File imageFile) async {
-    //check if there is a image or not
-    if (imageFile == null) {
-      return 'No selected image';
-    } else {
-      final visionImage = FirebaseVisionImage.fromFile(imageFile);
-      final textRecognizer = FirebaseVision.instance.textRecognizer();
-      try {
-        final visionText = await textRecognizer.processImage(visionImage);
-        await textRecognizer.close();
-
-        final text = extractText(visionText);
-        return text.isEmpty ? 'No text found in the image' : text;
-      } catch (error) {
-        return error.toString();
-      }
-    }
-  }
-
-  static extractText(VisionText visionText) {
-    String text = '';
-
-    for (TextBlock block in visionText.blocks) {
-      for (TextLine line in block.lines) {
-        for (TextElement word in line.elements) {
-          text = text + word.text + ' ';
-        }
-        text = text + '\n';
-      }
-    }
-
-    return text;
-  }
-}
-
-
-
-
-
-
-
