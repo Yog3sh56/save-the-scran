@@ -15,8 +15,18 @@ class ControlsWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+  // Widget build(BuildContext context) => Row(
+  Widget build(BuildContext context){
+    return Wrap(
+        spacing:10,
+        runSpacing:30,
+        alignment: WrapAlignment.center,
+        runAlignment:WrapAlignment.center,
+        crossAxisAlignment:WrapCrossAlignment.center,
+        verticalDirection:VerticalDirection.down,
+
+
+
     children: [
       RaisedButton(
         color: Color(0xFF82B1FF),
@@ -28,7 +38,7 @@ class ControlsWidget extends StatelessWidget {
 
 
   ),
-      const SizedBox(width: 3),
+      const SizedBox(width: 12,),
       RaisedButton(
         color: Color(0xFF82B1FF),
         onPressed: onClickedScanText,
@@ -36,8 +46,9 @@ class ControlsWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
+
       ),
-      const SizedBox(width: 3),
+      const SizedBox(width: 12),
       RaisedButton(
         color: Color(0xFF82B1FF),
         onPressed: onClickedBar,
@@ -46,7 +57,7 @@ class ControlsWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      const SizedBox(width: 3),
+      const SizedBox(width: 12),
       RaisedButton(
         color: Color(0xFF82B1FF),
         onPressed: onClickedClear,
@@ -61,5 +72,6 @@ class ControlsWidget extends StatelessWidget {
       // )
 
     ],
-  );
+    );
+}
 }
