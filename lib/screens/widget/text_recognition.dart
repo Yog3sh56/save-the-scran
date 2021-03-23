@@ -8,39 +8,63 @@ import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/screens/widget/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
 import 'control.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
-  final result;
+  final carryoverImage;
   const TextRecognitionWidget({
     Key key,
-    this.result,
+    this.carryoverImage,
   }) : super(key: key);
 
   @override
   _TextRecognitionWidgetState createState() =>
-      _TextRecognitionWidgetState(result);
+      _TextRecognitionWidgetState(carryoverImage);
 }
 
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  String text = '';
+  
   String itemName = "";
-  XFile result;
+  File carryoverImage;
   File image;
   DateTime _expiry = DateTime.now();
 
-  _TextRecognitionWidgetState(result){
-    print(result);
-    this.result = result;
+  _TextRecognitionWidgetState(carryoverImage){
+    print(carryoverImage);
+    this.carryoverImage = File(carryoverImage.path);
+  }
+final _controller = TextEditingController();
+
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      final text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+  
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
+
+
   @override
-  Widget build(BuildContext context) => Expanded(
+  Widget build(BuildContext context) {
+    //scanText();
+    //scanBarcode();
+    return Expanded(
         child: Column(
           children: [
             Expanded(child: buildImage()),
@@ -48,12 +72,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
             ControlsWidget(
               onClickedPickImage: pickImage,
               onClickedScanText: scanText,
-              onClickedClear: clear,
+              onClickedBar: scanBarcode,
             ),
             const SizedBox(height: 16),
             const SizedBox(height: 16),
             TextField(
               decoration: inputDecoration.copyWith(helperText: "item name"),
+              controller: _controller,
               onChanged: (value) {
                 itemName = value;
               },
@@ -87,15 +112,22 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
           ],
         ),
       );
+  }
 
-  Widget buildImage() => Container(
+  Widget buildImage(){
+    
+    scanText();
+    scanBarcode(); 
+
+    return Container(
         child: image != null
             ? Image.file(image)
-            : result == null
+            : carryoverImage == null
                 ? Icon(Icons.photo_size_select_actual,
                     size: 160, color: Colors.blue[300])
-                : Image.file(File(result.path)),
+                : Image.file(File(carryoverImage.path)),
       );
+  }
 
   Future pickImage() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
@@ -111,12 +143,25 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       ),
     );
     */
+    
 
     final dates = await FirebaseMLApi.recogniseText(image);
+    if (dates.length == 0)return;
     final expiry = dates?.elementAt(0);
     setDate(expiry);
-
-    //Navigator.of(context).pop();
+  }
+    Future scanBarcode() async {
+      /*
+    showDialog(
+      context: context,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    */
+    final text = await FirebaseBarcodeApi.recogniseBar(image);
+    print("text from barcode is: $text");
+    setText(text);
   }
 
   //conect with Leon's Market
@@ -139,12 +184,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     setText('');
   }
 
-  void copyToClipboard() {
-    if (text.trim() != '') {
-      FlutterClipboard.copy(text);
-    }
-  }
-
   void setImage(File newImage) {
     setState(() {
       image = newImage;
@@ -153,7 +192,8 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   void setText(String newText) {
     setState(() {
-      text = newText;
+      _controller.text = newText;
+      itemName = newText;
     });
   }
 

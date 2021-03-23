@@ -132,7 +132,7 @@ class DisplayRecognition extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 25),
-            TextRecognitionWidget(result: result),
+            TextRecognitionWidget(carryoverImage: result),
             const SizedBox(height: 15),
           ],
         ),

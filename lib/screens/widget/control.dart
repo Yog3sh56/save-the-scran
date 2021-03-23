@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ControlsWidget extends StatelessWidget {
   final VoidCallback onClickedPickImage;
   final VoidCallback onClickedScanText;
-  final VoidCallback onClickedClear;
+  final VoidCallback onClickedBar;
 
   const ControlsWidget({
     @required this.onClickedPickImage,
     @required this.onClickedScanText,
-    @required this.onClickedClear,
+    @required this.onClickedBar,
     Key key,
   }) : super(key: key);
 
@@ -38,8 +38,8 @@ class ControlsWidget extends StatelessWidget {
       const SizedBox(width: 12),
       RaisedButton(
         color: Color(0xFF82B1FF),
-        onPressed: onClickedClear,
-        child: Text('Clear'),
+        onPressed: onClickedBar,
+        child: Text('BarScan'),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
