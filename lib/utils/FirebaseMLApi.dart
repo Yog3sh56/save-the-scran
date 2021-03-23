@@ -40,7 +40,6 @@ class FirebaseMLApi {
   }
 
   static extractDates(String readText) {
-    Intl.defaultLocale = 'en_GB';
     RegExp regDate1 = RegExp(
         r"\d?\d[/?|\s?|.?]\d?\d[/?|\s?|.?]\d?\d?\d\d"); //matches n|nn/n|nn/nnnn|nn
     RegExp regDate2 =
@@ -55,10 +54,10 @@ class FirebaseMLApi {
     List<DateTime> possibleDates = [];
 
     List<String> possibleFormats;
-    DateTime date;
     for (var iterable in matches) {
       for (var regMatch in iterable) {
         String match = regMatch.group(0);
+
         if (match.contains(r'[a-zA-Z]')) {
           possibleFormats = [
             'MMM yy',
@@ -85,6 +84,8 @@ class FirebaseMLApi {
             'dd MM yyyy',
             'dd/MM/yyyy',
             'dd.MM.yyyy',
+            'd.M.yyyy',
+            'dd.M.yyyy',
             'MM yyyy',
             'MM/yyyy',
             'MM.yyyy',
@@ -103,13 +104,15 @@ class FirebaseMLApi {
           ];
         }
         for (var format in possibleFormats) {
+
           try {
-            date = DateFormat(format).parse(match);
+            DateTime date = DateFormat(format).parse(match);
             if (date.isBefore(DateTime(2000))) {
               date = DateTime(date.year + 2000, date.month, date.day);
             }
             possibleDates.add(date);
-          } catch (FormatException) {}
+          } catch (FormatException) {
+            print("$match was not a a valid date");          }
         }
       }
     }

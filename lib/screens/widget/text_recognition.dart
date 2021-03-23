@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:save_the_scran/constants.dart';
-import 'package:save_the_scran/screens/widget/text_area.dart';
 import 'package:save_the_scran/screens/widget/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,7 +34,10 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   File image;
   DateTime _expiry = DateTime.now();
 
-  _TextRecognitionWidgetState(this.result);
+  _TextRecognitionWidgetState(result){
+    print(result);
+    this.result = result;
+  }
 
   @override
   Widget build(BuildContext context) => Expanded(
@@ -78,7 +79,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                     setState(() {
                       _expiry = date;
                     });
-                  }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                  }, currentTime: _expiry!=null ?_expiry:DateTime.now(), locale: LocaleType.en);
                 }),
             PushtoMarketWidget(
               onClickedPushtoMarket: pushtoMarket,
@@ -90,7 +91,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   Widget buildImage() => Container(
         child: image != null
             ? Image.file(image)
-            : result != null
+            : result == null
                 ? Icon(Icons.photo_size_select_actual,
                     size: 160, color: Colors.blue[300])
                 : Image.file(File(result.path)),

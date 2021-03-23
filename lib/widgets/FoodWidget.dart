@@ -23,9 +23,9 @@ class FoodWidget extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    print(progress);
-    //this.foodProgress = progress;
-    this.foodProgress = Random().nextDouble();
+    
+    this.foodProgress = progress;
+    //this.foodProgress = Random().nextDouble();
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -66,7 +66,7 @@ class FoodWidget extends StatelessWidget {
         child: Card(
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: Column(children: [
                   Row(mainAxisSize: MainAxisSize.max, children: [
                     Expanded(
@@ -83,7 +83,7 @@ class FoodWidget extends StatelessWidget {
                     Expanded(
                         flex: 1,
                         child: Column(children: [
-                          Text(item.name),
+                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),),
                           Text(
                             "Expiry" +
                                 item.expiry.day.toString() +
@@ -94,7 +94,7 @@ class FoodWidget extends StatelessWidget {
                             style: TextStyle(fontSize: 11),
                           ),
                         ])),
-                    Padding(padding: EdgeInsets.only(right: 40)),
+                    
                     Expanded(
                       flex: 2,
                       child: InkResponse(

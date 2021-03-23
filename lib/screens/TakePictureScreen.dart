@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:save_the_scran/screens/widget/text_recognition.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -30,6 +29,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   XFile image;
+  
 
   @override
   void initState() {
@@ -89,7 +89,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             // Attempt to take a picture and get the file `image`
             // where it was saved.
-            final image = await _controller.takePicture();
+            image = await _controller.takePicture();
 
             final result = await ImageGallerySaver.saveFile(image?.path);
             print('result:$result');
@@ -114,7 +114,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       ),
     );
   }
-}}
+}
 
 class DisplayRecognition extends StatelessWidget {
   final result;
