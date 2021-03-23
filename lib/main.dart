@@ -24,6 +24,7 @@ void main() async {
   final firstCamera = cameras.first;
   await Firebase.initializeApp();
   return runApp(MyApp(firstCamera));
+  
 }
 
 class MyApp extends StatelessWidget{
