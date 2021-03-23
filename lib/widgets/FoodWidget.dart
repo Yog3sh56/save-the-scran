@@ -66,7 +66,7 @@ class FoodWidget extends StatelessWidget {
         child: Card(
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: Column(children: [
                   Row(mainAxisSize: MainAxisSize.max, children: [
                     Expanded(
@@ -81,9 +81,9 @@ class FoodWidget extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Column(children: [
-                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),),
+                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
                           Text(
                             "Expiry" +
                                 item.expiry.day.toString() +
@@ -96,14 +96,15 @@ class FoodWidget extends StatelessWidget {
                         ])),
                     
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: InkResponse(
                           radius: 50,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Icon(Icons.storefront),
-                              Text("Send to community"),
+                              Text("Send to"),
+                              Text("Community")
                             ],
                           ),
                           onTap: () {

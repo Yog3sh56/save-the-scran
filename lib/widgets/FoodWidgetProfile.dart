@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +20,7 @@ class FoodWidgetProfile extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    print(progress);
-    //this.foodProgress = progress;
-    this.foodProgress = Random().nextDouble();
+    this.foodProgress = progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -46,7 +42,7 @@ class FoodWidgetProfile extends StatelessWidget {
     return Card(
         margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
         child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Column(children: [
               Row(mainAxisSize: MainAxisSize.max, children: [
                 Expanded(
@@ -60,35 +56,31 @@ class FoodWidgetProfile extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(left: 15)),
-                Expanded(flex: 1, child: Text(item.name)),
-                Padding(padding: EdgeInsets.only(left: 15)),
+                Expanded(
+                        flex: 2,
+                        child: Column(children: [
+                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
+                          Text(
+                            "Expiry" +
+                                item.expiry.day.toString() +
+                                "/" +
+                                item.expiry.month.toString() +
+                                "/" +
+                                item.expiry.year.toString(),
+                            style: TextStyle(fontSize: 11),
+                          ),
+                        ])),
+                    
                 Expanded(
                   flex: 1,
-                  child: Column(
-                    children: [
-                      Text("Expiry"),
-                      Text(
-                        item.expiry.day.toString() +
-                            "/" +
-                            item.expiry.month.toString() +
-                            "/" +
-                            item.expiry.year.toString(),
-                        style: TextStyle(fontSize: 11),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(right: 40)),
-                Expanded(
-                  flex: 2,
                   child: InkResponse(
                       radius: 50,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Icon(Icons.home),
-                          Text("Return to Fridge"),
+                          Text("Return to"),
+                          Text("Fridge")
                         ],
                       ),
                       onTap: () {

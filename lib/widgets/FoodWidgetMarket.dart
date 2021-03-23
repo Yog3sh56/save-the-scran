@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +20,8 @@ class FoodWidgetMarket extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    print(progress);
-    //this.foodProgress = progress;
-    this.foodProgress = Random().nextDouble();
+
+    this.foodProgress = progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -59,26 +57,21 @@ class FoodWidgetMarket extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(left: 15)),
-                Expanded(flex: 1, child: Text(item.name)),
-                Padding(padding: EdgeInsets.only(left: 15)),
                 Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Text("Expiry"),
-                      Text(
-                        item.expiry.day.toString() +
-                            "/" +
-                            item.expiry.month.toString() +
-                            "/" +
-                            item.expiry.year.toString(),
-                        style: TextStyle(fontSize: 11),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(right: 40)),
+                        flex: 1,
+                        child: Column(children: [
+                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),),
+                          Text(
+                            "Expiry" +
+                                item.expiry.day.toString() +
+                                "/" +
+                                item.expiry.month.toString() +
+                                "/" +
+                                item.expiry.year.toString(),
+                            style: TextStyle(fontSize: 11),
+                          ),
+                        ])),
+                    
                 Expanded(
                   flex: 2,
                   child: InkResponse(

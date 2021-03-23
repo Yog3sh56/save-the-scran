@@ -23,9 +23,9 @@ class FirebaseBarcodeApi {
         //print("barcode text is $barcode_text");
         final foodname = await OpenFoodApi.getProduct(rawBarcode);
         return foodname;
-        final text = "Product name:"+foodname;
+        //final text = "Product name:"+foodname;
 
-        return text.isEmpty ? 'No text found in the image' : text;
+        //return text.isEmpty ? 'No text found in the image' : text;
       } catch (error) {
         return error.toString();
       }

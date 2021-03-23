@@ -124,8 +124,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
                           if (newUser != null) {
-                            uid = _auth.currentUser.uid;
-                            Navigator.popAndPushNamed(context, FridgeScreen.id);
+                                Navigator.popUntil(context, (route) => route.isFirst);
                           }
                         }
                       } on FirebaseAuthException catch (e) {
@@ -183,7 +182,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               elevation: 24.0,
               actions: <Widget>[
-                new FlatButton(
+                new TextButton(
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true)
                         .pop(); // dismisses only the dialog and returns nothing

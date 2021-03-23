@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               elevation: 24.0,
               actions: <Widget>[
-                new FlatButton(
+                new TextButton(
                   onPressed: () {
                     Navigator.of(context, rootNavigator: true)
                         .pop(); // dismisses only the dialog and returns nothing

@@ -21,7 +21,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent[100],
+      backgroundColor: Colors.grey.withOpacity(0.3),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
