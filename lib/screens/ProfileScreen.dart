@@ -21,9 +21,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: Text('Your Profile', style: TextStyle(color: Colors.black)),
+        title: Text('My Profile', style: TextStyle(color: Colors.black)),
       ),
       body: Center(
         child: Column(
@@ -32,10 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: Colors.lightBlue, shape: BoxShape.circle),
+                    color: Colors.greenAccent[200], shape: BoxShape.circle),
                 child: Icon(
                   Icons.person,
-                  size: 200,
+                  size: 100,
                 ) // This trailing comma makes auto-formatting nicer for build methods.
                 ),
             Text(_auth.currentUser.email),

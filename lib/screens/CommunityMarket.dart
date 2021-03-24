@@ -21,10 +21,23 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.3),
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+            gradient: LinearGradient(
+              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         title: Text('Community Market', style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(

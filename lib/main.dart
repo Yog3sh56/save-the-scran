@@ -9,6 +9,7 @@ import 'screens/CommunityMarket.dart';
 import 'screens/ChatContacts.dart';
 import 'screens/TakePictureScreen.dart';
 import 'chat/ChatContactsScreen.dart';
+import 'screens/ScranWelcomeScreen.dart';
 
 
 void main() async {
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget{
         RegistrationScreen.id: (context)=>RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         ProfileScreen.id: (context) => ProfileScreen(),
+        ScranWelcomeScreen.id: (context) => ScranWelcomeScreen(),
       },
     );
   }
