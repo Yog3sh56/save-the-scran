@@ -62,33 +62,41 @@ class _ChatContactsState extends State<ChatContacts> {
 
                       for (var item in snapshotDocs){
                         
+
+                        //parse in the other user Id, has to be converted to string
                         List<String> ids=[];
                         for (var val in item['twoIds']){
                           ids.add(val.toString());
                         } 
                         ids.remove(_auth.currentUser?.uid);
+
+
+                        //if message chain from user has not been added yet
                         if (!alreadyProcessed.contains(ids[0])){
-                          
+                          print(item['itemName']);
+
+                          //create Conversation Card
                           var c=ConversationList(
                             name: ids[0],
                             messageText: item['text'],
                             otherPerson: ids[0],
                             time: item['createdAt'].toDate().toString(),
-                            isMessageRead: false,
                             itemName: item['itemName'],
                           );
-                        conversations.add(c);
-                        alreadyProcessed.add(ids[0]);
-                        print("processed id");
+                          //add card and add processesd id
+                          conversations.add(c);
+                          alreadyProcessed.add(ids[0]);
+                          
                         }
                       }
+                      
                       return ListView(
                         shrinkWrap: true,
                         children: conversations
                       );
-                    }
+                    } else{
                     return Text("no messages");
-                    
+                    }
                     
                   })
                   :Text("Please login to send messages")

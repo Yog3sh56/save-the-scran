@@ -154,7 +154,7 @@ final _controller = TextEditingController();
 
     _firestore.collection("items").add({
       "ownerid": _auth.currentUser.uid,
-      "name": itemName,
+      "name": itemName.isEmpty?"no name":itemName,
       "buyDate": DateTime.now(),
       "expiryDate": _expiry,
       "inCommunity": false

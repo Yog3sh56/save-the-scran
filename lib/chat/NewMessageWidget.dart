@@ -23,7 +23,7 @@ class _NewMessageState extends State<NewMessage> {
     FocusScope.of(context).unfocus();
     List<String> hashes = [user.uid,widget.otherPerson.toString()];
     hashes.sort();
-    print(_enteredMessage);
+    print(widget.itemName);
     
     FirebaseFirestore.instance.collection('messages').add({
       'text': _enteredMessage,
@@ -33,7 +33,9 @@ class _NewMessageState extends State<NewMessage> {
       'twoIds':hashes,
       'itemName':widget.itemName
     });
+    
     _controller.clear();
+
   }
 
   @override
