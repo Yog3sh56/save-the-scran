@@ -14,10 +14,16 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
-        backgroundColor: Colors.grey.withOpacity(0.3),
-        title: Text('Saviours', style: TextStyle(color: Colors.white)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        title: Text('Saviours', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
         child: Column(

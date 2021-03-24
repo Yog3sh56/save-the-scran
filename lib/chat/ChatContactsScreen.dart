@@ -5,100 +5,104 @@ import '../chat/ChatUserModel.dart';
 import 'ConversationList.dart';
 
 class ChatContacts extends StatefulWidget {
-
   static const String id = "chat_contacts";
   @override
   _ChatContactsState createState() => _ChatContactsState();
 }
 
-
-
-
 class _ChatContactsState extends State<ChatContacts> {
   final _auth = FirebaseAuth.instance;
   final _firebase = FirebaseFirestore.instance;
-  List<ChatUsers> chatUsers=[];
-  
+  List<ChatUsers> chatUsers = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-       body:SingleChildScrollView(
-                child: Column(
-              children: <Widget>[
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "Saviours",
-                          style:
-                              TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                _auth.currentUser != null?
-                StreamBuilder(
-                  stream:_firebase
-                  .collection("messages")
-                  .orderBy("createdAt",descending: true)
-                  .where("twoIds",arrayContains: _auth.currentUser.uid)
-                  .snapshots(),
-                        
-                  builder: (context,snapshot){
-                    //initiate conversation list
-                    List<ConversationList> conversations=[];
-                    if (snapshot.hasData){
-                      //initiate array so we don't repeat conversations
-                      List<String> alreadyProcessed = [_auth.currentUser?.uid];
-                      
-                      //snapshot docs
-                      final snapshotDocs = snapshot.data.docs;
-                      
-
-                      for (var item in snapshotDocs){
-                        
-                        List<String> ids=[];
-                        for (var val in item['twoIds']){
-                          ids.add(val.toString());
-                        } 
-                        ids.remove(_auth.currentUser?.uid);
-                        if (!alreadyProcessed.contains(ids[0])){
-                          
-                          var c=ConversationList(
-                            name: ids[0],
-                            messageText: item['text'],
-                            otherPerson: ids[0],
-                            time: item['createdAt'].toDate().toString(),
-                            isMessageRead: false,
-                            itemName: item['itemName'],
-                          );
-                        conversations.add(c);
-                        alreadyProcessed.add(ids[0]);
-                        print("processed id");
-                        }
-                      }
-                      return ListView(
-                        shrinkWrap: true,
-                        children: conversations
-                      );
-                    }
-                    return Text("no messages");
-                    
-                    
-                  })
-                  :Text("Please login to send messages")
-                ,
-
-              ],
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
+        centerTitle: true,
+        // backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+            gradient: LinearGradient(
+              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
             ),
-       ),
+          ),
+        ),
+        title: Text('Saviours', style: TextStyle(color: Colors.black)),
+      ),
+
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            // SafeArea(
+            //   child: Padding(
+            //     padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: <Widget>[
+            //         Text(
+            //           "Saviours",
+            //           style:
+            //               TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            _auth.currentUser != null
+                ? StreamBuilder(
+                    stream: _firebase
+                        .collection("messages")
+                        .orderBy("createdAt", descending: true)
+                        .where("twoIds", arrayContains: _auth.currentUser.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      //initiate conversation list
+                      List<ConversationList> conversations = [];
+                      if (snapshot.hasData) {
+                        //initiate array so we don't repeat conversations
+                        List<String> alreadyProcessed = [
+                          _auth.currentUser?.uid
+                        ];
+
+                        //snapshot docs
+                        final snapshotDocs = snapshot.data.docs;
+
+                        for (var item in snapshotDocs) {
+                          List<String> ids = [];
+                          for (var val in item['twoIds']) {
+                            ids.add(val.toString());
+                          }
+                          ids.remove(_auth.currentUser?.uid);
+                          if (!alreadyProcessed.contains(ids[0])) {
+                            var c = ConversationList(
+                              name: ids[0],
+                              messageText: item['text'],
+                              otherPerson: ids[0],
+                              time: item['createdAt'].toDate().toString(),
+                              isMessageRead: false,
+                              itemName: item['itemName'],
+                            );
+                            conversations.add(c);
+                            alreadyProcessed.add(ids[0]);
+                            print("processed id");
+                          }
+                        }
+                        return ListView(
+                            shrinkWrap: true, children: conversations);
+                      }
+                      return Text("no messages");
+                    })
+                : Text("Please login to send messages"),
+          ],
+        ),
+      ),
     );
-      
-    
   }
 }
