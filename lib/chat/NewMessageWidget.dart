@@ -3,22 +3,35 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NewMessage extends StatefulWidget {
+
+  final otherPerson;
+  final itemName;
+
+  const NewMessage({Key key, this.otherPerson,this.itemName}) : super(key: key);
+
   @override
   _NewMessageState createState() => _NewMessageState();
 }
 
 class _NewMessageState extends State<NewMessage> {
+  final user = FirebaseAuth.instance.currentUser;
+  
   final _controller = new TextEditingController();
   var _enteredMessage = '';
-
-
   void _sendMessage() async{
+    
     FocusScope.of(context).unfocus();
-    final user = await FirebaseAuth.instance.currentUser;
-    FirebaseFirestore.instance.collection('chat').add({
+    List<String> hashes = [user.uid,widget.otherPerson.toString()];
+    hashes.sort();
+    print(_enteredMessage);
+    
+    FirebaseFirestore.instance.collection('messages').add({
       'text': _enteredMessage,
       'createdAt': Timestamp.now(),
-      'userId': user.uid,
+      'senderId': user.uid,
+      'receiverId':widget.otherPerson,
+      'twoIds':hashes,
+      'itemName':widget.itemName
     });
     _controller.clear();
   }

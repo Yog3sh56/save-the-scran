@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF00E676),
+          backgroundColor: Colors.grey.withOpacity(0.3),
           title: Text("Login", style: TextStyle(color: Colors.white)),
         ),
         backgroundColor: Colors.white,
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     decoration: inputDecoration.copyWith(hintText: "Password")),
                 SizedBox(
-                  height: 24.0,
+                  height: 5.0,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),

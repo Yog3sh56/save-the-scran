@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:camera/camera.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -22,7 +20,7 @@ class TextRecognitionWidget extends StatefulWidget {
 
   @override
   _TextRecognitionWidgetState createState() =>
-      _TextRecognitionWidgetState(carryoverImage);
+      _TextRecognitionWidgetState();
 }
 
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
@@ -31,27 +29,12 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   
   String itemName = "";
-  File carryoverImage;
   File image;
   DateTime _expiry = DateTime.now();
 
-  _TextRecognitionWidgetState(carryoverImage){
-    print(carryoverImage);
-    this.carryoverImage = File(carryoverImage.path);
-  }
 final _controller = TextEditingController();
 
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      final text = _controller.text.toLowerCase();
-      _controller.value = _controller.value.copyWith(
-        text: text,
-        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-  }
+
   
   void dispose() {
     _controller.dispose();
@@ -62,27 +45,27 @@ final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    //scanText();
-    //scanBarcode();
     return Expanded(
         child: Column(
           children: [
             Expanded(child: buildImage()),
             const SizedBox(height: 16),
-            ControlsWidget(
-              onClickedPickImage: pickImage,
-              onClickedScanText: scanText,
-              onClickedBar: scanBarcode,
-            ),
-            const SizedBox(height: 16),
-            const SizedBox(height: 16),
             TextField(
-              decoration: inputDecoration.copyWith(helperText: "item name"),
+              decoration: inputDecoration.copyWith(
+                  labelText:"hello"
+              ),
               controller: _controller,
-              onChanged: (value) {
-                itemName = value;
-              },
+              onChanged: (name) {
+                setState((){
+                  _controller.text = name;
+                });
+              },    
+              
             ),
+
+            const SizedBox(height: 16),
+            
+            
             ElevatedButton(
                 child: Text(_expiry.toString().split(" ")[0]),
                 onPressed: () {
@@ -106,6 +89,11 @@ final _controller = TextEditingController();
                     });
                   }, currentTime: _expiry!=null ?_expiry:DateTime.now(), locale: LocaleType.en);
                 }),
+                            ControlsWidget(
+              onClickedPickImage: pickImage,
+              onClickedScanText: scanText,
+              onClickedBar: scanBarcode,
+            ),
             PushtoMarketWidget(
               onClickedPushtoMarket: pushtoMarket,
             ),
@@ -119,13 +107,15 @@ final _controller = TextEditingController();
     scanText();
     scanBarcode(); 
 
+
+    
     return Container(
         child: image != null
             ? Image.file(image)
-            : carryoverImage == null
+            : widget.carryoverImage == null
                 ? Icon(Icons.photo_size_select_actual,
                     size: 160, color: Colors.blue[300])
-                : Image.file(File(carryoverImage.path)),
+                : Image.file(File(widget.carryoverImage.path)),
       );
   }
 
@@ -136,31 +126,24 @@ final _controller = TextEditingController();
   }
 
   Future scanText() async {
-    /*showDialog(
+    /*
+    showDialog(
       context: context,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      builder: (context)=> CircularProgressIndicator(),
     );
     */
     
 
     final dates = await FirebaseMLApi.recogniseText(image);
-    if (dates.length == 0)return;
-    final expiry = dates?.elementAt(0);
-    setDate(expiry);
+    if (dates!=null && dates?.length == 0){
+      
+      final expiry = dates?.elementAt(0);
+      setDate(expiry);
+    }
   }
     Future scanBarcode() async {
-      /*
-    showDialog(
-      context: context,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    */
+
     final text = await FirebaseBarcodeApi.recogniseBar(image);
-    print("text from barcode is: $text");
     setText(text);
   }
 

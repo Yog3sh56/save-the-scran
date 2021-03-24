@@ -40,13 +40,8 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       title: 'Save the Scran',
       home: MyBottomNavigationBar(),
-      // Start the app with the "/" named route. In this case, the app starts
-      // on the FirstScreen widget.
-      // initialRoute: '/',
+
       routes: {
-        // When navigating to the "/" route, build the FridgeScreen widget.
-        // '/': (context) => MyBottomNavigationBar(),
-        // When navigating to the "/market" route, build the SecondScreen widget.
         MyApp.id:(context) => MyApp(context),
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),

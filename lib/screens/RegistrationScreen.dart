@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/models/Item.dart';
-import 'package:save_the_scran/screens/FridgeScreen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'LoginScreen.dart';
 
@@ -22,31 +21,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //variables to store
   String email, password, passwordRepeat, uid;
 
-  void addMockItems(String uid) {
-    List<String> items = [
-      "yoghurt",
-      "milk",
-      "bread",
-      "cheese",
-      "lasagna",
-      "pizza"
-    ];
-    for (var i in items) {
-      Item item = Item(uid, i);
-      _firestore.collection("items").add({
-        "ownerid": uid,
-        "name": i,
-        "buyDate": item.buyDate,
-        "expiryDate": item.expiry
-      });
-    }
-  }
-
   //build
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF00E676),
+          backgroundColor: Colors.grey.withOpacity(0.3),
           title: Text("Register", style: TextStyle(color: Colors.white)),
         ),
         backgroundColor: Colors.white,
@@ -98,7 +77,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   decoration:
                       inputDecoration.copyWith(hintText: "Repeat Password")),
               SizedBox(
-                height: 24.0,
+                height: 5.0,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),

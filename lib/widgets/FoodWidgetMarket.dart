@@ -1,17 +1,19 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:save_the_scran/chat/ChatScreen.dart';
 
 class FoodWidgetMarket extends StatelessWidget {
-  final _firestore = FirebaseFirestore.instance;
 
+  final _auth = FirebaseAuth.instance;
   final id;
+  final ownerid;
   final item;
   double foodProgress;
   Color progressColor;
 
-  FoodWidgetMarket({this.item, this.id});
+  FoodWidgetMarket({this.item, this.id,this.ownerid});
 
   void setExpiryProgress() {
     final today = DateTime.now();
@@ -41,11 +43,12 @@ class FoodWidgetMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Card(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Padding(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Column(children: [
-              Row(mainAxisSize: MainAxisSize.max, children: [
+              Row(
+                mainAxisSize: MainAxisSize.max, children: [
                 Expanded(
                   flex: 1,
                   child: Container(
@@ -58,9 +61,9 @@ class FoodWidgetMarket extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Column(children: [
-                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),),
+                          Text(item.name[0].toUpperCase() + item.name.substring(1),textAlign: TextAlign.center,style: TextStyle(fontSize: 15),),
                           Text(
                             "Expiry" +
                                 item.expiry.day.toString() +
@@ -73,23 +76,28 @@ class FoodWidgetMarket extends StatelessWidget {
                         ])),
                     
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: InkResponse(
                       radius: 50,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Icon(Icons.person),
-                          Text("Message Owner"),
+                          Text("Message "),
+                          Text("owner")
                         ],
                       ),
                       onTap: () {
-                        bool changeTo = true;
-                        if (item.inCommunity) changeTo = false;
-                        _firestore
-                            .collection("items")
-                            .doc(id)
-                            .update({"inCommunity": changeTo});
+                        _auth.currentUser!=null?
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatScreen(
+                              otherPerson:this.ownerid,itemName:this.item.name),
+                          ),
+                        )
+                        :print("not signed in");
+                        ;
                       }),
                 )
               ]),

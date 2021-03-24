@@ -57,29 +57,35 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color(0xFF00E676),
+          backgroundColor: Colors.grey.withOpacity(0.3),
           title: Text('Add food to your fridge',
               style: TextStyle(color: Colors.white))),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If the Future is complete, display the preview.
-            return CameraPreview(_controller);
-          } else {
-            // Otherwise, display a loading indicator.
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
-        backgroundColor: Color(0xFFFF4081),
-        // Provide an onPressed callback.
-        onPressed: () async {
+      body: Column(
+              children: [FutureBuilder<void>(
+          future: _initializeControllerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              // If the Future is complete, display the preview.
+              return CameraPreview(_controller);
+            } else {
+              // Otherwise, display a loading indicator.
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
+        Expanded(
+          
+          child: 
+          GestureDetector(
+                      child: Container(
+              width: double.infinity,
+              child:Icon(Icons.camera),
+              color: Colors.blue,
+            ),
+            onTap:()async{
           // Take the Picture in a try / catch block. If anything goes wrong,
           // catch the error.
           try {
@@ -109,8 +115,12 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               builder: (context) => DisplayRecognition(image),
             ),
           );
-        },
+        } ,
+          ),
+          )
+        ]
       ),
+      
     );
   }
 }
@@ -125,6 +135,7 @@ class DisplayRecognition extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Recognition"),
+        backgroundColor: Colors.grey.withOpacity(0.3),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),

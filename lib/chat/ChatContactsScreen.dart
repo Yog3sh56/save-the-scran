@@ -12,77 +12,93 @@ class ChatContacts extends StatefulWidget {
 }
 
 
-final user = FirebaseAuth.instance.currentUser;
+
 
 class _ChatContactsState extends State<ChatContacts> {
-
-  List<ChatUsers> chatUsers = [
-    ChatUsers(name: user.uid, messageText: "Nice tomato", time: "Now"),
-    ChatUsers(
-        name: "Test2", messageText: "I like apples", time: "Yesterday"),
-  ];
-
+  final _auth = FirebaseAuth.instance;
+  final _firebase = FirebaseFirestore.instance;
+  List<ChatUsers> chatUsers=[];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Saviours",
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+      
+       body:SingleChildScrollView(
+                child: Column(
+              children: <Widget>[
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "Saviours",
+                          style:
+                              TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.grey.shade600),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey.shade600,
-                    size: 20,
                   ),
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.grey.shade100)),
                 ),
-              ),
+                _auth.currentUser != null?
+                StreamBuilder(
+                  stream:_firebase
+                  .collection("messages")
+                  .orderBy("createdAt",descending: true)
+                  .where("twoIds",arrayContains: _auth.currentUser.uid)
+                  .snapshots(),
+                        
+                  builder: (context,snapshot){
+                    //initiate conversation list
+                    List<ConversationList> conversations=[];
+                    if (snapshot.hasData){
+                      //initiate array so we don't repeat conversations
+                      List<String> alreadyProcessed = [_auth.currentUser?.uid];
+                      
+                      //snapshot docs
+                      final snapshotDocs = snapshot.data.docs;
+                      
+
+                      for (var item in snapshotDocs){
+                        
+                        List<String> ids=[];
+                        for (var val in item['twoIds']){
+                          ids.add(val.toString());
+                        } 
+                        ids.remove(_auth.currentUser?.uid);
+                        if (!alreadyProcessed.contains(ids[0])){
+                          
+                          var c=ConversationList(
+                            name: ids[0],
+                            messageText: item['text'],
+                            otherPerson: ids[0],
+                            time: item['createdAt'].toDate().toString(),
+                            isMessageRead: false,
+                            itemName: item['itemName'],
+                          );
+                        conversations.add(c);
+                        alreadyProcessed.add(ids[0]);
+                        print("processed id");
+                        }
+                      }
+                      return ListView(
+                        shrinkWrap: true,
+                        children: conversations
+                      );
+                    }
+                    return Text("no messages");
+                    
+                    
+                  })
+                  :Text("Please login to send messages")
+                ,
+
+              ],
             ),
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: 16),
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return ConversationList(
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  // imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: (index == 0 || index == 3) ? true : false,
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+       ),
     );
+      
+    
   }
 }

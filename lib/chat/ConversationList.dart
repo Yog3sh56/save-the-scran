@@ -7,27 +7,34 @@ class ConversationList extends StatefulWidget {
 
   String name;
   String messageText;
+  final otherPerson;
   // String imageUrl;
   String time;
   bool isMessageRead;
+  String itemName;
   ConversationList(
       {@required this.name,
       @required this.messageText,
       @required this.time,
-      @required this.isMessageRead});
+      @required this.otherPerson,
+      @required this.isMessageRead,
+      @required this.itemName});
   @override
-  _ConversationListState createState() => _ConversationListState();
+  _ConversationListState createState() => _ConversationListState(otherPerson);
 }
 
 //,@required this.imageUrl
 
 class _ConversationListState extends State<ConversationList> {
+  final otherPerson;
+
+  _ConversationListState(this.otherPerson);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ChatScreen();
+          return ChatScreen(otherPerson: otherPerson);
         }));
       },
       child: Container(
@@ -51,14 +58,15 @@ class _ConversationListState extends State<ConversationList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.name,
+                            widget.itemName==null?"":widget.itemName,
                             style: TextStyle(fontSize: 16),
                           ),
                           SizedBox(
                             height: 6,
                           ),
                           Text(
-                            widget.messageText,
+
+                            widget.messageText==null?"":widget.messageText,
                             style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.grey.shade600,
@@ -74,7 +82,9 @@ class _ConversationListState extends State<ConversationList> {
               ),
             ),
             Text(
-              widget.time,
+              widget.time==null?"":
+              widget.time.toString().split(" ")[0],
+              
               style: TextStyle(
                   fontSize: 12,
                   fontWeight: widget.isMessageRead

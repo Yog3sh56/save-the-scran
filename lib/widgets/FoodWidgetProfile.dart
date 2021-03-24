@@ -20,7 +20,7 @@ class FoodWidgetProfile extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = progress;
+    this.foodProgress = progress.isNaN?0.1:progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -39,66 +39,86 @@ class FoodWidgetProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setExpiryProgress();
-    return Card(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-        child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Column(children: [
-              Row(mainAxisSize: MainAxisSize.max, children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: new BoxDecoration(
-                      color: progressColor,
-                      shape: BoxShape.circle,
+    return Dismissible(
+              background: Padding(
+            padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
+            child: Container(
+                padding: EdgeInsets.all(20),
+                alignment: AlignmentDirectional.centerStart,
+                child: Icon(Icons.delete),
+                color: Colors.red)),
+        secondaryBackground: Padding(
+            padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
+            child: Container(
+                padding: EdgeInsets.all(20),
+                alignment: AlignmentDirectional.centerEnd,
+                child: Icon(Icons.delete),
+                color: Colors.red)),
+        key: UniqueKey(),
+        onDismissed: (DismissDirection direction) {
+          _firestore.collection("items").doc(id).delete();
+        },
+          child: Card(
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+          child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Column(children: [
+                Row(mainAxisSize: MainAxisSize.max, children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      decoration: new BoxDecoration(
+                        color: progressColor,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                        flex: 2,
-                        child: Column(children: [
-                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
-                          Text(
-                            "Expiry" +
-                                item.expiry.day.toString() +
-                                "/" +
-                                item.expiry.month.toString() +
-                                "/" +
-                                item.expiry.year.toString(),
-                            style: TextStyle(fontSize: 11),
-                          ),
-                        ])),
-                    
-                Expanded(
-                  flex: 1,
-                  child: InkResponse(
-                      radius: 50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(Icons.home),
-                          Text("Return to"),
-                          Text("Fridge")
-                        ],
-                      ),
-                      onTap: () {
-                        _firestore
-                            .collection("items")
-                            .doc(id)
-                            .update({"inCommunity": false});
-                      }),
+                  Expanded(
+                          flex: 2,
+                          child: Column(children: [
+                            Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
+                            Text(
+                              "Expiry" +
+                                  item.expiry.day.toString() +
+                                  "/" +
+                                  item.expiry.month.toString() +
+                                  "/" +
+                                  item.expiry.year.toString(),
+                              style: TextStyle(fontSize: 11),
+                            ),
+                          ])),
+                      
+                  Expanded(
+                    flex: 1,
+                    child: InkResponse(
+                        radius: 50,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.home),
+                            Text("Return to"),
+                            Text("Fridge")
+                          ],
+                        ),
+                        onTap: () {
+                          _firestore
+                              .collection("items")
+                              .doc(id)
+                              .update({"inCommunity": false});
+                        }),
+                  )
+                ]),
+                Padding(padding: EdgeInsets.only(bottom: 20)),
+                LinearProgressIndicator(
+                  value: this.foodProgress,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    this.progressColor,
+                  ),
+                  backgroundColor: Colors.black,
                 )
-              ]),
-              Padding(padding: EdgeInsets.only(bottom: 20)),
-              LinearProgressIndicator(
-                value: this.foodProgress,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  this.progressColor,
-                ),
-                backgroundColor: Colors.black,
-              )
-            ])));
+              ]))),
+    );
   }
 }

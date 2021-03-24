@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PushtoMarketWidget extends StatelessWidget {
   final VoidCallback onClickedPushtoMarket;
-  final _firestore = FirebaseFirestore.instance;
 
   PushtoMarketWidget({
     @required this.onClickedPushtoMarket,

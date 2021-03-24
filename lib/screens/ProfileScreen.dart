@@ -16,19 +16,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  void itemStream() async {
-    //_firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()
-    await for (var snapshot in _firestore
-        .collection("items")
-        .where("ownerid",
-            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
-        .where("inCommunity", isEqualTo: true)
-        .snapshots()) {
-      for (var i in snapshot.docs) {
-        print(i.data());
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +64,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: StreamBuilder(
                   //the stream provides a snapshot, to pass onto the builder
                   stream: _firestore
-                      .collection("items")
-                      .where("inCommunity", isEqualTo: true)
+                    .collection("items")
+                    .where("inCommunity", isEqualTo: true)
+                    .where("ownerid",
+                      isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+
                       .snapshots(),
                   //the builder takes in the stream
                   builder: (context, snapshot) {

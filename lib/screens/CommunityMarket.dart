@@ -62,6 +62,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                       continue;
                     }
                   }
+                  print(item['name']);
                   Item i = Item(item['ownerid'], item['name'],
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),
@@ -72,6 +73,8 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                   final fw = FoodWidgetMarket(
                     item: i,
                     id: item.id,
+                    ownerid:item['ownerid'],
+                    
                   );
                   itemText.add(fw);
                   //itemText.add(Text(item['name']));
