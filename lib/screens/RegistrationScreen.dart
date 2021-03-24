@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/constants.dart';
-import 'package:save_the_scran/models/Item.dart';
 import 'package:email_validator/email_validator.dart';
 import 'LoginScreen.dart';
 
@@ -25,10 +24,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey.withOpacity(0.3),
-          title: Text("Register", style: TextStyle(color: Colors.white)),
+          // backgroundColor: Colors.grey.withOpacity(0.3),
+          backgroundColor: Colors.greenAccent[200],
+          // title: Text("Register", style: TextStyle(color: Colors.black)),
+          elevation: 0,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.greenAccent[200],
         body: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(25, 50, 25, 50),
           child: Column(
@@ -50,7 +51,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     email = value;
                   },
                   decoration:
-                      inputDecoration.copyWith(hintText: 'Enter your email')),
+                      inputDecoration.copyWith( fillColor: Colors.white.withOpacity(0.5), filled: true ,hintText: 'Enter your email', icon: Icon(Icons.person, color: Color(0xFFc2075e),)),
+              ),
               SizedBox(
                 height: 8.0,
               ),
@@ -62,27 +64,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   onChanged: (value) {
                     password = value;
                   },
-                  decoration: inputDecoration.copyWith(hintText: "Password")),
+                  decoration: inputDecoration.copyWith(fillColor: Colors.white.withOpacity(0.5), filled: true, hintText: "Password", icon: Icon(Icons.lock, color: Color(0xFFc2075e)) )),
               SizedBox(
                 height: 8.0,
               ),
-              TextField(
-                  style: TextStyle(color: Colors.black),
-                  obscureText: true,
-                  textAlign: TextAlign.center,
-                  obscuringCharacter: "*",
-                  onChanged: (value) {
-                    passwordRepeat = value;
-                  },
-                  decoration:
-                      inputDecoration.copyWith(hintText: "Repeat Password")),
+              Material(
+                child: TextField(
+                    style: TextStyle(color: Colors.black),
+                    obscureText: true,
+                    textAlign: TextAlign.center,
+                    obscuringCharacter: "*",
+                    onChanged: (value) {
+                      passwordRepeat = value;
+                    },
+                    decoration:
+                        inputDecoration.copyWith(fillColor: Colors.white.withOpacity(0.5), filled: true ,hintText: "Repeat Password", icon: Icon(Icons.lock, color: Colors.greenAccent[200]))),
+              ),
               SizedBox(
                 height: 5.0,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Material(
-                  color: Colors.blueAccent,
+                  color: Color(0xFFc2075e),
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                   elevation: 5.0,
                   child: MaterialButton(
@@ -103,7 +107,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
                           if (newUser != null) {
-                                Navigator.popUntil(context, (route) => route.isFirst);
+                            Navigator.popUntil(
+                                context, (route) => route.isFirst);
                           }
                         }
                       } on FirebaseAuthException catch (e) {

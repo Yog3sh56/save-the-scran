@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
+import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';
 import 'package:save_the_scran/widgets/FoodWidget.dart';
 
@@ -60,10 +62,24 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.3),
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+            gradient: LinearGradient(
+              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+              begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+            ),
+          ),
+        ),
+
         title: Text('My Fridge', style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
@@ -73,12 +89,14 @@ class _FridgeScreenState extends State<FridgeScreen> {
               ),
               onPressed: () {
                 if (_auth.currentUser == null) {
-                  Navigator.pushNamed(context, LoginScreen.id);
+                  Navigator.pushNamed(context, ScranWelcomeScreen.id);
                 } else {
                   Navigator.pushNamed(context, ProfileScreen.id);
                 }
               })
         ],
+
+        elevation: 4,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -18,10 +18,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey.withOpacity(0.3),
-          title: Text("Login", style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.greenAccent[200],
+          // title: Text("Login", style: TextStyle(color: Colors.black)),
+          elevation: 0,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.greenAccent[200],
         body: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(25, 50, 25, 50),
           child: Column(
@@ -37,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextField(
                     style: TextStyle(color: Colors.black),
+                    cursorColor: Color(0xFFFF4081),
                     keyboardType: TextInputType.emailAddress,
                     textAlign: TextAlign.center,
                     onChanged: (value) {
@@ -62,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: Material(
-                    color: Colors.blueAccent,
+                    color: Color(0xFFFF4081),
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     elevation: 5.0,
                     child: MaterialButton(
