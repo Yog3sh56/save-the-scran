@@ -135,7 +135,7 @@ final _controller = TextEditingController();
     
 
     final dates = await FirebaseMLApi.recogniseText(image);
-    if (dates!=null && dates?.length == 0){
+    if (dates!=null && dates?.length != 0){
       
       final expiry = dates?.elementAt(0);
       setDate(expiry);

@@ -83,7 +83,7 @@ class FoodWidget extends StatelessWidget {
                         child: Column(children: [
                           Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
                           Text(
-                            "Expiry" +
+                            "Expires " +
                                 item.expiry.day.toString() +
                                 "/" +
                                 item.expiry.month.toString() +

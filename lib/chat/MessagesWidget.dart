@@ -19,7 +19,7 @@ class Messages extends StatelessWidget {
           .collection('messages')
           .where("twoIds",isEqualTo: twoIds)
           
-          //.orderBy('createdAt', descending: true)
+          .orderBy('createdAt', descending: true)
           
           .snapshots(),
       builder: (ctx, chatSnapshot) {
