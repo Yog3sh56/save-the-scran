@@ -44,8 +44,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {
                       email = value;
                     },
-                    decoration:
-                        inputDecoration.copyWith(hintText: 'Enter your email')),
+                    decoration: inputDecoration.copyWith(
+                        fillColor: Colors.white.withOpacity(0.5),
+                        filled: true,
+                        prefixIcon: Icon(Icons.person),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                                color: Color(0xFFc2075e), width: .5)),
+                        hintText: 'Enter your email')),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -57,7 +69,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {
                       password = value;
                     },
-                    decoration: inputDecoration.copyWith(hintText: "Password")),
+                    decoration: inputDecoration.copyWith(
+                        fillColor: Colors.white.withOpacity(0.5),
+                        filled: true,
+                        prefixIcon: Icon(Icons.lock),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(
+                                color: Color(0xFFc2075e), width: .5)),
+                        hintText: "Password")),
                 SizedBox(
                   height: 5.0,
                 ),
@@ -79,7 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (user != null) {
                               print("succesfull login");
-                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
                             }
                           }
                         } on FirebaseAuthException catch (e) {
