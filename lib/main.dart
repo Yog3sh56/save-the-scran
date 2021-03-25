@@ -40,6 +40,10 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Save the Scran',
+      theme: ThemeData(
+        primaryColor: Color(0xFFc2075e),
+        accentColor: Colors.greenAccent[200]
+      ),
       home: MyBottomNavigationBar(),
 
       routes: {
