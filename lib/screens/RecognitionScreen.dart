@@ -54,6 +54,10 @@ final _controller = TextEditingController();
             const SizedBox(height: 16),
             TextField(
               decoration: inputDecoration.copyWith(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                          color: Color(0xFFc2075e), width: .5)),
                   labelText:"Product Name"
               ),
               controller: _controller,
@@ -76,10 +80,10 @@ final _controller = TextEditingController();
                       minTime: DateTime.now(),
                       maxTime: DateTime(2030, 6, 7),
                       theme: DatePickerTheme(
-                          headerColor: Colors.orange,
-                          backgroundColor: Colors.blue,
+                          headerColor: Color(0xFFc2075e),
+                          backgroundColor: Colors.greenAccent[200],
                           itemStyle: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                           doneStyle:

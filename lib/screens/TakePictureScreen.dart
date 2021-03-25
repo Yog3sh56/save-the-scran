@@ -28,7 +28,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   XFile image;
-  
 
   @override
   void initState() {
@@ -56,6 +55,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           backgroundColor: Colors.grey.withOpacity(0.3),
           title: Text('Add food to your fridge',
@@ -63,8 +63,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
-      body: Column(
-              children: [FutureBuilder<void>(
+      body: ListView(children: [
+        FutureBuilder<void>(
           future: _initializeControllerFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -76,59 +76,53 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             }
           },
         ),
-        Expanded(
-          
-          child: 
-          GestureDetector(
-            child: Container(
-              width: double.infinity,
-              child:Icon(Icons.camera),
-              decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-            gradient: LinearGradient(
-              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
-              begin: Alignment.bottomRight,
+        GestureDetector(
+          child: Container(
+            width: double.infinity,
+                        height: 60,
+                        child: Icon(Icons.camera),
+            decoration: BoxDecoration(
+              //borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+              gradient: LinearGradient(
+                colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+                begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
+              ),
             ),
           ),
-            
-            ),
-            onTap:()async{
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
-          try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
+          onTap: () async {
+            // Take the Picture in a try / catch block. If anything goes wrong,
+            // catch the error.
+            try {
+              // Ensure that the camera is initialized.
+              await _initializeControllerFuture;
 
-            // Attempt to take a picture and get the file `image`
-            // where it was saved.
-            image = await _controller.takePicture();
+              // Attempt to take a picture and get the file `image`
+              // where it was saved.
+              image = await _controller.takePicture();
 
-            final result = await ImageGallerySaver.saveFile(image?.path);
-            print('result:$result');
+              final result = await ImageGallerySaver.saveFile(image?.path);
+              print('result:$result');
 
-            if (result) {
-              print('Failed to save！');
-            } else {
-              print('Save successfully!');
+              if (result) {
+                print('Failed to save！');
+              } else {
+                print('Save successfully!');
+              }
+            } catch (e) {
+              // If an error occurs, log the error to the console.
+              print(e);
             }
-          } catch (e) {
-            // If an error occurs, log the error to the console.
-            print(e);
-          }
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DisplayRecognition(image),
-            ),
-          );
-        } ,
-          ),
-          )
-        ]
-      ),
-      
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DisplayRecognition(image),
+              ),
+            );
+          },
+        ),
+      ]),
     );
   }
 }
