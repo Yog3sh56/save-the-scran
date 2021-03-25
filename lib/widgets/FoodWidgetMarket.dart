@@ -1,11 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/chat/ChatScreen.dart';
 
 class FoodWidgetMarket extends StatelessWidget {
-
   final _auth = FirebaseAuth.instance;
   final id;
   final ownerid;
@@ -13,7 +11,7 @@ class FoodWidgetMarket extends StatelessWidget {
   double foodProgress;
   Color progressColor;
 
-  FoodWidgetMarket({this.item, this.id,this.ownerid});
+  FoodWidgetMarket({this.item, this.id, this.ownerid});
 
   void setExpiryProgress() {
     final today = DateTime.now();
@@ -43,12 +41,12 @@ class FoodWidgetMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Card(
+      elevation: 15,
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Padding(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Column(children: [
-              Row(
-                mainAxisSize: MainAxisSize.max, children: [
+              Row(mainAxisSize: MainAxisSize.max, children: [
                 Expanded(
                   flex: 1,
                   child: Container(
@@ -61,20 +59,23 @@ class FoodWidgetMarket extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                        flex: 2,
-                        child: Column(children: [
-                          Text(item.name[0].toUpperCase() + item.name.substring(1),textAlign: TextAlign.center,style: TextStyle(fontSize: 15),),
-                          Text(
-                            "Expiry" +
-                                item.expiry.day.toString() +
-                                "/" +
-                                item.expiry.month.toString() +
-                                "/" +
-                                item.expiry.year.toString(),
-                            style: TextStyle(fontSize: 11),
-                          ),
-                        ])),
-                    
+                    flex: 2,
+                    child: Column(children: [
+                      Text(
+                        item.name[0].toUpperCase() + item.name.substring(1),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      Text(
+                        "Expiry" +
+                            item.expiry.day.toString() +
+                            "/" +
+                            item.expiry.month.toString() +
+                            "/" +
+                            item.expiry.year.toString(),
+                        style: TextStyle(fontSize: 11),
+                      ),
+                    ])),
                 Expanded(
                   flex: 1,
                   child: InkResponse(
@@ -82,21 +83,22 @@ class FoodWidgetMarket extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.person),
+                          Icon(Icons.send),
                           Text("Message "),
                           Text("owner")
                         ],
                       ),
                       onTap: () {
-                        _auth.currentUser!=null?
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChatScreen(
-                              otherPerson:this.ownerid,itemName:this.item.name),
-                          ),
-                        )
-                        :print("not signed in");
+                        _auth.currentUser != null
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                      otherPerson: this.ownerid,
+                                      itemName: this.item.name),
+                                ),
+                              )
+                            : print("not signed in");
                         ;
                       }),
                 )
