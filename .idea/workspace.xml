@@ -27,8 +27,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5f85dac6-ce7e-4ea5-a6c1-9c925827d75c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/RecognitionScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/RecognitionScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/TakePictureScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/TakePictureScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/push_to_market.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/push_to_market.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
