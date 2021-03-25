@@ -31,7 +31,9 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   String itemName = "";
   File image;
   DateTime _expiry = DateTime.now();
-
+  bool textHasBeenScanned=false;
+  bool barcodeHasBeenScanned=false;
+  
 final _controller = TextEditingController();
 
 
@@ -52,7 +54,7 @@ final _controller = TextEditingController();
             const SizedBox(height: 16),
             TextField(
               decoration: inputDecoration.copyWith(
-                  labelText:"hello"
+                  labelText:"Product Name"
               ),
               controller: _controller,
               onChanged: (name) {
@@ -104,8 +106,8 @@ final _controller = TextEditingController();
 
   Widget buildImage(){
     
-    scanText();
-    scanBarcode(); 
+    if (!textHasBeenScanned)scanText();
+    if (!barcodeHasBeenScanned)scanBarcode(); 
 
 
     
@@ -121,7 +123,6 @@ final _controller = TextEditingController();
 
   Future pickImage() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
-    //final file = await ImagePicker().getImage(source: ImageSource.camera);
     setImage(File(file.path));
   }
 
@@ -132,18 +133,18 @@ final _controller = TextEditingController();
       builder: (context)=> CircularProgressIndicator(),
     );
     */
-    
-
-    final dates = await FirebaseMLApi.recogniseText(image);
+    textHasBeenScanned =true;
+    final dates = await FirebaseMLApi.recogniseText(widget.carryoverImage==null?image:File(widget.carryoverImage.path));
     if (dates!=null && dates?.length != 0){
       
       final expiry = dates?.elementAt(0);
       setDate(expiry);
+
     }
   }
     Future scanBarcode() async {
-
-    final text = await FirebaseBarcodeApi.recogniseBar(image);
+    barcodeHasBeenScanned=true;
+    final text = await FirebaseBarcodeApi.recogniseBar(widget.carryoverImage==null?image:File(widget.carryoverImage.path));
     setText(text);
   }
 

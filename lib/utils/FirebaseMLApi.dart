@@ -112,7 +112,8 @@ class FirebaseMLApi {
             }
             possibleDates.add(date);
           } catch (FormatException) {
-            print("$match was not a a valid date");          }
+            //print("$match was not a a valid date");          
+            }
         }
       }
     }

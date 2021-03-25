@@ -22,6 +22,7 @@ class FirebaseBarcodeApi {
 
         //print("barcode text is $barcode_text");
         final foodname = await OpenFoodApi.getProduct(rawBarcode);
+        print(foodname);
         return foodname;
         //final text = "Product name:"+foodname;
 
