@@ -3,13 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:save_the_scran/constants.dart';
-import 'package:save_the_scran/screens/widget/push_to_market.dart';
+import 'package:save_the_scran/widgets/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
-import 'control.dart';
+import '../widgets/control.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
   final carryoverImage;

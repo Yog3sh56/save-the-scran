@@ -4,15 +4,10 @@ class MessageBubble extends StatelessWidget {
   MessageBubble(this.message, this.myId);
  // MessageBubble(this.message, this.isMe, {key}) : super(key: key);
 
-
   final dynamic message;
   final String myId;
   bool isMe=false;
-
-
   
-
-
   @override
   Widget build(BuildContext context) {
     if (message['senderId']==myId) isMe=true;
@@ -22,7 +17,7 @@ class MessageBubble extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: isMe ? Colors.grey : Theme.of(context).accentColor,
-            boxShadow: [BoxShadow(color: Colors.blue,offset: Offset.fromDirection(5,3))],
+            boxShadow:[BoxShadow(color: isMe?Colors.blue:Colors.grey,offset: Offset.fromDirection(5,3))],
             borderRadius: BorderRadius.only(
               
               topLeft: Radius.circular(12),

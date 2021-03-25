@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_scran/screens/widget/RoundedButtonWidget.dart';
+import 'package:save_the_scran/widgets/RoundedButtonWidget.dart';
 import 'LoginScreen.dart';
 import 'RegistrationScreen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';

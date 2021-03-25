@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../chat/ChatUserModel.dart';
+import 'package:save_the_scran/models/ChatUserModel.dart';
 import 'ConversationList.dart';
 
 class ChatContacts extends StatefulWidget {
@@ -74,7 +74,6 @@ class _ChatContactsState extends State<ChatContacts> {
                         //snapshot docs
                         final snapshotDocs = snapshot.data.docs;
 
-<<<<<<< HEAD
                       for (var item in snapshotDocs){
                         
 
@@ -102,32 +101,10 @@ class _ChatContactsState extends State<ChatContacts> {
                           conversations.add(c);
                           alreadyProcessed.add(ids[0]);
                           
-=======
-                        for (var item in snapshotDocs) {
-                          List<String> ids = [];
-                          for (var val in item['twoIds']) {
-                            ids.add(val.toString());
-                          }
-                          ids.remove(_auth.currentUser?.uid);
-                          if (!alreadyProcessed.contains(ids[0])) {
-                            var c = ConversationList(
-                              name: ids[0],
-                              messageText: item['text'],
-                              otherPerson: ids[0],
-                              time: item['createdAt'].toDate().toString(),
-                              isMessageRead: false,
-                              itemName: item['itemName'],
-                            );
-                            conversations.add(c);
-                            alreadyProcessed.add(ids[0]);
-                            print("processed id");
-                          }
->>>>>>> bebaddbf67a61eda5c0ae2011ad8fccd3ecaf422
                         }
                         return ListView(
                             shrinkWrap: true, children: conversations);
                       }
-<<<<<<< HEAD
                       
                       return ListView(
                         shrinkWrap: true,
@@ -144,14 +121,6 @@ class _ChatContactsState extends State<ChatContacts> {
               ],
             ),
        ),
-=======
-                      return Text("no messages");
-                    })
-                : Text("Please login to send messages"),
-          ],
-        ),
-      ),
->>>>>>> bebaddbf67a61eda5c0ae2011ad8fccd3ecaf422
     );
   }
 }

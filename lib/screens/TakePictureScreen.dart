@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'package:save_the_scran/screens/widget/text_recognition.dart';
+import 'package:save_the_scran/screens/RecognitionScreen.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
@@ -80,10 +80,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           
           child: 
           GestureDetector(
-                      child: Container(
+            child: Container(
               width: double.infinity,
               child:Icon(Icons.camera),
-              color: Colors.blue,
+              decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+            gradient: LinearGradient(
+              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+              begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+            ),
+          ),
+            
             ),
             onTap:()async{
           // Take the Picture in a try / catch block. If anything goes wrong,
