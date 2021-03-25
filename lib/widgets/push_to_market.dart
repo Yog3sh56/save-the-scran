@@ -15,7 +15,7 @@ class PushtoMarketWidget extends StatelessWidget {
           RaisedButton(
             color: Color(0xFFff79af),
             onPressed: onClickedPushtoMarket,
-            child: Text('Push to Market'),
+            child: Text('Add to Fridge'),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
