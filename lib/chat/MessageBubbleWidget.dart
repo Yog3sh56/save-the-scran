@@ -16,8 +16,8 @@ class MessageBubble extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isMe ? Colors.grey : Theme.of(context).accentColor,
-            boxShadow:[BoxShadow(color: isMe?Colors.blue:Colors.grey,offset: Offset.fromDirection(5,3))],
+            color: isMe ? Colors.white : Theme.of(context).accentColor,
+            boxShadow:[BoxShadow(color: isMe?Colors.black.withOpacity(0.2):Colors.grey,offset: Offset.fromDirection(1,2))],
             borderRadius: BorderRadius.only(
               
               topLeft: Radius.circular(12),
