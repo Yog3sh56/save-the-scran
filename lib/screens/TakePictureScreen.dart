@@ -135,9 +135,10 @@ class DisplayRecognition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
         title: Text("Recognition"),
-        backgroundColor: Colors.grey.withOpacity(0.3),
+        backgroundColor: Colors.grey,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),

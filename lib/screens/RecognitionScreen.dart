@@ -53,7 +53,13 @@ final _controller = TextEditingController();
             Expanded(child: buildImage()),
             const SizedBox(height: 16),
             TextField(
+              cursorColor: Color(0xFFc2075e),
               decoration: inputDecoration.copyWith(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide:
+                    BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                  ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(
