@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (user != null) {
                               print("succesfull login");
-                              Navigator.pop(context);
+                              Navigator.popUntil(context, (route) => route.isFirst);
                             }
                           }
                         } on FirebaseAuthException catch (e) {
