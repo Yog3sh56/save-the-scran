@@ -40,21 +40,6 @@ class _ChatContactsState extends State<ChatContacts> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // SafeArea(
-            //   child: Padding(
-            //     padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: <Widget>[
-            //         Text(
-            //           "Saviours",
-            //           style:
-            //               TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
             _auth.currentUser != null
                 ? StreamBuilder(
                     stream: _firebase
