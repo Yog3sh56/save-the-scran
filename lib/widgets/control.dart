@@ -17,7 +17,7 @@ class ControlsWidget extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       RaisedButton(
-        color: Color(0xFF82B1FF),
+        color: Color(0xFFff79af),
         onPressed: onClickedPickImage,
         child:Text('Pick Image'),
         shape: RoundedRectangleBorder(
@@ -28,7 +28,7 @@ class ControlsWidget extends StatelessWidget {
   ),
       const SizedBox(width: 12),
       RaisedButton(
-        color: Color(0xFF82B1FF),
+        color: Color(0xFFff79af),
         onPressed: onClickedScanText,
         child: Text('Scan'),
         shape: RoundedRectangleBorder(
@@ -37,7 +37,7 @@ class ControlsWidget extends StatelessWidget {
       ),
       const SizedBox(width: 12),
       RaisedButton(
-        color: Color(0xFF82B1FF),
+        color: Color(0xFFff79af),
         onPressed: onClickedBar,
         child: Text('BarScan'),
         shape: RoundedRectangleBorder(
