@@ -59,6 +59,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.4
   flutter_native_splash: ^0.2.8
 
+
 flutter_native_splash:
   color: "69F0AE"
   image: images/logoWithScran.png
@@ -70,7 +71,7 @@ flutter_native_splash:
 flutter_icons:
     android: true
     ios: true
-    image_path: "images/heartLogo.png"
+    image_path: "images/appIcon.png"
 # The following section is specific to Flutter.
 flutter:
 

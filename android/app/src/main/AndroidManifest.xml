@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dsc_team.save_the_scran">
    <application
-        android:label="save_the_scran"
+        android:label="Save the Scran"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
