@@ -63,73 +63,95 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
-      body: Column(
-              children: [FutureBuilder<void>(
-          future: _initializeControllerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              // If the Future is complete, display the preview.
-              return CameraPreview(_controller);
-            } else {
-              // Otherwise, display a loading indicator.
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
-        Expanded(
+
+        body:
+        Stack(
           
-          child: 
-          GestureDetector(
-            child: Container(
-              width: double.infinity,
-              child:Icon(Icons.camera),
-              decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-            gradient: LinearGradient(
-              colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
-              begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
+          children:[
+
+
+          Positioned(
+            width: MediaQuery.of(context).size.width,
+                      child: FutureBuilder<void>(
+              future: _initializeControllerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  // If the Future is complete, display the preview.
+                  
+                    return CameraPreview(_controller)
+                  
+                  ;} else {
+                  // Otherwise, display a loading indicator.
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
+        
+        
+        
+        
+          
             
-            ),
-            onTap:()async{
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
-          try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
+             Positioned(
+               bottom: 0,
+               
+               
+                            child: GestureDetector(
+                  child: Container(
+                    height: 100,
+                  width: MediaQuery.of(context).size.width,
+                    
+                    child:Icon(Icons.camera),
+                    decoration: BoxDecoration(
+                  
+                  gradient: LinearGradient(
+                    colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+                    begin: Alignment.bottomRight,
+                      end: Alignment.topLeft,
+                  ),
+                ),
+                  
+                  ),
+                  onTap:()async{
+                // Take the Picture in a try / catch block. If anything goes wrong,
+                // catch the error.
+                try {
+                  // Ensure that the camera is initialized.
+                  await _initializeControllerFuture;
 
-            // Attempt to take a picture and get the file `image`
-            // where it was saved.
-            image = await _controller.takePicture();
+                  // Attempt to take a picture and get the file `image`
+                  // where it was saved.
+                  image = await _controller.takePicture();
 
-            final result = await ImageGallerySaver.saveFile(image?.path);
-            print('result:$result');
+                  final result = await ImageGallerySaver.saveFile(image?.path);
+                  print('result:$result');
 
-            if (result) {
-              print('Failed to save！');
-            } else {
-              print('Save successfully!');
-            }
-          } catch (e) {
-            // If an error occurs, log the error to the console.
-            print(e);
-          }
+                  if (result) {
+                    print('Failed to save！');
+                  } else {
+                    print('Save successfully!');
+                  }
+                } catch (e) {
+                  // If an error occurs, log the error to the console.
+                  print(e);
+                }
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DisplayRecognition(image),
-            ),
-          );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DisplayRecognition(image),
+                  ),
+                );
         } ,
-          ),
-          )
+                ),
+             ),
+
+          
         ]
       ),
       
-    );
+          );
   }
 }
 
