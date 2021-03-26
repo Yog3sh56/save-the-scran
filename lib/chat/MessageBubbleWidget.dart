@@ -16,7 +16,7 @@ class MessageBubble extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isMe ? Colors.white : Color(0xFFff79af),
+            color: isMe ? Color(0xFFff79af) : Colors.white,
             boxShadow: [
               BoxShadow(
                   color: isMe ? Colors.black.withOpacity(0.2) : Colors.grey,
