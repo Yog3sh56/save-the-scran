@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(this.downloadUrl==null)getDownloadUrl();
+    
     
     return Scaffold(
       appBar: AppBar(
@@ -53,11 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         .getImage(source: ImageSource.gallery);
                     File image = File(imagePath.path);
                     await _storageHelper.uploadFile(image);
-
                     downloadUrl = await _storageHelper.getProfileImage();
-                    setState(() {});
                   },
-                  downloadUrl: this.downloadUrl,
+                  downloadUrl: this.downloadUrl==null?getDownloadUrl():this.downloadUrl,
                 ) // This trailing comma makes auto-formatting nicer for build methods.
                 ),
             Text(_auth.currentUser.email),
@@ -138,16 +136,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void getDownloadUrl() {
+  String getDownloadUrl() {
     print("getting download url");
-    _storageHelper.getProfileImage().then((value)  {
-      print("url returned $value");
+    _storageHelper.getProfileImage().then((value) {
       setState(() {
         this.downloadUrl=value;
       });
-      
-      });
-
-    print("value of this.downloadUrl ${this.downloadUrl}");
+      return value;
+    });
   }
 }
