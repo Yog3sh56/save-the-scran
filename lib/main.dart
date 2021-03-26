@@ -6,7 +6,6 @@ import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
-import 'screens/ChatContacts.dart';
 import 'screens/TakePictureScreen.dart';
 import 'chat/ChatContactsScreen.dart';
 import 'screens/ScranWelcomeScreen.dart';
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget{
         MyApp.id:(context) => MyApp(context),
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),
-        ChatScreen.id: (context) => ChatScreen(),
+        
         ChatContacts.id: (context) => ChatContacts(),
         TakePictureScreen.id: (context) => TakePictureScreen(camera: camera),
         RegistrationScreen.id: (context)=>RegistrationScreen(),
