@@ -99,7 +99,9 @@ class _ChatContactsState extends State<ChatContacts> {
                         children: conversations
                       );
                     } else{
-                    return Text("no messages");
+                    return CircularProgressIndicator(
+
+                    );
                     }
                     
                   })

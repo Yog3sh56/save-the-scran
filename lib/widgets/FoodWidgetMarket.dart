@@ -19,7 +19,9 @@ class FoodWidgetMarket extends StatelessWidget {
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
+
     double progress = 1 - remaining / totalDuration;
+    this.foodProgress = progress.isNaN?0.1:progress;
 
     this.foodProgress = progress;
 

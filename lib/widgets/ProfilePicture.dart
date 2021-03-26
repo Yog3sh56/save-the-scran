@@ -15,7 +15,9 @@ class ProfilePicture extends StatelessWidget {
       onTap: onTap,
       child: downloadUrl == null
           ? Icon(Icons.person)
-          : CircleAvatar(backgroundImage: NetworkImage(downloadUrl)),
+          : CircleAvatar(
+            radius: 80,
+            backgroundImage: NetworkImage(downloadUrl)),
     );
   }
 }

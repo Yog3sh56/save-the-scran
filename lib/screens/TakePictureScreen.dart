@@ -87,31 +87,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               },
             ),
           ),
-        
-        
-        
-        
-          
-            
              Positioned(
                bottom: 0,
-               
-               
-                            child: GestureDetector(
+                child: GestureDetector(
                   child: Container(
-                    height: 100,
+                    height: 130,
                   width: MediaQuery.of(context).size.width,
-                    
-                    child:Icon(Icons.camera),
+                    child:Icon(Icons.camera,size: 40,),
                     decoration: BoxDecoration(
-                  
                   gradient: LinearGradient(
                     colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
                     begin: Alignment.bottomRight,
                       end: Alignment.topLeft,
                   ),
                 ),
-                  
                   ),
                   onTap:()async{
                 // Take the Picture in a try / catch block. If anything goes wrong,
