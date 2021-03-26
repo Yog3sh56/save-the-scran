@@ -24,7 +24,6 @@ class FoodWidget extends StatelessWidget {
     double progress = 1 - remaining / totalDuration;
     this.foodProgress = progress.isNaN?0.1:progress;
     
-    this.foodProgress = progress;
     //this.foodProgress = Random().nextDouble();
 
     if (foodProgress <= 0.6) {

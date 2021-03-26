@@ -23,7 +23,7 @@ class FoodWidgetMarket extends StatelessWidget {
     double progress = 1 - remaining / totalDuration;
     this.foodProgress = progress.isNaN?0.1:progress;
 
-    this.foodProgress = progress;
+
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
