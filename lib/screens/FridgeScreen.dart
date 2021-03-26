@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/models/Item.dart';
-import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';

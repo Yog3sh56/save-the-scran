@@ -55,7 +55,9 @@ class _ChatContactsState extends State<ChatContacts> {
                         List<String> alreadyProcessed = [
                           _auth.currentUser?.uid
                         ];
-
+                        print("shold display");
+                        print(snapshot.data.docs);
+                        print("\n\n\n\n");
                         //snapshot docs
                         final snapshotDocs = snapshot.data.docs;
 
@@ -87,9 +89,10 @@ class _ChatContactsState extends State<ChatContacts> {
                           alreadyProcessed.add(ids[0]);
                           
                         }
-                        return ListView(
-                            shrinkWrap: true, children: conversations);
+                        
+                        
                       }
+                      
                       
                       return ListView(
                         shrinkWrap: true,
