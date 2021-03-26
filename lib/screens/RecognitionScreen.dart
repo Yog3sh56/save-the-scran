@@ -33,16 +33,28 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   DateTime _expiry = DateTime.now();
   bool textHasBeenScanned=false;
   bool barcodeHasBeenScanned=false;
-  
-final _controller = TextEditingController();
 
+  final TextEditingController _controller = TextEditingController();
 
-  
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      final String text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: text,
+        selection:
+        TextSelection(baseOffset: text.length,extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
 
 
   @override
