@@ -4,6 +4,8 @@ import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'package:save_the_scran/utils/StorageHelper.dart';
+import 'package:save_the_scran/widgets/ProfilePicture.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -14,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
+  final _storageHelper = StorageHelper();
   String email, password;
   @override
   Widget build(BuildContext context) => Scaffold(
