@@ -19,6 +19,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   final _storageHelper = StorageHelper();
@@ -26,6 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if(this.downloadUrl==null)getDownloadUrl();
+    
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -53,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     downloadUrl = await _storageHelper.getProfileImage();
                     setState(() {});
                   },
-                  downloadUrl: downloadUrl,
+                  downloadUrl: this.downloadUrl,
                 ) // This trailing comma makes auto-formatting nicer for build methods.
                 ),
             Text(_auth.currentUser.email),
@@ -134,9 +138,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future<String> getDownloadUrl() async {
-    var task = _storageHelper.getProfileImage();
-    this.downloadUrl = await task;
-    return downloadUrl;
+  void getDownloadUrl() {
+    print("getting download url");
+    _storageHelper.getProfileImage().then((value)  {
+      print("url returned $value");
+      setState(() {
+        this.downloadUrl=value;
+      });
+      
+      });
+
+    print("value of this.downloadUrl ${this.downloadUrl}");
   }
 }

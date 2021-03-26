@@ -30,7 +30,8 @@ class StorageHelper {
     try {
       final downloadUrl =
           await _storage.ref().child("user/profile/$uid").getDownloadURL();
-      print(downloadUrl);
+      
+      print("download url from getProfileImage() $downloadUrl");
       return downloadUrl;
     } on firebase_core.FirebaseException catch (e) {
       print(e);
