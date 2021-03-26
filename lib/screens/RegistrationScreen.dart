@@ -43,14 +43,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 48.0,
               ),
               TextField(
-                  style: TextStyle(color: Colors.black),
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  decoration:
-                      inputDecoration.copyWith( fillColor: Colors.white.withOpacity(0.5), filled: true ,hintText: 'Enter your email', icon: Icon(Icons.person, color: Color(0xFFc2075e),)),
+                style: TextStyle(color: Colors.black),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration: inputDecoration.copyWith(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide:
+                          BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide:
+                            BorderSide(color: Color(0xFFc2075e), width: .5)),
+                    fillColor: Colors.white.withOpacity(0.5),
+                    filled: true,
+                    hintText: 'Enter your email',
+                    border: InputBorder.none,
+                    prefixIcon: Icon(
+                      Icons.person,
+                    )),
               ),
               SizedBox(
                 height: 8.0,
@@ -63,22 +78,45 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   onChanged: (value) {
                     password = value;
                   },
-                  decoration: inputDecoration.copyWith(fillColor: Colors.white.withOpacity(0.5), filled: true, hintText: "Password", icon: Icon(Icons.lock, color: Color(0xFFc2075e)) )),
+                  decoration: inputDecoration.copyWith(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide:
+                            BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              BorderSide(color: Color(0xFFc2075e), width: .5)),
+                      fillColor: Colors.white.withOpacity(0.5),
+                      filled: true,
+                      hintText: "Password",
+                      prefixIcon: Icon(Icons.lock))),
               SizedBox(
                 height: 8.0,
               ),
-              Material(
-                child: TextField(
-                    style: TextStyle(color: Colors.black),
-                    obscureText: true,
-                    textAlign: TextAlign.center,
-                    obscuringCharacter: "*",
-                    onChanged: (value) {
-                      passwordRepeat = value;
-                    },
-                    decoration:
-                        inputDecoration.copyWith(fillColor: Colors.white.withOpacity(0.5), filled: true ,hintText: "Repeat Password", icon: Icon(Icons.lock, color: Colors.greenAccent[200]))),
-              ),
+              TextField(
+                  style: TextStyle(color: Colors.black),
+                  obscureText: true,
+                  textAlign: TextAlign.center,
+                  obscuringCharacter: "*",
+                  onChanged: (value) {
+                    passwordRepeat = value;
+                  },
+                  decoration: inputDecoration.copyWith(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide:
+                            BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              BorderSide(color: Color(0xFFc2075e), width: .5)),
+                      fillColor: Colors.white.withOpacity(0.5),
+                      filled: true,
+                      hintText: "Repeat Password",
+                      prefixIcon: Icon(Icons.lock))),
               SizedBox(
                 height: 5.0,
               ),

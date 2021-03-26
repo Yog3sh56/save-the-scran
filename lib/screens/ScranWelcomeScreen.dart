@@ -57,14 +57,17 @@ class _ScranWelcomeScreenState extends State<ScranWelcomeScreen>
                     height: 100.0,
                   ),
                 ),
-                TyperAnimatedTextKit(
-                  text: ['Save the Scran'],
-                  textStyle: TextStyle(
-                    fontSize: 35.0,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'GoogleFonts.pacifico',
+                SizedBox(
+                  width: 200,
+                  child: TyperAnimatedTextKit(
+                    text: ['Save the Scran'],
+                    textStyle: TextStyle(
+                      fontSize: 35.0,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'GoogleFonts.pacifico',
+                    ),
+                    isRepeatingAnimation: false,
                   ),
-                  isRepeatingAnimation: false,
                 ),
               ],
             ),

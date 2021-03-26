@@ -33,16 +33,28 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   DateTime _expiry = DateTime.now();
   bool textHasBeenScanned=false;
   bool barcodeHasBeenScanned=false;
-  
-final _controller = TextEditingController();
 
+  final TextEditingController _controller = TextEditingController();
 
-  
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      final String text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: text,
+        selection:
+        TextSelection(baseOffset: text.length,extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
 
 
   @override
@@ -53,7 +65,17 @@ final _controller = TextEditingController();
             Expanded(child: buildImage()),
             const SizedBox(height: 16),
             TextField(
+              cursorColor: Color(0xFFc2075e),
               decoration: inputDecoration.copyWith(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide:
+                    BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                          color: Color(0xFFc2075e), width: .5)),
                   labelText:"Product Name"
               ),
               controller: _controller,
@@ -76,10 +98,10 @@ final _controller = TextEditingController();
                       minTime: DateTime.now(),
                       maxTime: DateTime(2030, 6, 7),
                       theme: DatePickerTheme(
-                          headerColor: Colors.orange,
-                          backgroundColor: Colors.blue,
+                          headerColor: Color(0xFFc2075e),
+                          backgroundColor: Colors.greenAccent[200],
                           itemStyle: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                           doneStyle:

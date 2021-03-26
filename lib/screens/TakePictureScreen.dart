@@ -28,7 +28,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   XFile image;
-  
 
   @override
   void initState() {
@@ -56,6 +55,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           backgroundColor: Colors.grey.withOpacity(0.3),
           title: Text('Add food to your fridge',
@@ -163,9 +163,10 @@ class DisplayRecognition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
         title: Text("Recognition"),
-        backgroundColor: Colors.grey.withOpacity(0.3),
+        backgroundColor: Colors.grey,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
