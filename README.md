@@ -36,3 +36,7 @@ Our app will therefore focus on the prevention of food waste and redistribution 
 -	[Cloud Firestore](https://firebase.flutter.dev/docs/firestore/overview/)
 -	[Firebase Cloud Messaging](https://firebase.flutter.dev/docs/messaging/overview/)
 -	[Firebase Cloud Storage](https://firebase.flutter.dev/docs/storage/overview/)
+  
+  <div align=center><img width="150" height="84.25" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/flutterfire_600x.png"/></div>
+
+
