@@ -1,7 +1,10 @@
 # Save The Scran
 
-## This repository is for 2021 Google DSC challenge The 17 Sustainable Development Goals of the United Nations
-👉：https://developers.google.com/community/dsc-solution-challenge
+## This repository is for 2021 Google DSC challenge 
+
+- 👉：[The 17 Sustainable Development Goals of the United Nations](https://developers.google.com/community/dsc-solution-challenge)
+
+<div align=center><img width="300" height="300" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/heartLogo.png"/></div>
 
 ## Motivation
 Around 1.3 billion tonnes of food produced globally is wasted each year.
@@ -9,7 +12,7 @@ In Scotland, 1.35 million tonnes of food and drink wastages was estimated in 201
 Save the scran as a project aims to aid the project by providing a way to reduce the food wastage. The app allows user to add food and information about the food such as expiry date into the virtual fridge by taking a picture. If the food is approaching expiry date, the user can choose to put the item onto community market where other users are able to view the item and message the user to arrange pickup. This way a food item can be shared amongst the community market which could reduce the avoidable food waste. 
 
 ## Demo
-https://youtu.be/U7k1jD9Mhyc
+- 🎈This project's demo video is already published on 🎥[Youtube](https://youtu.be/U7k1jD9Mhyc)
 
 ## Features
 -	Secure login using firebase authentication
