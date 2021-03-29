@@ -21,14 +21,14 @@ Our app will therefore focus on the prevention of food waste and redistribution 
 - 🎈This project's demo video has already published on 🎥[Youtube](https://youtu.be/U7k1jD9Mhyc)
 
 ## Features
--	Secure login using firebase authentication
--	Text and barcode recognition using Firebase Machine Learning Kit API
--	Food recognition using Open Food facts API
--	Personal virtual fridge where you can add food items of your own
--	Personalization of user experience by adding profile pictures
--	Community sharing where an item can be publicly shared in the community market
--	Messaging service where you can message a user who has posted an item in the community. 
--	Simple UI design for easy navigation
+-	Secure login using firebase authentication🔒
+-	Text and barcode recognition using Firebase Machine Learning Kit API💡
+-	Food recognition using [Open Food facts API](https://github.com/openfoodfacts)🔨
+-	Personal virtual fridge where you can add food items of your own🍔
+-	Personalization of user experience by adding profile pictures⛷
+-	Community sharing where an item can be publicly shared in the community market🍕
+-	Messaging service where you can message a user who has posted an item in the community📱
+-	Simple UI design for easy navigation👏
 
 ## Technologies Used
 -	[Flutter](https://flutter.dev)
