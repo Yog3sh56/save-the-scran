@@ -10,20 +10,19 @@ class FoodWidgetMarket extends StatelessWidget {
   final item;
   double foodProgress;
   Color progressColor;
+  final today = DateTime.now();
 
   FoodWidgetMarket({this.item, this.id, this.ownerid});
 
   void setExpiryProgress() {
-    final today = DateTime.now();
+    
 
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = progress.isNaN?0.1:progress;
-
-
+    this.foodProgress = (progress.isNaN || progress.isInfinite)?0.1:progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -43,7 +42,7 @@ class FoodWidgetMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Card(
-      elevation: 15,
+      elevation: 10,
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Padding(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -69,12 +68,14 @@ class FoodWidgetMarket extends StatelessWidget {
                         style: TextStyle(fontSize: 15),
                       ),
                       Text(
-                        "Expiry" +
+                        "Expires " +
                             item.expiry.day.toString() +
                             "/" +
                             item.expiry.month.toString() +
                             "/" +
-                            item.expiry.year.toString(),
+                            item.expiry.year.toString() +
+                            (this.foodProgress>0.8?" (${item.expiry.difference(today).inDays.toString()} days)":"")
+                            ,
                         style: TextStyle(fontSize: 11),
                       ),
                     ])),
@@ -111,7 +112,7 @@ class FoodWidgetMarket extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(
                   this.progressColor,
                 ),
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.grey,
               )
             ])));
   }

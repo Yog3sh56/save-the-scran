@@ -57,7 +57,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
             stream: _firestore
                 .collection("items")
                 .where("inCommunity", isEqualTo: true)
-                
+                .orderBy("expiryDate")
                 .snapshots(),
             //the builder takes in the stream
             builder: (context, snapshot) {
@@ -75,7 +75,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                       continue;
                     }
                   }
-                  print(item['name']);
+                  
                   Item i = Item(item['ownerid'], item['name'],
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),

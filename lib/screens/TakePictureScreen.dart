@@ -57,9 +57,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-          backgroundColor: Colors.grey.withOpacity(0.3),
+          backgroundColor: Colors.greenAccent[200],
           title: Text('Add food to your fridge',
-              style: TextStyle(color: Colors.white))),
+              style: TextStyle(color: Colors.black))),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
@@ -91,9 +91,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                bottom: 0,
                 child: GestureDetector(
                   child: Container(
-                    height: 130,
+                    height: 140,
                   width: MediaQuery.of(context).size.width,
-                    child:Icon(Icons.camera,size: 40,),
+                    child:Icon(Icons.camera,size: 30,),
                     decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
@@ -115,7 +115,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
                   final result = await ImageGallerySaver.saveFile(image?.path);
                   print('result:$result');
-
                   if (result) {
                     print('Failed to save！');
                   } else {
@@ -152,10 +151,10 @@ class DisplayRecognition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent[200],
+      backgroundColor: Colors.white.withOpacity(0.9),
       appBar: AppBar(
         title: Text("Recognition"),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.greenAccent[200],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),

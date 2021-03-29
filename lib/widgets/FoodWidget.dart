@@ -23,8 +23,6 @@ class FoodWidget extends StatelessWidget {
 
     double progress = 1 - remaining / totalDuration;
     this.foodProgress = progress.isNaN?0.1:progress;
-    
-    //this.foodProgress = Random().nextDouble();
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -63,6 +61,7 @@ class FoodWidget extends StatelessWidget {
           _firestore.collection("items").doc(id).delete();
         },
         child: Card(
+          elevation: 10,
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -122,7 +121,7 @@ class FoodWidget extends StatelessWidget {
                     valueColor: AlwaysStoppedAnimation<Color>(
                       this.progressColor,
                     ),
-                    backgroundColor: Colors.black,
+                    backgroundColor: Colors.grey,
                   )
                 ]))));
   }

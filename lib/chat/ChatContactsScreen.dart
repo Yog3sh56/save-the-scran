@@ -36,7 +36,6 @@ class _ChatContactsState extends State<ChatContacts> {
         ),
         title: Text('Saviours', style: TextStyle(color: Colors.black)),
       ),
-
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -55,27 +54,18 @@ class _ChatContactsState extends State<ChatContacts> {
                         List<String> alreadyProcessed = [
                           _auth.currentUser?.uid
                         ];
-                        print("shold display");
-                        print(snapshot.data.docs);
-                        print("\n\n\n\n");
                         //snapshot docs
                         final snapshotDocs = snapshot.data.docs;
 
                       for (var item in snapshotDocs){
-                        
-
                         //parse in the other user Id, has to be converted to string
                         List<String> ids=[];
                         for (var val in item['twoIds']){
                           ids.add(val.toString());
                         } 
                         ids.remove(_auth.currentUser?.uid);
-
-
                         //if message chain from user has not been added yet
                         if (!alreadyProcessed.contains(ids[0])){
-                          print(item['itemName']);
-
                           //create Conversation Card
                           var c=ConversationList(
                             name: ids[0],
@@ -87,27 +77,24 @@ class _ChatContactsState extends State<ChatContacts> {
                           //add card and add processesd id
                           conversations.add(c);
                           alreadyProcessed.add(ids[0]);
-                          
                         }
-                        
-                        
                       }
-                      
-                      
                       return ListView(
                         shrinkWrap: true,
                         children: conversations
                       );
                     } else{
-                    return CircularProgressIndicator(
-
-                    );
+                    return Container(
+                      padding: EdgeInsets.all(20),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width,
+                      child:CircularProgressIndicator(
+                      strokeWidth: 20,
+                    ));
                     }
-                    
                   })
                   :Text("Please login to send messages")
                 ,
-
               ],
             ),
        ),

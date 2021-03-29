@@ -70,7 +70,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
-                    BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                    BorderSide(color: Colors.blueAccent, width: 2.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -92,6 +92,20 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
             
             ElevatedButton(
                 child: Text(_expiry.toString().split(" ")[0]),
+                style: ButtonStyle(
+              textStyle: MaterialStateProperty.all(
+                TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  )
+                ),
+              //padding: MaterialStateProperty.all(EdgeInsetsGeometry.infinity),
+              minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width/2,MediaQuery.of(context).size.width/6)),
+              backgroundColor: MaterialStateProperty.all(Colors.blueAccent) ,
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius:BorderRadius.all(Radius.circular(50)),
+              ))
+            ),
                 onPressed: () {
                   DatePicker.showDatePicker(context,
                       showTitleActions: true,
@@ -103,7 +117,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                           itemStyle: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                              fontSize: 22),
                           doneStyle:
                               TextStyle(color: Colors.white, fontSize: 16)),
                       onConfirm: (date) {
@@ -113,11 +127,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                     });
                   }, currentTime: _expiry!=null ?_expiry:DateTime.now(), locale: LocaleType.en);
                 }),
-                            ControlsWidget(
+                /*
+            ControlsWidget(
               onClickedPickImage: pickImage,
               onClickedScanText: scanText,
               onClickedBar: scanBarcode,
-            ),
+            ),*/
+            const SizedBox(height: 16),
             PushtoMarketWidget(
               onClickedPushtoMarket: pushtoMarket,
             ),

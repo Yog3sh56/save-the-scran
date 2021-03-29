@@ -98,12 +98,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
         elevation: 4,
       ),
       floatingActionButton: FloatingActionButton(
+        
         onPressed: () {
           Navigator.pushNamed(context, TakePictureScreen.id);
           //addItem();
         },
         child: Icon(Icons.add),
-        backgroundColor: Color(0xFFFF4081),
+        backgroundColor:Colors.greenAccent[200],
       ),
       body: Center(
         child: StreamBuilder(
