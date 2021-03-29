@@ -1,10 +1,11 @@
 # Save The Scran
 
-## This repository is for 2021 Google DSC challenge 
-
 - 👉：[The 17 Sustainable Development Goals of the United Nations](https://developers.google.com/community/dsc-solution-challenge)
 
 <div align=center><img width="300" height="300" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/logoWithScran.png"/></div>
+
+## Overview
+Save the scran is an app designed to reduce food wastage by allowing comminities to come together digitally to share food items preventing avoidable food wastage. If you have a food item lying in your fridge that is approaching its expiry date and you are not planning on consuming it, you can list it in the community market where other people can view the item and message you to collect the food item reducing food wastage and carbon footprint. 
 
 ## Motivation
 Around 1.3 billion tonnes of food produced globally is wasted each year.
@@ -29,7 +30,7 @@ Our app will therefore focus on the prevention of food waste and redistribution 
 -	Messaging service where you can message a user who has posted an item in the community. 
 -	Simple UI design for easy navigation
 
-## Technologies used
+## Technologies Used
 -	[Flutter](https://flutter.dev)
 -	[Firebase Authentication](https://firebase.flutter.dev/docs/auth/overview/)
 -	[Cloud Firestore](https://firebase.flutter.dev/docs/firestore/overview/)
