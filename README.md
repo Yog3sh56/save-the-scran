@@ -4,7 +4,7 @@
 
 - 👉：[The 17 Sustainable Development Goals of the United Nations](https://developers.google.com/community/dsc-solution-challenge)
 
-<div align=center><img width="300" height="300" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/heartLogo.png"/></div>
+<div align=center><img width="300" height="300" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/logoWithScran.png"/></div>
 
 ## Motivation
 Around 1.3 billion tonnes of food produced globally is wasted each year.
