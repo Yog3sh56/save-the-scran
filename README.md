@@ -39,4 +39,8 @@ Our app will therefore focus on the prevention of food waste and redistribution 
   
   <div align=center><img width="150" height="84.25" src="https://github.com/Yog3sh56/save-the-scran/blob/main/images/flutterfire_600x.png"/></div>
 
-
+## Contributors 
+thomas.kuhn.uk@gmail.com <br>
+yogeshparajuli56@gmail.com <br>
+jingrenwangcyber@gmail.com <br>
+leon.tadina@gmail.com <br>
