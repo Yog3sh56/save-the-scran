@@ -71,15 +71,17 @@ class FoodWidget extends StatelessWidget {
                       child: Container(
                         height: 50,
                         width: 50,
-                        decoration: new BoxDecoration(shape: BoxShape.circle),
+
                         child: item.imageUrl.isEmpty
                             ? Container(
                                 decoration: new BoxDecoration(
                                   color: progressColor,
+                                    shape: BoxShape.circle
                                 ),
                               )
                             : Container(
                                 decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
                                   image: DecorationImage(
                                       image: NetworkImage(item.imageUrl)),
                                 ),

@@ -72,18 +72,18 @@ class FoodWidgetProfile extends StatelessWidget {
                       child: item.imageUrl.isEmpty
                           ? Container(
                               decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
                                 color: progressColor,
                               ),
                             )
                           : Container(
                               decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
                                 image: DecorationImage(
                                     image: NetworkImage(item.imageUrl)),
                               ),
                             ),
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
+
                     ),
                   ),
                   Expanded(
