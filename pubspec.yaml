@@ -46,6 +46,9 @@ dependencies:
   intl: ^0.16.1
   openfoodfacts: ^0.3.14
 
+  # Google Sign in
+  google_sign_in: "^4.5.1"
+
   #text kit
   animated_text_kit: ^1.3.0
   google_fonts: ^1.0.0

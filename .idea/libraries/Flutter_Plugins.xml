@@ -19,6 +19,8 @@
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.7.0" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.1" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11" />
+      <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.9.2" />
+      <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.9" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

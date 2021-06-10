@@ -145,6 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text("Don't have an account? Register here",
                       textAlign: TextAlign.center),
                 )
+              ,
+              SizedBox(height: 15),
               ]),
         ),
       );

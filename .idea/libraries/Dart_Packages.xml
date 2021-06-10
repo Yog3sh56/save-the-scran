@@ -324,6 +324,27 @@
             </list>
           </value>
         </entry>
+        <entry key="google_sign_in">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.9/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="google_sign_in_platform_interface">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-1.1.2/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="google_sign_in_web">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.9.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="http">
           <value>
             <list>
@@ -636,6 +657,9 @@
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-0.2.11/lib" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/lib" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-1.1.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.9/lib" />
+      <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-1.1.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.9.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4/lib" />
       <root url="file://$PROJECT_DIR$/../../../Flutter Development/flutter/.pub-cache/hosted/pub.dartlang.org/image-2.1.19/lib" />

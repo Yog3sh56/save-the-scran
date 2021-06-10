@@ -91,7 +91,8 @@ class FoodWidgetMarket extends StatelessWidget {
                     ])),
                 Expanded(
                   flex: 1,
-                  child: InkResponse(
+                  child: ownerid != _auth.currentUser.uid?
+                  InkResponse(
                       radius: 50,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -113,7 +114,7 @@ class FoodWidgetMarket extends StatelessWidget {
                               )
                             : print("not signed in");
                         ;
-                      }),
+                      }):SizedBox(),
                 )
               ]),
               Padding(padding: EdgeInsets.only(bottom: 20)),
