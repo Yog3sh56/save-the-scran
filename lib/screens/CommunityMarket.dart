@@ -76,7 +76,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                     }
                   }
                   
-                  Item i = Item(item['ownerid'], item['name'],
+                  Item i = Item(item['ownerid'], item['name'],item['imageUrl'],
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),
                       inCommunity: true);
@@ -90,6 +90,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                     
                   );
                   itemText.add(fw);
+
                   //itemText.add(Text(item['name']));
                 }
                 return ListView(children: itemText);

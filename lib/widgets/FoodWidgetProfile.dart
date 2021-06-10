@@ -20,7 +20,7 @@ class FoodWidgetProfile extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = progress.isNaN?0.1:progress;
+    this.foodProgress = progress.isNaN ? 0.1 : progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -40,25 +40,25 @@ class FoodWidgetProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Dismissible(
-              background: Padding(
-            padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
-            child: Container(
-                padding: EdgeInsets.all(20),
-                alignment: AlignmentDirectional.centerStart,
-                child: Icon(Icons.delete),
-                color: Colors.red)),
-        secondaryBackground: Padding(
-            padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
-            child: Container(
-                padding: EdgeInsets.all(20),
-                alignment: AlignmentDirectional.centerEnd,
-                child: Icon(Icons.delete),
-                color: Colors.red)),
-        key: UniqueKey(),
-        onDismissed: (DismissDirection direction) {
-          _firestore.collection("items").doc(id).delete();
-        },
-          child: Card(
+      background: Padding(
+          padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
+          child: Container(
+              padding: EdgeInsets.all(20),
+              alignment: AlignmentDirectional.centerStart,
+              child: Icon(Icons.delete),
+              color: Colors.red)),
+      secondaryBackground: Padding(
+          padding: EdgeInsets.fromLTRB(5, 8, 0, 8),
+          child: Container(
+              padding: EdgeInsets.all(20),
+              alignment: AlignmentDirectional.centerEnd,
+              child: Icon(Icons.delete),
+              color: Colors.red)),
+      key: UniqueKey(),
+      onDismissed: (DismissDirection direction) {
+        _firestore.collection("items").doc(id).delete();
+      },
+      child: Card(
           margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
           child: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -69,27 +69,41 @@ class FoodWidgetProfile extends StatelessWidget {
                     child: Container(
                       height: 50,
                       width: 50,
+                      child: item.imageUrl.isEmpty
+                          ? Container(
+                              decoration: new BoxDecoration(
+                                color: progressColor,
+                              ),
+                            )
+                          : Container(
+                              decoration: new BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(item.imageUrl)),
+                              ),
+                            ),
                       decoration: new BoxDecoration(
-                        color: progressColor,
                         shape: BoxShape.circle,
                       ),
                     ),
                   ),
                   Expanded(
-                          flex: 2,
-                          child: Column(children: [
-                            Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
-                            Text(
-                              "Expiry" +
-                                  item.expiry.day.toString() +
-                                  "/" +
-                                  item.expiry.month.toString() +
-                                  "/" +
-                                  item.expiry.year.toString(),
-                              style: TextStyle(fontSize: 11),
-                            ),
-                          ])),
-                      
+                      flex: 2,
+                      child: Column(children: [
+                        Text(
+                          item.name[0].toUpperCase() + item.name.substring(1),
+                          style: TextStyle(fontSize: 15),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "Expiry" +
+                              item.expiry.day.toString() +
+                              "/" +
+                              item.expiry.month.toString() +
+                              "/" +
+                              item.expiry.year.toString(),
+                          style: TextStyle(fontSize: 11),
+                        ),
+                      ])),
                   Expanded(
                     flex: 1,
                     child: InkResponse(

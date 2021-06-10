@@ -47,11 +47,11 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
   //add item function
   void addItem() {
-    Item i = Item(
-        (_auth.currentUser == null) ? "" : _auth.currentUser.uid, "asyncFood");
+    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid, "asyncFood","imageUrl");
     _firestore.collection("items").add({
       "ownerid": i.ownerid,
       "name": i.name,
+      "imageUrl": i.imageUrl,
       "buyDate": i.buyDate,
       "expiryDate": i.expiry,
       "inCommunity": i.inCommunity
@@ -129,6 +129,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                 //parse data
                 for (var item in snapshotDocs) {
                   Item i = Item(item['ownerid'], item['name'],
+                      item['imageUrl'],
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),
                       inCommunity: item['inCommunity']);

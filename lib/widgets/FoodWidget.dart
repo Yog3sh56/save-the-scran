@@ -20,9 +20,8 @@ class FoodWidget extends StatelessWidget {
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
-
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = progress.isNaN?0.1:progress;
+    this.foodProgress = progress.isNaN ? 0.1 : progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -61,7 +60,7 @@ class FoodWidget extends StatelessWidget {
           _firestore.collection("items").doc(id).delete();
         },
         child: Card(
-          elevation: 10,
+            elevation: 10,
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -72,16 +71,29 @@ class FoodWidget extends StatelessWidget {
                       child: Container(
                         height: 50,
                         width: 50,
-                        decoration: new BoxDecoration(
-                          color: progressColor,
-                          shape: BoxShape.circle,
-                        ),
+                        decoration: new BoxDecoration(shape: BoxShape.circle),
+                        child: item.imageUrl.isEmpty
+                            ? Container(
+                                decoration: new BoxDecoration(
+                                  color: progressColor,
+                                ),
+                              )
+                            : Container(
+                                decoration: new BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(item.imageUrl)),
+                                ),
+                              ),
                       ),
                     ),
                     Expanded(
                         flex: 2,
                         child: Column(children: [
-                          Text(item.name[0].toUpperCase() + item.name.substring(1),style: TextStyle(fontSize: 15),textAlign: TextAlign.center,),
+                          Text(
+                            item.name[0].toUpperCase() + item.name.substring(1),
+                            style: TextStyle(fontSize: 15),
+                            textAlign: TextAlign.center,
+                          ),
                           Text(
                             "Expires " +
                                 item.expiry.day.toString() +
@@ -92,7 +104,6 @@ class FoodWidget extends StatelessWidget {
                             style: TextStyle(fontSize: 11),
                           ),
                         ])),
-                    
                     Expanded(
                       flex: 1,
                       child: InkResponse(
