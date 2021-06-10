@@ -15,14 +15,12 @@ class FoodWidgetMarket extends StatelessWidget {
   FoodWidgetMarket({this.item, this.id, this.ownerid});
 
   void setExpiryProgress() {
-    
-
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
-
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = (progress.isNaN || progress.isInfinite)?0.1:progress;
+    this.foodProgress =
+        (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -42,7 +40,7 @@ class FoodWidgetMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Card(
-      elevation: 10,
+        elevation: 10,
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Padding(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -53,10 +51,21 @@ class FoodWidgetMarket extends StatelessWidget {
                   child: Container(
                     height: 50,
                     width: 50,
-                    decoration: new BoxDecoration(
-                      color: progressColor,
-                      shape: BoxShape.circle,
-                    ),
+                    child: item.imageUrl.isEmpty
+                        ? Container(
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: progressColor,
+                            ),
+                          )
+                        : Container(
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: NetworkImage(item.imageUrl)),
+                            ),
+                          ),
+
                   ),
                 ),
                 Expanded(
@@ -74,8 +83,9 @@ class FoodWidgetMarket extends StatelessWidget {
                             item.expiry.month.toString() +
                             "/" +
                             item.expiry.year.toString() +
-                            (this.foodProgress>0.8?" (${item.expiry.difference(today).inDays.toString()} days)":"")
-                            ,
+                            (this.foodProgress > 0.8
+                                ? " (${item.expiry.difference(today).inDays.toString()} days)"
+                                : ""),
                         style: TextStyle(fontSize: 11),
                       ),
                     ])),
