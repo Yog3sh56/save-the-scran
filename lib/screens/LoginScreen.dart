@@ -7,6 +7,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:save_the_scran/widgets/ProfilePicture.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -157,8 +158,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 
                 Column(
                   children: [
-                    IconButton(onPressed: (){
-                      
+                    IconButton(onPressed: () async {
+                    // function to allow sign in with google credentials
+
+                      // Trigger the authentication flow
+                      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+                      // Obtain the auth details from the request
+                      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+                      // Create a new credential
+                      final credential = GoogleAuthProvider.credential(
+                        accessToken: googleAuth.accessToken,
+                        idToken: googleAuth.idToken,
+                      );
+                      final user = FirebaseAuth.instance.signInWithCredential(credential);
+
+                      if (user != null) {
+                        print("succesfull login");
+
+                        Navigator.popUntil(
+                            context, (route) => route.isFirst);
+                      }
+
+
                     }, icon:SvgPicture.asset("assets/icons/Google.svg")),
                     Text("Sign In with Google", style: TextStyle(fontWeight: FontWeight.bold),)
                   ],
