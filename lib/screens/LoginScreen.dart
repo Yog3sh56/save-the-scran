@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:save_the_scran/widgets/ProfilePicture.dart';
+
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -98,7 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: MaterialButton(
                       onPressed: () async {
                         try {
-                          if (email.isEmpty ||
+                          if(password.isEmpty){
+                            showAlert("Please type in password");
+                          }
+                          else if (email.isEmpty ||
                               !EmailValidator.validate(email)) {
                             showAlert("Please type in valid email");
                           } else {
@@ -147,6 +152,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 )
               ,
               SizedBox(height: 15),
+              Center(child: Text("OR", style: TextStyle(fontWeight: FontWeight.bold),)),
+              SizedBox(height: 15,),
+                
+                Column(
+                  children: [
+                    IconButton(onPressed: (){
+                      
+                    }, icon:SvgPicture.asset("assets/icons/Google.svg")),
+                    Text("Sign In with Google", style: TextStyle(fontWeight: FontWeight.bold),)
+                  ],
+                ),
               ]),
         ),
       );
