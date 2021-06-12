@@ -135,7 +135,7 @@ class FoodWidget extends StatelessWidget {
                       this.progressColor,
                     ),
                     backgroundColor: Colors.grey,
-                  )
+                  ),
                 ]))));
   }
 }

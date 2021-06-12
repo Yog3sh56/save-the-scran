@@ -71,9 +71,10 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                 //parse data
                 for (var item in snapshotDocs) {
                   // if (_auth.currentUser != null){
-                  //   if (item['ownerid'] == _auth.currentUser.uid){
-                  //     continue;
-                  //   }
+                  //   // if (item['ownerid'] == _auth.currentUser.uid) {
+                  //   //   continue;
+                  //   // }
+                  //
                   // }
                   
                   Item i = Item(item['ownerid'], item['name'],item['imageUrl'],
