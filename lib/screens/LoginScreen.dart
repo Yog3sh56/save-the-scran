@@ -6,9 +6,8 @@ import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
-import 'package:save_the_scran/widgets/ProfilePicture.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -21,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   final _storageHelper = StorageHelper();
   String email, password;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -30,13 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         backgroundColor: Colors.greenAccent[200],
         body: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(25, 50, 25, 50),
+          padding: EdgeInsets.fromLTRB(25, 25, 25, 50),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
-                  height: 200.0,
+                  height: 150,
                   child: Image.asset('images/heartLogo.png'),
                 ),
                 SizedBox(
@@ -101,10 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: MaterialButton(
                       onPressed: () async {
                         try {
-                          if(password.isEmpty){
+                          if (password.isEmpty) {
                             showAlert("Please type in password");
-                          }
-                          else if (email.isEmpty ||
+                          } else if (email.isEmpty ||
                               !EmailValidator.validate(email)) {
                             showAlert("Please type in valid email");
                           } else {
@@ -150,40 +149,94 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text("Don't have an account? Register here",
                       textAlign: TextAlign.center),
-                )
-              ,
-              SizedBox(height: 15),
-              Center(child: Text("OR", style: TextStyle(fontWeight: FontWeight.bold),)),
-              SizedBox(height: 15,),
-                
+                ),
+                SizedBox(height: 25),
+                Center(
+                    child: Text(
+                  "-OR-",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
+                SizedBox(
+                  height: 30,
+                ),
                 Column(
                   children: [
-                    IconButton(onPressed: () async {
-                    // function to allow sign in with google credentials
+                    Text(
+                      "Sign up with your Socials",
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white),
+                          height: 40,
+                          width: 40,
+                          child: IconButton(
+                              onPressed: () async {
+                                // function to allow sign in with google credentials
 
-                      // Trigger the authentication flow
-                      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+                                // Trigger the authentication flow
+                                final GoogleSignInAccount googleUser =
+                                    await GoogleSignIn().signIn();
 
-                      // Obtain the auth details from the request
-                      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+                                // Obtain the auth details from the request
+                                final GoogleSignInAuthentication googleAuth =
+                                    await googleUser.authentication;
 
-                      // Create a new credential
-                      final credential = GoogleAuthProvider.credential(
-                        accessToken: googleAuth.accessToken,
-                        idToken: googleAuth.idToken,
-                      );
-                      final user = FirebaseAuth.instance.signInWithCredential(credential);
+                                // Create a new credential
+                                final credential =
+                                    GoogleAuthProvider.credential(
+                                  accessToken: googleAuth.accessToken,
+                                  idToken: googleAuth.idToken,
+                                );
+                                final user = FirebaseAuth.instance
+                                    .signInWithCredential(credential);
 
-                      if (user != null) {
-                        print("succesfull login");
+                                if (user != null) {
+                                  print("succesfull login");
 
-                        Navigator.popUntil(
-                            context, (route) => route.isFirst);
-                      }
+                                  Navigator.popUntil(
+                                      context, (route) => route.isFirst);
+                                }
+                              },
+                              icon: SvgPicture.asset(
+                                "assets/icons/Google.svg",
+                                width: 30,
+                                height: 30,
+                              )),
+                        ),
+                        IconButton(
+                            onPressed: () async {
+                              // Trigger the sign-in flow
+                              final AccessToken result =
+                                  await FacebookAuth.instance.login();
 
+                              // Create a credential from the access token
+                              final facebookAuthCredential =
+                                  FacebookAuthProvider.credential(result.token);
 
-                    }, icon:SvgPicture.asset("assets/icons/Google.svg")),
-                    Text("Sign In with Google", style: TextStyle(fontWeight: FontWeight.bold),)
+                              // Once signed in, return the UserCredential
+                              final user = await FirebaseAuth.instance
+                                  .signInWithCredential(facebookAuthCredential);
+                              print("Debug 0");
+
+                              if (user != null) {
+                                print("succesfull login");
+
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                              }
+                            },
+                            icon: SvgPicture.asset("assets/icons/Facebook.svg",
+                                width: 30,
+                                height: 30,
+                                color: Color(0xff4267B2))),
+                      ],
+                    ),
                   ],
                 ),
               ]),

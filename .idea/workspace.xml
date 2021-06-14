@@ -22,11 +22,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f85dac6-ce7e-4ea5-a6c1-9c925827d75c" name="Default Changelist" comment="">
+    <list default="true" id="5f85dac6-ce7e-4ea5-a6c1-9c925827d75c" name="Default Changelist" comment="Minor glitches fix for FoodWidget and FoodProfileWidget">
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/settings_aar.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/Facebook.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/TakePictureScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/TakePictureScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/FoodWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/FoodWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/FoodWidgetProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/FoodWidgetProfile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/LoginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/LoginScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +53,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1p7zjkKtIr8Rvp3QIOA9NMN5y78" />
   <component name="ProjectLevelVcsManager">
@@ -69,15 +76,15 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\t_kuh\myscran\save-the-scran\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/icons" />
       <recent name="$PROJECT_DIR$/Assets" />
       <recent name="$PROJECT_DIR$/images" />
       <recent name="C:\Users\t_kuh\myscran\save-the-scran\images" />
       <recent name="C:\Users\t_kuh\myscran\save-the-scran\lib\chat" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\t_kuh\myscran\save-the-scran\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -105,6 +112,14 @@
       <option name="presentableId" value="Default" />
       <updated>1614549053627</updated>
     </task>
+    <task id="LOCAL-00001" summary="Minor glitches fix for FoodWidget and FoodProfileWidget">
+      <created>1623686240797</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623686240797</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,6 +136,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Minor glitches fix for FoodWidget and FoodProfileWidget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor glitches fix for FoodWidget and FoodProfileWidget" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616693151147">
@@ -139,54 +156,67 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="781" y="257" key="AndroidProcessChooserDialog/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616597260966" />
-    <state width="1398" height="160" key="GridCell.Tab.0.bottom" timestamp="1623685371787">
+    <state x="144" y="90" key="DiffContextDialog" timestamp="1623686267930">
+      <screen x="0" y="25" width="1440" height="804" />
+    </state>
+    <state x="144" y="90" key="DiffContextDialog/0.25.1440.804@0.25.1440.804" timestamp="1623686267930" />
+    <state width="1398" height="206" key="GridCell.Tab.0.bottom" timestamp="1623708223389">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1877" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616711019318" />
     <state width="1037" height="225" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.-368.1080.1880@1920.-368.1080.1880" timestamp="1616608257188" />
     <state width="1398" height="36" key="GridCell.Tab.0.bottom/0.25.1440.801/1440.25.1920.1055@0.25.1440.801" timestamp="1623498381552" />
     <state width="1398" height="216" key="GridCell.Tab.0.bottom/0.25.1440.801@0.25.1440.801" timestamp="1623412407289" />
-    <state width="1398" height="216" key="GridCell.Tab.0.bottom/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623495494117" />
-    <state width="1398" height="160" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1623685371787" />
+    <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623708223389" />
+    <state width="1398" height="20" key="GridCell.Tab.0.bottom/0.25.1440.804@0.25.1440.804" timestamp="1623688732745" />
+    <state width="1398" height="301" key="GridCell.Tab.0.bottom/0.25.1440.805/1440.25.1920.1055@0.25.1440.805" timestamp="1623698740209" />
     <state width="1398" height="215" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.25.1920.976@0.25.1440.875" timestamp="1623088884204" />
-    <state width="1398" height="160" key="GridCell.Tab.0.center" timestamp="1623685371786">
+    <state width="1398" height="206" key="GridCell.Tab.0.center" timestamp="1623708223388">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1877" height="295" key="GridCell.Tab.0.center/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616711019318" />
     <state width="1037" height="225" key="GridCell.Tab.0.center/0.0.1920.1040/1920.-368.1080.1880@1920.-368.1080.1880" timestamp="1616608257188" />
     <state width="1398" height="36" key="GridCell.Tab.0.center/0.25.1440.801/1440.25.1920.1055@0.25.1440.801" timestamp="1623498381550" />
     <state width="1398" height="216" key="GridCell.Tab.0.center/0.25.1440.801@0.25.1440.801" timestamp="1623412407288" />
-    <state width="1398" height="216" key="GridCell.Tab.0.center/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623495494116" />
-    <state width="1398" height="160" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1623685371786" />
+    <state width="1398" height="206" key="GridCell.Tab.0.center/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623708223388" />
+    <state width="1398" height="20" key="GridCell.Tab.0.center/0.25.1440.804@0.25.1440.804" timestamp="1623688732744" />
+    <state width="1398" height="301" key="GridCell.Tab.0.center/0.25.1440.805/1440.25.1920.1055@0.25.1440.805" timestamp="1623698740208" />
     <state width="1398" height="215" key="GridCell.Tab.0.center/0.25.1440.875/1440.25.1920.976@0.25.1440.875" timestamp="1623088884201" />
-    <state width="1398" height="160" key="GridCell.Tab.0.left" timestamp="1623685371786">
+    <state width="1398" height="206" key="GridCell.Tab.0.left" timestamp="1623708223387">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1877" height="295" key="GridCell.Tab.0.left/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616711019318" />
     <state width="1037" height="225" key="GridCell.Tab.0.left/0.0.1920.1040/1920.-368.1080.1880@1920.-368.1080.1880" timestamp="1616608257188" />
     <state width="1398" height="36" key="GridCell.Tab.0.left/0.25.1440.801/1440.25.1920.1055@0.25.1440.801" timestamp="1623498381550" />
     <state width="1398" height="216" key="GridCell.Tab.0.left/0.25.1440.801@0.25.1440.801" timestamp="1623412407288" />
-    <state width="1398" height="216" key="GridCell.Tab.0.left/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623495494114" />
-    <state width="1398" height="160" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1623685371786" />
+    <state width="1398" height="206" key="GridCell.Tab.0.left/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623708223387" />
+    <state width="1398" height="20" key="GridCell.Tab.0.left/0.25.1440.804@0.25.1440.804" timestamp="1623688732744" />
+    <state width="1398" height="301" key="GridCell.Tab.0.left/0.25.1440.805/1440.25.1920.1055@0.25.1440.805" timestamp="1623698740207" />
     <state width="1398" height="215" key="GridCell.Tab.0.left/0.25.1440.875/1440.25.1920.976@0.25.1440.875" timestamp="1623088884201" />
-    <state width="1398" height="160" key="GridCell.Tab.0.right" timestamp="1623685371787">
+    <state width="1398" height="206" key="GridCell.Tab.0.right" timestamp="1623708223389">
       <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state width="1877" height="295" key="GridCell.Tab.0.right/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616711019318" />
     <state width="1037" height="225" key="GridCell.Tab.0.right/0.0.1920.1040/1920.-368.1080.1880@1920.-368.1080.1880" timestamp="1616608257188" />
     <state width="1398" height="36" key="GridCell.Tab.0.right/0.25.1440.801/1440.25.1920.1055@0.25.1440.801" timestamp="1623498381551" />
     <state width="1398" height="216" key="GridCell.Tab.0.right/0.25.1440.801@0.25.1440.801" timestamp="1623412407289" />
-    <state width="1398" height="216" key="GridCell.Tab.0.right/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623495494116" />
-    <state width="1398" height="160" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1623685371787" />
+    <state width="1398" height="206" key="GridCell.Tab.0.right/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623708223389" />
+    <state width="1398" height="20" key="GridCell.Tab.0.right/0.25.1440.804@0.25.1440.804" timestamp="1623688732745" />
+    <state width="1398" height="301" key="GridCell.Tab.0.right/0.25.1440.805/1440.25.1920.1055@0.25.1440.805" timestamp="1623698740208" />
     <state width="1398" height="215" key="GridCell.Tab.0.right/0.25.1440.875/1440.25.1920.976@0.25.1440.875" timestamp="1623088884203" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1616693388577">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.-368.1080.1880@0.0.1920.1040" timestamp="1616693388577" />
-    <state x="522" y="343" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623685192478">
-      <screen x="0" y="25" width="1440" height="801" />
+    <state x="320" y="162" key="Vcs.Push.Dialog.v2" timestamp="1623686269344">
+      <screen x="0" y="25" width="1440" height="804" />
+    </state>
+    <state x="320" y="162" key="Vcs.Push.Dialog.v2/0.25.1440.804@0.25.1440.804" timestamp="1623686269344" />
+    <state x="522" y="344" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623697408977">
+      <screen x="0" y="25" width="1440" height="804" />
     </state>
     <state x="522" y="343" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1440.801@0.25.1440.801" timestamp="1623685192478" />
+    <state x="522" y="344" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1440.804/1440.25.1920.1055@0.25.1440.804" timestamp="1623697408977" />
     <state x="350" y="25" width="829" height="409" key="dock-window-1" timestamp="1623594421239">
       <screen x="0" y="25" width="1440" height="801" />
     </state>
