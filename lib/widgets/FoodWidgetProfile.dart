@@ -20,7 +20,7 @@ class FoodWidgetProfile extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = progress.isNaN ? 0.1 : progress;
+    this.foodProgress = (progress.isNaN || progress.isInfinite)? 0.1 : progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
