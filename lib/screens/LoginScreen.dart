@@ -179,6 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () async {
                                 // function to allow sign in with google credentials
 
+
                                 // Trigger the authentication flow
                                 final GoogleSignInAccount googleUser =
                                     await GoogleSignIn().signIn();
@@ -196,6 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 final user = FirebaseAuth.instance
                                     .signInWithCredential(credential);
 
+
                                 if (user != null) {
                                   print("succesfull login");
 
@@ -211,6 +213,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         IconButton(
                             onPressed: () async {
+
+
                               // Trigger the sign-in flow
                               final AccessToken result =
                                   await FacebookAuth.instance.login();
@@ -218,19 +222,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               // Create a credential from the access token
                               final facebookAuthCredential =
                                   FacebookAuthProvider.credential(result.token);
-
+                              try{
                               // Once signed in, return the UserCredential
                               final user = await FirebaseAuth.instance
                                   .signInWithCredential(facebookAuthCredential);
-                              print("Debug 0");
 
                               if (user != null) {
                                 print("succesfull login");
 
                                 Navigator.popUntil(
                                     context, (route) => route.isFirst);
+                              }}
+                              on FirebaseAuthException catch (e){
+                                if (e.code == "account-exists-with-different-credential"){
+                                  showAlert("Account already exists with different credentials, please use email or Google sign in.");
+                                }
                               }
-                            },
+
+                              }
+                             ,
                             icon: SvgPicture.asset("assets/icons/Facebook.svg",
                                 width: 30,
                                 height: 30,
