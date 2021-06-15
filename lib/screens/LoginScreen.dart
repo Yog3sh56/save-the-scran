@@ -9,6 +9,7 @@ import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
+
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
 
@@ -150,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text("Don't have an account? Register here",
                       textAlign: TextAlign.center),
                 ),
+
                 SizedBox(height: 25),
                 Center(
                     child: Text(
@@ -247,6 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Color(0xff4267B2))),
                       ],
                     ),
+
                   ],
                 ),
               ]),

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "654806604583-glnrnk0184jvgkst66phu8rnss17fprg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dsc_team.save_the_scran",
+            "certificate_hash": "53913360eff348d3fcd3c1480e187756819c07ae"
+          }
+        },
+        {
           "client_id": "654806604583-vllv2va1lqnrpkn3d8fgdio72ctbssr9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "654806604583-vllv2va1lqnrpkn3d8fgdio72ctbssr9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "654806604583-3ile5en1qip4gmvhpt8e76b72kvvnbau.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.savethescran"
+              }
             }
           ]
         }

@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^0.7.0
+  
   firebase_analytics:
   flutter_svg: ^0.19.3
 
@@ -35,10 +35,14 @@ dependencies:
 
   image_gallery_saver: ^1.2.2
 
+  #location 
+  location: 3.2.4
+  location_web: 
+
   camera:
   path_provider:
   path:
-  # firebase_core: ^0.7.0
+  firebase_core: ^0.7.0
   firebase_auth: ^0.20.1
   cloud_firestore: ^0.16.0+1
   firebase_storage: "^7.0.0"
