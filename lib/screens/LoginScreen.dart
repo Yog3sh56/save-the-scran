@@ -6,9 +6,7 @@ import 'package:email_validator/email_validator.dart';
 
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
-import 'package:save_the_scran/widgets/ProfilePicture.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -101,10 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: MaterialButton(
                       onPressed: () async {
                         try {
-                          if(password.isEmpty){
+                          if (password.isEmpty) {
                             showAlert("Please type in password");
-                          }
-                          else if (email.isEmpty ||
+                          } else if (email.isEmpty ||
                               !EmailValidator.validate(email)) {
                             showAlert("Please type in valid email");
                           } else {
@@ -150,40 +147,50 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text("Don't have an account? Register here",
                       textAlign: TextAlign.center),
-                )
-              ,
-              SizedBox(height: 15),
-              Center(child: Text("OR", style: TextStyle(fontWeight: FontWeight.bold),)),
-              SizedBox(height: 15,),
-                
+                ),
+                SizedBox(height: 15),
+                Center(
+                    child: Text(
+                  "OR",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
+                SizedBox(
+                  height: 15,
+                ),
                 Column(
                   children: [
-                    IconButton(onPressed: () async {
-                    // function to allow sign in with google credentials
+                    IconButton(
+                        onPressed: () async {
+                          // function to allow sign in with google credentials
 
-                      // Trigger the authentication flow
-                      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+                          // Trigger the authentication flow
+                          final GoogleSignInAccount googleUser =
+                              await GoogleSignIn().signIn();
 
-                      // Obtain the auth details from the request
-                      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+                          // Obtain the auth details from the request
+                          final GoogleSignInAuthentication googleAuth =
+                              await googleUser.authentication;
 
-                      // Create a new credential
-                      final credential = GoogleAuthProvider.credential(
-                        accessToken: googleAuth.accessToken,
-                        idToken: googleAuth.idToken,
-                      );
-                      final user = FirebaseAuth.instance.signInWithCredential(credential);
+                          // Create a new credential
+                          final credential = GoogleAuthProvider.credential(
+                            accessToken: googleAuth.accessToken,
+                            idToken: googleAuth.idToken,
+                          );
+                          final user = FirebaseAuth.instance
+                              .signInWithCredential(credential);
 
-                      if (user != null) {
-                        print("succesfull login");
+                          if (user != null) {
+                            print("succesfull login");
 
-                        Navigator.popUntil(
-                            context, (route) => route.isFirst);
-                      }
-
-
-                    }, icon:SvgPicture.asset("assets/icons/Google.svg")),
-                    Text("Sign In with Google", style: TextStyle(fontWeight: FontWeight.bold),)
+                            Navigator.popUntil(
+                                context, (route) => route.isFirst);
+                          }
+                        },
+                        icon: SvgPicture.asset("assets/icons/Google.svg")),
+                    Text(
+                      "Sign In with Google",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ]),

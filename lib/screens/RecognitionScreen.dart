@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
-
-import '../widgets/control.dart';
+import 'package:location/location.dart';
+import 'package:save_the_scran/utils/LocationWrap.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
   final carryoverImage;
@@ -27,6 +27,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final _firestore = FirebaseFirestore.instance;
 
   String itemName = "";
+  LocationData location;
   File image;
   DateTime _expiry = DateTime.now();
   bool textHasBeenScanned = false;
@@ -59,6 +60,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   @override
   Widget build(BuildContext context) {
+    LocationWrap.getLocation();
     return Expanded(
       child: Column(
         children: [
@@ -151,11 +153,14 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     );
   }
 
+  //async function to pick and set image, deprecated
   Future pickImage() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
     setImage(File(file.path));
   }
 
+  //scan text on the image
+  //async function returns a future
   Future scanText() async {
     /*
     showDialog(
@@ -174,6 +179,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     }
   }
 
+  //async function to scan barcode
   Future scanBarcode() async {
     barcodeHasBeenScanned = true;
     final text = await FirebaseBarcodeApi.recogniseBar(
@@ -198,7 +204,8 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       "imageUrl": imageUrl.isEmpty ? "No image" : imageUrl,
       "buyDate": DateTime.now(),
       "expiryDate": _expiry,
-      "inCommunity": false
+      "inCommunity": false,
+      "location": {location.latitude, location.longitude}
     });
     Navigator.popUntil(context, (route) => route.isFirst);
   }
