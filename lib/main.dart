@@ -103,9 +103,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               icon: Icon(Icons.kitchen),
             ),
             BottomNavigationBarItem(
-              label: 'Add',
-              icon: Icon(Icons.add),
-            ),
+                label: 'Add Food', icon: Icon(Icons.add_circle)),
             BottomNavigationBarItem(
               label: 'Market',
               icon: Icon(Icons.storefront),

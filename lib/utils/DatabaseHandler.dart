@@ -10,7 +10,7 @@ class DbHandler {
     _firestore.collection("items").add({
       "ownerid": _auth.currentUser.uid,
       "name": itemName.isEmpty ? "no name" : itemName,
-      "imageUrl": imageUrl.isEmpty ? "No image" : imageUrl,
+      "imageUrl": imageUrl?.isEmpty == null ? "No image" : imageUrl,
       "buyDate": DateTime.now(),
       "expiryDate": _expiry,
       "inCommunity": false,

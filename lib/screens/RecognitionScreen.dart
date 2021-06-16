@@ -3,13 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:save_the_scran/constants.dart';
+import 'package:save_the_scran/utils/DatabaseHandler.dart';
 import 'package:save_the_scran/widgets/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
-import 'package:location/location.dart';
-import 'package:save_the_scran/utils/LocationWrap.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
   final carryoverImage;
@@ -123,7 +122,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
               }),
           const SizedBox(height: 16),
           PushtoMarketWidget(
-            onClickedPushtoMarket: pushtoMarket,
+            onClickedPushtoMarket: () => DbHandler.pushtoMarket(
+                FirebaseAuth.instance,
+                FirebaseFirestore.instance,
+                itemName,
+                imageUrl,
+                _expiry,
+                context),
           ),
         ],
       ),

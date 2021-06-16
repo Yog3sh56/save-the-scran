@@ -16,7 +16,7 @@ class ChooseAddMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
@@ -49,8 +49,6 @@ class ChooseAddMethod extends StatelessWidget {
                 }
               })
         ],
-
-        elevation: 4,
       ),
       body: Column(
         children: [
@@ -61,15 +59,18 @@ class ChooseAddMethod extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("Scan  "),
+                  Text(
+                    "Smart-Scan  ",
+                    style: TextStyle(fontSize: 25),
+                  ),
                   Icon(
-                    Icons.camera,
+                    Icons.qr_code_scanner,
                     size: 30,
                   ),
                 ]),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.greenAccent[200], Colors.blue],
+                    colors: [Colors.greenAccent[200], Colors.green],
                     begin: Alignment.bottomRight,
                     end: Alignment.topLeft,
                   ),
@@ -87,7 +88,10 @@ class ChooseAddMethod extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("Enter Manually "),
+                  Text(
+                    "Enter Manually ",
+                    style: TextStyle(fontSize: 25),
+                  ),
                   Icon(
                     Icons.sort_by_alpha,
                     size: 30,
@@ -95,7 +99,7 @@ class ChooseAddMethod extends StatelessWidget {
                 ]),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.greenAccent[200], Colors.greenAccent[100]],
+                    colors: [Colors.blueAccent[200], Colors.lightBlue],
                     begin: Alignment.bottomRight,
                     end: Alignment.topLeft,
                   ),

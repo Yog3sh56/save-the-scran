@@ -22,8 +22,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   DateTime _expiry = DateTime.now();
 
-  final TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,10 +64,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     borderSide:
                         BorderSide(color: Color(0xFFc2075e), width: .5)),
                 labelText: "Product Name"),
-            controller: _controller,
             onChanged: (name) {
               setState(() {
-                _controller.text = name;
+                itemName = name;
               });
             },
           ),
