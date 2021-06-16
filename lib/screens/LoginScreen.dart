@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
-                  height: 150,
+                  height: 200,
                   child: Image.asset('images/heartLogo.png'),
                 ),
                 SizedBox(

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:location/location.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
@@ -36,7 +39,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
       backgroundColor: Colors.greenAccent[200],
       body: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(25, 50, 25, 50),
+        padding: EdgeInsets.fromLTRB(25, 25, 25, 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,7 +49,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Image.asset('images/heartLogo.png'),
             ),
             SizedBox(
-              height: 48.0,
+              height: 30,
             ),
             TextField(
               style: TextStyle(color: Colors.black),
@@ -190,6 +193,106 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 onTap: () {
                   Navigator.popAndPushNamed(context, LoginScreen.id);
                 }),
+            SizedBox(height: 25),
+            Center(
+                child: Text(
+                  "-OR-",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
+            SizedBox(
+              height: 30,
+            ),
+            Column(
+              children: [
+                Text(
+                  "Sign up with your Socials",
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(20)),
+                          color: Colors.white),
+                      height: 40,
+                      width: 40,
+                      child: IconButton(
+                          onPressed: () async {
+                            // function to allow sign in with google credentials
+
+
+                            // Trigger the authentication flow
+                            final GoogleSignInAccount googleUser =
+                            await GoogleSignIn().signIn();
+
+                            // Obtain the auth details from the request
+                            final GoogleSignInAuthentication googleAuth =
+                            await googleUser.authentication;
+
+                            // Create a new credential
+                            final credential =
+                            GoogleAuthProvider.credential(
+                              accessToken: googleAuth.accessToken,
+                              idToken: googleAuth.idToken,
+                            );
+                            final user = FirebaseAuth.instance
+                                .signInWithCredential(credential);
+
+
+                            if (user != null) {
+                              print("succesfull login");
+
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                            }
+                          },
+                          icon: SvgPicture.asset(
+                            "assets/icons/Google.svg",
+                            width: 30,
+                            height: 30,
+                          )),
+                    ),
+                    IconButton(
+                        onPressed: () async {
+
+
+                          // Trigger the sign-in flow
+                          final AccessToken result =
+                          await FacebookAuth.instance.login();
+
+                          // Create a credential from the access token
+                          final facebookAuthCredential =
+                          FacebookAuthProvider.credential(result.token);
+                          try{
+                            // Once signed in, return the UserCredential
+                            final user = await FirebaseAuth.instance
+                                .signInWithCredential(facebookAuthCredential);
+
+                            if (user != null) {
+                              print("succesfull login");
+
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                            }}
+                          on FirebaseAuthException catch (e){
+                            if (e.code == "account-exists-with-different-credential"){
+                              showAlert("Account already exists with different credentials, please use email or Google sign in.");
+                            }
+                          }
+
+                        }
+                        ,
+                        icon: SvgPicture.asset("assets/icons/Facebook.svg",
+                            width: 30,
+                            height: 30,
+                            color: Color(0xff4267B2))),
+                  ],
+                ),
+
+              ],
+            ),
           ],
         ),
       ),
