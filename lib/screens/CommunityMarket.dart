@@ -75,55 +75,56 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                   snapshotOuter.hasData) {
                 if (snapshotOuter.data.isEmpty) {
                   return Center(child: Text("no items"));
-                }
-                return Center(
-                  child: StreamBuilder(
-                      //the stream provides a snapshot, to pass onto the builder
-                      stream: _firestore
-                          .collection("items")
-                          .where("ownerid", whereIn: snapshotOuter.data)
-                          .where("inCommunity", isEqualTo: true)
-                          .orderBy("expiryDate")
-                          .snapshots(),
-                      //the builder takes in the stream
-                      builder: (context, snapshot) {
-                        List<Widget> itemText = [];
-                        //make sure snapshot has data
-                        if (snapshot.hasData) {
-                          //declare vars
-                          final snapshotDocs = snapshot.data.docs;
-                          List<Item> itemsList = [];
-                          //parse data
-                          for (var item in snapshotDocs) {
-                            // if (_auth.currentUser != null){
-                            //   // if (item['ownerid'] == _auth.currentUser.uid) {
-                            //   //   continue;
-                            //   // }
-                            //
-                            // }
+                } else {
+                  return Center(
+                    child: StreamBuilder(
+                        //the stream provides a snapshot, to pass onto the builder
+                        stream: _firestore
+                            .collection("items")
+                            .where("ownerid", whereIn: snapshotOuter.data)
+                            .where("inCommunity", isEqualTo: true)
+                            .orderBy("expiryDate")
+                            .snapshots(),
+                        //the builder takes in the stream
+                        builder: (context, snapshot) {
+                          List<Widget> itemText = [];
+                          //make sure snapshot has data
+                          if (snapshot.hasData) {
+                            //declare vars
+                            final snapshotDocs = snapshot.data.docs;
+                            List<Item> itemsList = [];
+                            //parse data
+                            for (var item in snapshotDocs) {
+                              // if (_auth.currentUser != null){
+                              //   // if (item['ownerid'] == _auth.currentUser.uid) {
+                              //   //   continue;
+                              //   // }
+                              //
+                              // }
 
-                            Item i = Item(
-                                item['ownerid'], item['name'], item['imageUrl'],
-                                buyDate: item['buyDate'].toDate(),
-                                expiry: item['expiryDate'].toDate(),
-                                inCommunity: true);
+                              Item i = Item(item['ownerid'], item['name'],
+                                  item['imageUrl'],
+                                  buyDate: item['buyDate'].toDate(),
+                                  expiry: item['expiryDate'].toDate(),
+                                  inCommunity: true);
 
-                            itemsList.add(i);
+                              itemsList.add(i);
 
-                            final fw = FoodWidgetMarket(
-                              item: i,
-                              id: item.id,
-                              ownerid: item['ownerid'],
-                            );
-                            itemText.add(fw);
+                              final fw = FoodWidgetMarket(
+                                item: i,
+                                id: item.id,
+                                ownerid: item['ownerid'],
+                              );
+                              itemText.add(fw);
 
-                            //itemText.add(Text(item['name']));
+                              //itemText.add(Text(item['name']));
+                            }
+                            return ListView(children: itemText);
                           }
                           return ListView(children: itemText);
-                        }
-                        return ListView(children: itemText);
-                      }),
-                );
+                        }),
+                  );
+                }
               } else {
                 return Center(
                   child: CircularProgressIndicator(),
