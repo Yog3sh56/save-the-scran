@@ -27,7 +27,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final _firestore = FirebaseFirestore.instance;
 
   String itemName = "";
-  LocationData location;
   File image;
   DateTime _expiry = DateTime.now();
   bool textHasBeenScanned = false;
@@ -60,7 +59,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    LocationWrap.getLocation();
     return Expanded(
       child: Column(
         children: [
@@ -205,7 +203,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       "buyDate": DateTime.now(),
       "expiryDate": _expiry,
       "inCommunity": false,
-      "location": {location.latitude, location.longitude}
     });
     Navigator.popUntil(context, (route) => route.isFirst);
   }

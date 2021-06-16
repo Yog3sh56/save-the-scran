@@ -8,8 +8,6 @@ class LocationWrap {
     if (isEnabled) {
       print("location enabled");
       location = await _location.getLocation();
-      print(location.latitude);
-      print(location.longitude);
     }
     return location;
   }
