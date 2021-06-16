@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-firestore:22.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/77045f4a5d99d44a379dbc3ba7654253/jetified-firebase-firestore-22.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4e23667b7eb7ade2cd85027cda00afc/jetified-firebase-firestore-22.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4e23667b7eb7ade2cd85027cda00afc/jetified-firebase-firestore-22.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4e23667b7eb7ade2cd85027cda00afc/jetified-firebase-firestore-22.0.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/22.0.1/da50ac5bfe46566be15a73601f5c3766eda195e7/firebase-firestore-22.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/22.0.1/53dbcdddf7883270d48acf3c5328bd1d4535a03c/firebase-firestore-22.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
