@@ -73,6 +73,9 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
             builder: (context, snapshotOuter) {
               if (snapshotOuter.connectionState == ConnectionState.done &&
                   snapshotOuter.hasData) {
+                if (snapshotOuter.data.isEmpty) {
+                  return Center(child: Text("no items"));
+                }
                 return Center(
                   child: StreamBuilder(
                       //the stream provides a snapshot, to pass onto the builder
