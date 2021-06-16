@@ -47,7 +47,8 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
   //add item function
   void addItem() {
-    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid, "asyncFood","imageUrl");
+    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid,
+        "asyncFood", "imageUrl");
     _firestore.collection("items").add({
       "ownerid": i.ownerid,
       "name": i.name,
@@ -74,7 +75,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
             gradient: LinearGradient(
               colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
               begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
+              end: Alignment.topLeft,
             ),
           ),
         ),
@@ -97,6 +98,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
         elevation: 4,
       ),
+      /*
       floatingActionButton: FloatingActionButton(
         
         onPressed: () {
@@ -106,6 +108,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
         child: Icon(Icons.add),
         backgroundColor:Colors.greenAccent[200],
       ),
+      */
       body: Center(
         child: StreamBuilder(
             //the stream provides a snapshot, to pass onto the builder
@@ -128,8 +131,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
                 //parse data
                 for (var item in snapshotDocs) {
-                  Item i = Item(item['ownerid'], item['name'],
-                      item['imageUrl'],
+                  Item i = Item(item['ownerid'], item['name'], item['imageUrl'],
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),
                       inCommunity: item['inCommunity']);

@@ -91,7 +91,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                     color: Colors.black,
                     fontSize: 15,
                   )),
-                  //padding: MaterialStateProperty.all(EdgeInsetsGeometry.infinity),
                   minimumSize: MaterialStateProperty.all(Size(
                       MediaQuery.of(context).size.width / 2,
                       MediaQuery.of(context).size.width / 6)),
@@ -122,12 +121,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                     currentTime: _expiry != null ? _expiry : DateTime.now(),
                     locale: LocaleType.en);
               }),
-          /*
-            ControlsWidget(
-              onClickedPickImage: pickImage,
-              onClickedScanText: scanText,
-              onClickedBar: scanBarcode,
-            ),*/
           const SizedBox(height: 16),
           PushtoMarketWidget(
             onClickedPushtoMarket: pushtoMarket,

@@ -58,7 +58,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           backgroundColor: Colors.greenAccent[200],
-          title: Text('Add food to your fridge',
+          title: Text('Add Food to Fridge',
               style: TextStyle(color: Colors.black))),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
