@@ -161,6 +161,7 @@ Future<List<dynamic>> getClosest(var _auth, double limit) async {
     uLoc = await LocationWrap.getLocation();
     insertLocationData(uid, uLoc);
   }
+
   if (buff.isEmpty) return null;
   //userLocation = uLoc == null ? await LocationWrap.getLocation() : uLoc;
   for (var entry in buff) {
@@ -169,5 +170,6 @@ Future<List<dynamic>> getClosest(var _auth, double limit) async {
     if (dist < limit) ret.add(entry["uid"]);
   }
 
+  if (ret.isEmpty) return null;
   return ret;
 }

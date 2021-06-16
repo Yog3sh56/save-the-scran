@@ -99,7 +99,7 @@ class ChooseAddMethod extends StatelessWidget {
                 ]),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.blueAccent[200], Colors.lightBlue],
+                    colors: [Colors.blueAccent[100], Colors.lightBlue],
                     begin: Alignment.bottomRight,
                     end: Alignment.topLeft,
                   ),
