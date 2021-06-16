@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:save_the_scran/screens/AddItemScreen.dart';
+import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         ProfileScreen.id: (context) => ProfileScreen(),
         ScranWelcomeScreen.id: (context) => ScranWelcomeScreen(),
+        ChooseAddMethod.id: (context) => ChooseAddMethod(),
+        AddItemScreen.id: (context) => AddItemScreen(),
       },
     );
   }
@@ -69,6 +73,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _index = 0;
   final List<Widget> _children = [
     FridgeScreen(),
+    ChooseAddMethod(),
     CommunityMarketScreen(),
     ChatContacts(),
   ];
@@ -96,6 +101,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             BottomNavigationBarItem(
               label: 'Fridge',
               icon: Icon(Icons.kitchen),
+            ),
+            BottomNavigationBarItem(
+              label: 'Add',
+              icon: Icon(Icons.add),
             ),
             BottomNavigationBarItem(
               label: 'Market',
