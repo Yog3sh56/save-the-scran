@@ -6,6 +6,7 @@
         <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
         <option name="modules">
           <set>
             <option value="$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.7.0+2/android" />
@@ -25,6 +26,8 @@
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
+=======
+>>>>>>> 67a9b4e347d35d547b12b6d93eb9c2ee158e4681
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

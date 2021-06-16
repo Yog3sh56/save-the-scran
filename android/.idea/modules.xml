@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1155353792/android.camera.iml" filepath="$PROJECT_DIR$/.idea/modules/1155353792/android.camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-76861955/android.cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-76861955/android.cloud_firestore.iml" />
@@ -17,6 +18,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/248859519/android.image_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/248859519/android.image_picker.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-110577301/android.location.iml" filepath="$PROJECT_DIR$/.idea/modules/-110577301/android.location.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1778621167/android.path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/1778621167/android.path_provider.iml" />
+=======
+>>>>>>> 67a9b4e347d35d547b12b6d93eb9c2ee158e4681
     </modules>
   </component>
 </project>

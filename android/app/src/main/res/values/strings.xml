@@ -1,0 +1,5 @@
+<resources>
+    <string name="facebook_app_id">417397152558308</string>
+    <string name="app_name">Save The Scran Android</string>
+    <string name="fb_login_protocol_scheme">fb417397152558308</string>
+</resources>
