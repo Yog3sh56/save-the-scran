@@ -19,6 +19,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
   final _firestore = FirebaseFirestore.instance;
   User loggedInUser;
 
+  void initState(){
+    super.initState();
+    if (_auth.currentUser == null){
+      Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
+    }
+  }
+
   //basic example of how objects are fetched
   void getUserItems() async {
     final userItems = await _firestore
