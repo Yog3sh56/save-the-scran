@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
-
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+import 'PasswordResetScreen.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset('images/heartLogo.png'),
                 ),
                 SizedBox(
-                  height: 48.0,
+                  height: 30,
                 ),
                 TextField(
                     style: TextStyle(color: Colors.black),
@@ -90,8 +91,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderSide: BorderSide(
                                 color: Color(0xFFc2075e), width: .5)),
                         hintText: "Password")),
+                SizedBox(height: 8.0,),
+                Center(
+                  child: GestureDetector(
+                    child: Text("Forgot your password?"),
+                    onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordResetScreen() ));
+                    },
+                  ),
+                ),
                 SizedBox(
-                  height: 5.0,
+                  height: MediaQuery.of(context).size.height*0.06,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -281,4 +291,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ]);
         });
   }
+
+
 }
+
+
