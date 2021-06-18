@@ -40,58 +40,61 @@ class _ScranWelcomeScreenState extends State<ScranWelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Colors.greenAccent[200],
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Hero(
-                    tag: 'logo',
-                    child: Container(
-                      child: Image.asset('images/heartLogo.png'),
-                      height: 100.0,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 200,
-                    child: TyperAnimatedTextKit(
-                      text: ['Save the Scran'],
-                      textStyle: TextStyle(
-                        fontSize: 35.0,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'GoogleFonts.pacifico',
+    return  WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+          backgroundColor: Colors.greenAccent[200],
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Hero(
+                      tag: 'logo',
+                      child: Container(
+                        child: Image.asset('images/heartLogo.png'),
+                        height: 100.0,
                       ),
-                      isRepeatingAnimation: false,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 48.0,
-              ),
-              RoundedButton(
-                title: 'Log In',
-                colour: Color(0xFFFF4081),
-                onPressed: () {
-                  Navigator.pushNamed(context, LoginScreen.id);
-                },
-              ),
-              RoundedButton(
-                title: 'Register',
-                colour: Color(0xFFc2075e),
-                onPressed: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
-                },
-              ),
-            ],
+                    SizedBox(
+                      width: 200,
+                      child: TyperAnimatedTextKit(
+                        text: ['Save the Scran'],
+                        textStyle: TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'GoogleFonts.pacifico',
+                        ),
+                        isRepeatingAnimation: false,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 48.0,
+                ),
+                RoundedButton(
+                  title: 'Log In',
+                  colour: Color(0xFFFF4081),
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                ),
+                RoundedButton(
+                  title: 'Register',
+                  colour: Color(0xFFc2075e),
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
 
+      ),
     );
   }
 }
