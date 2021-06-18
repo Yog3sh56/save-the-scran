@@ -2,14 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';
 import 'package:save_the_scran/widgets/FoodWidget.dart';
+import 'dart:async';
 
 class FridgeScreen extends StatefulWidget {
   static const String id = "fridge_screen";
+
   @override
   State<StatefulWidget> createState() => _FridgeScreenState();
 }
@@ -19,19 +22,20 @@ class _FridgeScreenState extends State<FridgeScreen> {
   final _firestore = FirebaseFirestore.instance;
   User loggedInUser;
 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
-    if (_auth.currentUser == null){
+    // it will navigate to Welcome page as soon as this state is built
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
-    }
+    });
   }
-
   //basic example of how objects are fetched
   void getUserItems() async {
     final userItems = await _firestore
         .collection("items")
         .where("ownerid",
-            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .get();
     for (var item in userItems.docs) {
       print(item.data());
@@ -44,7 +48,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
     await for (var snapshot in _firestore
         .collection("items")
         .where("ownerid",
-            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .snapshots()) {
       for (var i in snapshot.docs) {
         print(i.data());
@@ -118,13 +122,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
       */
       body: Center(
         child: StreamBuilder(
-            //the stream provides a snapshot, to pass onto the builder
+          //the stream provides a snapshot, to pass onto the builder
             stream: _firestore
                 .collection("items")
                 .where("ownerid",
-                    isEqualTo: (_auth.currentUser == null)
-                        ? ""
-                        : _auth.currentUser.uid)
+                isEqualTo: (_auth.currentUser == null)
+                    ? ""
+                    : _auth.currentUser.uid)
                 .where("inCommunity", isEqualTo: false)
                 .snapshots(),
             //the builder takes in the stream
