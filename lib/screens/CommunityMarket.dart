@@ -8,6 +8,7 @@ import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
 import 'package:save_the_scran/widgets/FoodWidgetMarket.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'LoginScreen.dart';
 import 'ProfileScreen.dart';
@@ -24,6 +25,18 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
   List<dynamic> closeUsers;
   User loggedInUser;
 
+
+
+
+  //image file
+  final List<String> imageSlides = [
+    "images/slide0.jpg",
+    "images/slide1.jpg",
+    "images/slide2.jpg",
+    "images/slide3.jpg"
+  ];
+
+
   @override
   void initState() {
     super.initState();
@@ -31,107 +44,170 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
         appBar: AppBar(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-          ),
-          centerTitle: true,
-          // backgroundColor: Colors.white,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-              gradient: LinearGradient(
-                colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
+
+        shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
               ),
-            ),
-          ),
-          title:
-              Text('Community Market', style: TextStyle(color: Colors.black)),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.black,
+              centerTitle: true,
+              // backgroundColor: Colors.white,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+                  gradient: LinearGradient(
+                    colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                  ),
                 ),
-                onPressed: () {
-                  if (_auth.currentUser == null) {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  } else {
-                    Navigator.pushNamed(context, ProfileScreen.id);
-                  }
-                })
+              ),
+
+
+          title:
+                    Text('Community Market', style: TextStyle(color: Colors.black)),
+                actions: [
+                  IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        if (_auth.currentUser == null) {
+                          Navigator.pushNamed(context, LoginScreen.id);
+                        } else {
+                          Navigator.pushNamed(context, ProfileScreen.id);
+                        }
+                      })
+                ],
+
+
+
+        bottom: TabBar(
+            indicatorColor: Colors.red,
+            labelColor: Colors.red,
+            unselectedLabelColor: Colors.black45,
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.tv),
+                text: "News",
+              ),
+              Tab(
+                icon: Icon(Icons.shopping_cart_outlined),
+                text: "Market",
+              )
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+
+            CarouselSlider(
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                autoPlay: true,
+              ),
+              items: imageSlides.map((e) => ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    // Image.network(e,
+                    // width: 1000,
+                    // height: 200,
+                    // fit: BoxFit.cover,)
+
+                    Image.asset(e,
+                      width: 1000,
+                      height: 800,
+                      fit: BoxFit.cover,
+                    )
+                  ],
+
+                )
+              )).toList(),
+            ),
+
+
+            FutureBuilder(
+                    future: getClosest(_auth, 100),
+                    builder: (context, snapshotOuter) {
+                      if (snapshotOuter.connectionState == ConnectionState.done &&
+                          snapshotOuter.hasData) {
+                        return Center(
+                          child: StreamBuilder(
+                            //the stream provides a snapshot, to pass onto the builder
+                              stream: _firestore
+                                  .collection("items")
+                                  .where("ownerid", whereIn: snapshotOuter.data)
+                                  .where("inCommunity", isEqualTo: true)
+                                  .orderBy("expiryDate")
+                                  .snapshots(),
+                              //the builder takes in the stream
+                              builder: (context, snapshot) {
+                                List<Widget> itemText = [];
+                                //make sure snapshot has data
+                                if (snapshot.hasData) {
+                                  //declare vars
+                                  final snapshotDocs = snapshot.data.docs;
+                                  List<Item> itemsList = [];
+                                  //parse data
+                                  for (var item in snapshotDocs) {
+                                    // if (_auth.currentUser != null){
+                                    //   // if (item['ownerid'] == _auth.currentUser.uid) {
+                                    //   //   continue;
+                                    //   // }
+                                    //
+                                    // }
+
+                                    Item i = Item(
+                                        item['ownerid'], item['name'], item['imageUrl'],
+                                        buyDate: item['buyDate'].toDate(),
+                                        expiry: item['expiryDate'].toDate(),
+                                        inCommunity: true);
+
+                                    itemsList.add(i);
+
+                                    final fw = FoodWidgetMarket(
+                                      item: i,
+                                      id: item.id,
+                                      ownerid: item['ownerid'],
+                                    );
+                                    itemText.add(fw);
+
+                                    //itemText.add(Text(item['name']));
+                                  }
+                                  return ListView(children: itemText);
+                                }
+                                return ListView(children: itemText);
+                              }),
+                        );
+                      } else {
+                        if (snapshotOuter.connectionState == ConnectionState.done) {
+                          return Center(child: Text("no items"));
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    })
+
           ],
         ),
-        //future builder, so that when the close enough other users are loaded
-        //we can filter the queries
-        body: FutureBuilder(
-            future: getClosest(_auth, 100),
-            builder: (context, snapshotOuter) {
-              if (snapshotOuter.connectionState == ConnectionState.done &&
-                  snapshotOuter.hasData) {
-                return Center(
-                  child: StreamBuilder(
-                      //the stream provides a snapshot, to pass onto the builder
-                      stream: _firestore
-                          .collection("items")
-                          .where("ownerid", whereIn: snapshotOuter.data)
-                          .where("inCommunity", isEqualTo: true)
-                          .orderBy("expiryDate")
-                          .snapshots(),
-                      //the builder takes in the stream
-                      builder: (context, snapshot) {
-                        List<Widget> itemText = [];
-                        //make sure snapshot has data
-                        if (snapshot.hasData) {
-                          //declare vars
-                          final snapshotDocs = snapshot.data.docs;
-                          List<Item> itemsList = [];
-                          //parse data
-                          for (var item in snapshotDocs) {
-                            // if (_auth.currentUser != null){
-                            //   // if (item['ownerid'] == _auth.currentUser.uid) {
-                            //   //   continue;
-                            //   // }
-                            //
-                            // }
+      ),
+    );
 
-                            Item i = Item(
-                                item['ownerid'], item['name'], item['imageUrl'],
-                                buyDate: item['buyDate'].toDate(),
-                                expiry: item['expiryDate'].toDate(),
-                                inCommunity: true);
 
-                            itemsList.add(i);
 
-                            final fw = FoodWidgetMarket(
-                              item: i,
-                              id: item.id,
-                              ownerid: item['ownerid'],
-                            );
-                            itemText.add(fw);
 
-                            //itemText.add(Text(item['name']));
-                          }
-                          return ListView(children: itemText);
-                        }
-                        return ListView(children: itemText);
-                      }),
-                );
-              } else {
-                if (snapshotOuter.connectionState == ConnectionState.done) {
-                  return Center(child: Text("no items"));
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }));
+
   }
 }
+
+
 
 double getDistance(dynamic userLocation, GeoPoint loc) {
   double dx = loc.longitude - userLocation.longitude;

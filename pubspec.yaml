@@ -27,6 +27,9 @@ dependencies:
   firebase_analytics:
   flutter_svg: ^0.19.3
 
+  #Slider:
+  carousel_slider: ^3.0.0
+
   #text recognition
   firebase_ml_vision: ^0.9.7
 
