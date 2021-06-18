@@ -103,9 +103,9 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
         ),
         body: TabBarView(
           children: <Widget>[
-
             CarouselSlider(
               options: CarouselOptions(
+                height: 370,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: false,
                 autoPlay: true,
@@ -115,15 +115,8 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    // Image.network(e,
-                    // width: 1000,
-                    // height: 200,
-                    // fit: BoxFit.cover,)
-
                     Image.asset(e,
-                      width: 1000,
-                      height: 800,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitHeight,
                     )
                   ],
 
