@@ -25,10 +25,12 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   void initState() {
     super.initState();
-    // it will navigate to Welcome page as soon as this state is built
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
-    });
+    if (_auth.currentUser == null){
+      // it will navigate to Welcome page as soon as this state is built
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
+      });
+    }
   }
   //basic example of how objects are fetched
   void getUserItems() async {
