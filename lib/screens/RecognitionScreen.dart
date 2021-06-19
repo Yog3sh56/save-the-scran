@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
+
 class TextRecognitionWidget extends StatefulWidget {
   final carryoverImage;
   const TextRecognitionWidget({

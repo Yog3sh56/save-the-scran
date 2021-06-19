@@ -48,6 +48,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.greenAccent[200],
 
         shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
@@ -64,6 +65,20 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                   ),
                 ),
               ),
+
+          //     flexibleSpace: ClipRRect(
+          //       borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
+          //       child:Container(
+          //         decoration: BoxDecoration(
+          //           image: DecorationImage(
+          //             image: AssetImage("images/0.jpg"),
+          //             fit: BoxFit.cover,
+          //             colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),BlendMode.dstIn)
+          //
+          //           )
+          //         )
+          //     ),
+          // ),
 
 
           title:
@@ -92,7 +107,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.tv),
-                text: "News",
+                text: "Action",
               ),
               Tab(
                 icon: Icon(Icons.shopping_cart_outlined),
@@ -103,25 +118,42 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
         ),
         body: TabBarView(
           children: <Widget>[
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 370,
-                enlargeCenterPage: true,
-                enableInfiniteScroll: false,
-                autoPlay: true,
-              ),
-              items: imageSlides.map((e) => ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(e,
-                      fit: BoxFit.fitHeight,
-                    )
-                  ],
+            // CarouselSlider(
+            //   options: CarouselOptions(
+            //     height: 300,
+            //     enlargeCenterPage: true,
+            //     enableInfiniteScroll: false,
+            //     autoPlay: true,
+            //   ),
+            //   items: imageSlides.map((e) => ClipRRect(
+            //     borderRadius: BorderRadius.circular(8),
+            //     child: Stack(
+            //       fit: StackFit.expand,
+            //       children: [
+            //         Image.asset(e,
+            //           fit: BoxFit.fitHeight,
+            //         )
+            //       ],
+            //
+            //     )
+            //   )).toList(),
+            // ),
 
+            ListView(
+              children: <Widget>[
+                ListTile(
+                  title: Text("Post 0"),
+                ),
+                ListTile(
+                  title: Text("Post 1"),
+                ),
+                ListTile(
+                  title: Text("Post 2"),
+                ),
+                ListTile(
+                  title: Text("Post 3"),
                 )
-              )).toList(),
+              ],
             ),
 
 

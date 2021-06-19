@@ -6,6 +6,7 @@ import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'package:save_the_scran/screens/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
 import 'screens/TakePictureScreen.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         ScranWelcomeScreen.id: (context) => ScranWelcomeScreen(),
         ChooseAddMethod.id: (context) => ChooseAddMethod(),
         AddItemScreen.id: (context) => AddItemScreen(),
+        NewsScreen.id: (context) => NewsScreen()
       },
     );
   }
@@ -70,49 +72,91 @@ class MyBottomNavigationBar extends StatefulWidget {
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-  int _index = 0;
+
+  int _currentIndex = 0;
   final List<Widget> _children = [
     FridgeScreen(),
+    NewsScreen(),
     ChooseAddMethod(),
     CommunityMarketScreen(),
     ChatContacts(),
   ];
 
-  void onTappedBar(int index) {
-    setState(() {
-      _index = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+
+
     return new Scaffold(
-        body: _children[_index],
+        body: _children[_currentIndex],
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            onTabTapped(2);
+          },
+          tooltip: "Add Food",
+          child: Icon(Icons.add_circle_outline, color: Colors.green[200], size: 55),
+          elevation: 4.0,
+          backgroundColor: Colors.white,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
         bottomNavigationBar: BottomNavigationBar(
+
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey,
           selectedFontSize: 14,
           unselectedFontSize: 14,
-          onTap: onTappedBar,
-          currentIndex: _index,
+          // onTap: onTappedBar,
+          // currentIndex: _index,
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+
           items: [
             BottomNavigationBarItem(
-              label: 'Fridge',
-              icon: Icon(Icons.kitchen),
+              label:'Fridge',
+              icon: new Icon(Icons.kitchen),
             ),
             BottomNavigationBarItem(
-                label: 'Add Food', icon: Icon(Icons.add_circle)),
+              label: 'News',
+              icon: new Icon(Icons.tv),
+            ),
+            BottomNavigationBarItem(
+                label: 'Add Food',
+
+                icon: new Icon(
+                  Icons.add_circle,
+                  color:Colors.white.withOpacity(0)
+                )),
             BottomNavigationBarItem(
               label: 'Market',
-              icon: Icon(Icons.storefront),
+              icon: new Icon(Icons.storefront),
             ),
             BottomNavigationBarItem(
               label: 'Saviours',
-              icon: Icon(Icons.chat),
+              icon: new Icon(Icons.chat),
             ),
           ],
         ));
+
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
