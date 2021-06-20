@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   firebase_analytics:
   flutter_svg: ^0.19.3
 
@@ -36,14 +36,14 @@ dependencies:
   firebase_ml_vision: ^0.9.7
 
   image_picker: ^0.6.7+11
-#  image_picker: ^0.8.0+3
+  #  image_picker: ^0.8.0+3
   clipboard: ^0.1.2+8
 
   image_gallery_saver: ^1.2.2
 
-  #location 
+  #location
   location: 3.2.4
-  location_web: 
+  location_web:
 
   camera:
   path_provider:
@@ -89,9 +89,9 @@ flutter_native_splash:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_icons:
-    android: true
-    ios: true
-    image_path: "images/appIcon.png"
+  android: true
+  ios: true
+  image_path: "images/appIcon.png"
 # The following section is specific to Flutter.
 flutter:
 
@@ -119,10 +119,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-#  fonts:
-#    - family: AppIcons
-#      fonts:
-#        - asset: Assets/Google.ttf
+  #  fonts:
+  #    - family: AppIcons
+  #      fonts:
+  #        - asset: Assets/Google.ttf
 
   #   - family: Trajan Pro
   #     fonts:
@@ -133,6 +133,6 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
-  - images/
-  - assets/icons/Google.svg
-  - assets/icons/Facebook.svg
+    - images/
+    - assets/icons/Google.svg
+    - assets/icons/Facebook.svg

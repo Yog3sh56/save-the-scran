@@ -97,66 +97,8 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                         }
                       })
                 ],
-
-
-
-        bottom: TabBar(
-            indicatorColor: Colors.red,
-            labelColor: Colors.red,
-            unselectedLabelColor: Colors.black45,
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.tv),
-                text: "Action",
-              ),
-              Tab(
-                icon: Icon(Icons.shopping_cart_outlined),
-                text: "Market",
-              )
-            ],
-          ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            // CarouselSlider(
-            //   options: CarouselOptions(
-            //     height: 300,
-            //     enlargeCenterPage: true,
-            //     enableInfiniteScroll: false,
-            //     autoPlay: true,
-            //   ),
-            //   items: imageSlides.map((e) => ClipRRect(
-            //     borderRadius: BorderRadius.circular(8),
-            //     child: Stack(
-            //       fit: StackFit.expand,
-            //       children: [
-            //         Image.asset(e,
-            //           fit: BoxFit.fitHeight,
-            //         )
-            //       ],
-            //
-            //     )
-            //   )).toList(),
-            // ),
-
-            ListView(
-              children: <Widget>[
-                ListTile(
-                  title: Text("Post 0"),
-                ),
-                ListTile(
-                  title: Text("Post 1"),
-                ),
-                ListTile(
-                  title: Text("Post 2"),
-                ),
-                ListTile(
-                  title: Text("Post 3"),
-                )
-              ],
-            ),
-
-
+        body:
             FutureBuilder(
                     future: getClosest(_auth, 100),
                     builder: (context, snapshotOuter) {
@@ -220,14 +162,8 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                       }
                     })
 
-          ],
-        ),
       ),
     );
-
-
-
-
 
   }
 }

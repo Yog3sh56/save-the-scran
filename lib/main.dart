@@ -6,7 +6,7 @@ import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
-import 'package:save_the_scran/screens/NewsScreen.dart';
+import 'screens/News/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
 import 'screens/TakePictureScreen.dart';
