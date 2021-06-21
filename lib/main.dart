@@ -95,8 +95,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             onTabTapped(2);
           },
           tooltip: "Add Food",
-          child: Icon(Icons.add_circle_outline, color: Colors.green[200], size: 55),
-          elevation: 4.0,
+          child: Icon(Icons.add_circle_rounded, color: Colors.greenAccent[200], size: 55),
+          elevation: 0.5,
           backgroundColor: Colors.white,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -125,7 +125,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             ),
             BottomNavigationBarItem(
                 label: 'Add Food',
-
                 icon: new Icon(
                   Icons.add_circle,
                   color:Colors.white.withOpacity(0)

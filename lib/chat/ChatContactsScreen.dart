@@ -79,11 +79,14 @@ class _ChatContactsState extends State<ChatContacts> {
                           alreadyProcessed.add(ids[0]);
                         }
                       }
+                      if (conversations.isEmpty){
+                        return Center(child: Text("no messages"));
+                      }
                       return ListView(
                         shrinkWrap: true,
                         children: conversations
                       );
-                    } else{
+                    }else{
                     return Container(
                       padding: EdgeInsets.all(20),
                       width: MediaQuery.of(context).size.width,
