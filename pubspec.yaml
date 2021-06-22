@@ -30,6 +30,11 @@ dependencies:
   #Slider:
   carousel_slider: ^3.0.0
 
+  #news
+  http: ^0.12.2
+  cached_network_image: ^2.5.0
+  webview_flutter: ^1.0.7
+
 
 
   #text recognition
@@ -45,7 +50,7 @@ dependencies:
   location: 3.2.4
   location_web:
 
-  camera:
+  camera: 0.7.0
   path_provider:
   path:
   firebase_core: ^0.7.0

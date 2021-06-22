@@ -29,6 +29,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Future<void> _initializeControllerFuture;
   XFile image;
 
+
+
   @override
   void initState() {
     super.initState();

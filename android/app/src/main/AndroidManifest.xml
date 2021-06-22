@@ -2,8 +2,10 @@
     package="com.dsc_team.save_the_scran">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
+        android:usesCleartextTraffic="true"
         android:label="Save the Scran"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
