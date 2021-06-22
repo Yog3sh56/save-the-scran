@@ -3,7 +3,6 @@ import 'package:save_the_scran/widgets/RoundedButtonWidget.dart';
 import 'LoginScreen.dart';
 import 'RegistrationScreen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 
 class ScranWelcomeScreen extends StatefulWidget {

@@ -79,19 +79,23 @@ class _ChatContactsState extends State<ChatContacts> {
                           alreadyProcessed.add(ids[0]);
                         }
                       }
+                      
                       return ListView(
                         shrinkWrap: true,
                         children: conversations
                       );
-                    } else{
-                    return Container(
-                      padding: EdgeInsets.all(20),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width,
-                      child:CircularProgressIndicator(
-                      strokeWidth: 20,
-                    ));
-                    }
+                    }else{
+                      if (snapshot.connectionState == ConnectionState.done){
+                        if (conversations.isEmpty){
+                          return Center(child: Text("no messages"));
+                      }
+                      }else{
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      }
+                    
                   })
                   :Text("Please login to send messages")
                 ,

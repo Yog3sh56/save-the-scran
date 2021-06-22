@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:location/location.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'package:save_the_scran/utils/LocationWrap.dart';
 import 'screens/News/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
@@ -95,8 +98,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             onTabTapped(2);
           },
           tooltip: "Add Food",
-          child: Icon(Icons.add_circle_outline, color: Colors.green[200], size: 55),
-          elevation: 4.0,
+          child: Icon(Icons.add_circle_rounded, color: Colors.greenAccent[200], size: 55),
+          elevation: 0.5,
           backgroundColor: Colors.white,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -125,7 +128,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             ),
             BottomNavigationBarItem(
                 label: 'Add Food',
-
                 icon: new Icon(
                   Icons.add_circle,
                   color:Colors.white.withOpacity(0)

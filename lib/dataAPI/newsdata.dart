@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 
 import 'package:save_the_scran/models/ArticleModel.dart';
@@ -9,14 +10,6 @@ class News{
 
 
   Future<void> getNews() async{
-    // String url = 'https://newsapi.org/v2/everything?' +
-    //     'q=food&' +
-    //     // 'from=2021-06-21&' +
-    //     'country=gb&' +
-    //     'sortBy=popularity&' +
-    //     'apiKey=3660007ffa9943e6be6031237b67050f';
-
-
 
 
     String url = "https://newsapi.org/v2/top-headlines?q=food&apiKey=3660007ffa9943e6be6031237b67050f";

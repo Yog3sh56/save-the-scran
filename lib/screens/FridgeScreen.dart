@@ -154,6 +154,9 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   itemText.add(fw);
                 }
               }
+              if (itemText.isEmpty){
+                return Center(child: Text("Fridge is empty"));
+              }
               return ListView(children: itemText);
             }),
       ),

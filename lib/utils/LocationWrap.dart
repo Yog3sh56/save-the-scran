@@ -1,12 +1,38 @@
 import 'package:location/location.dart';
 
 class LocationWrap {
+
+  static final LocationWrap _instance = LocationWrap._internal();
+
+  factory LocationWrap()=>_instance;
+
+  Future<LocationData> _uLocation;
+  double _lastMaxDistance;
+
+  LocationWrap._internal(){
+    _uLocation = getLocation();
+    _lastMaxDistance = 2000;
+  }
+
+
+  double getLastDistance()=>_lastMaxDistance;
+
+  void setLastDistance(double newDist) {_lastMaxDistance = newDist;}
+
+  Future<LocationData> staticUserLocation() async{
+    var m = await _uLocation;
+    return m;
+  }
+
+
+
+
+
   static Future<LocationData> getLocation() async {
     var _location = Location();
     bool isEnabled = await checkLocationEnabled();
     LocationData location;
     if (isEnabled) {
-      print("location enabled");
       location = await _location.getLocation();
     }
     return location;
@@ -15,7 +41,6 @@ class LocationWrap {
   //check if location is enabled, returns a future bool
   //if location isn't enabled it asks the user to enable
   static Future<bool> checkLocationEnabled() async {
-    print("checking location");
     Location location = new Location();
 
     bool _serviceEnabled;

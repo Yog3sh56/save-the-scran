@@ -1,17 +1,15 @@
-import 'dart:math';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
 import 'package:save_the_scran/widgets/FoodWidgetMarket.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
-import 'LoginScreen.dart';
-import 'ProfileScreen.dart';
 
 class CommunityMarketScreen extends StatefulWidget {
   static const String id = "market_screen";
@@ -24,26 +22,24 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
   final _firestore = FirebaseFirestore.instance;
   List<dynamic> closeUsers;
   User loggedInUser;
+  double maxDist=LocationWrap().getLastDistance();
+  
 
-
-
-
-  //image file
-  final List<String> imageSlides = [
-    "images/slide0.jpg",
-    "images/slide1.jpg",
-    "images/slide2.jpg",
-    "images/slide3.jpg"
-  ];
-
+  
 
   @override
   void initState() {
     super.initState();
   }
 
+
+  void reloadMainWidget(){
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(maxDist);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -65,51 +61,55 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                   ),
                 ),
               ),
-
-          //     flexibleSpace: ClipRRect(
-          //       borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
-          //       child:Container(
-          //         decoration: BoxDecoration(
-          //           image: DecorationImage(
-          //             image: AssetImage("images/0.jpg"),
-          //             fit: BoxFit.cover,
-          //             colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),BlendMode.dstIn)
-          //
-          //           )
-          //         )
-          //     ),
-          // ),
-
-
           title:
                     Text('Community Market', style: TextStyle(color: Colors.black)),
                 actions: [
                   IconButton(
                       icon: Icon(
-                        Icons.person,
+                        Icons.filter_list_sharp,
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        if (_auth.currentUser == null) {
-                          Navigator.pushNamed(context, LoginScreen.id);
-                        } else {
-                          Navigator.pushNamed(context, ProfileScreen.id);
-                        }
-                      })
+                        showDialog(context: context, builder: 
+                        (context){
+                          return SimpleDialog(
+                            title: Text("Maximum Distance"),
+                            children: [
+                              StatefulBuilder(builder: (context,setState){
+                                return Column(
+                                  children:[
+                                    Slider(min:1,max:4476588,value: maxDist,label: maxDist.toString(), onChanged: (changed) => setState((){
+                                      maxDist = changed;
+                                      LocationWrap().setLastDistance(changed);
+                                      })),
+                                    ElevatedButton(
+                                      onPressed: (){
+                                      Navigator.pop(context);
+                                      reloadMainWidget();
+                                      }, child: Text("Apply"),
+                                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.greenAccent[200])),
+                                    ), 
+                                  ]
+                                );
+                              }),
+                            ],
+                          );
+                        });
+                      }
+                      )
                 ],
         ),
         body:
             FutureBuilder(
-                    future: getClosest(_auth, 100),
+                    future: getUserLocation(),
                     builder: (context, snapshotOuter) {
                       if (snapshotOuter.connectionState == ConnectionState.done &&
                           snapshotOuter.hasData) {
                         return Center(
-                          child: StreamBuilder(
+                          child:StreamBuilder(
                             //the stream provides a snapshot, to pass onto the builder
                               stream: _firestore
                                   .collection("items")
-                                  .where("ownerid", whereIn: snapshotOuter.data)
                                   .where("inCommunity", isEqualTo: true)
                                   .orderBy("expiryDate")
                                   .snapshots(),
@@ -123,57 +123,51 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   List<Item> itemsList = [];
                                   //parse data
                                   for (var item in snapshotDocs) {
-                                    // if (_auth.currentUser != null){
-                                    //   // if (item['ownerid'] == _auth.currentUser.uid) {
-                                    //   //   continue;
-                                    //   // }
-                                    //
-                                    // }
+                                    var itemLocation = item["location"];
+                                    var dist = getDistance(snapshotOuter.data, itemLocation);
+                                    
+                                    if (dist<maxDist && item["ownerid"] != _auth.currentUser.uid){
 
                                     Item i = Item(
                                         item['ownerid'], item['name'], item['imageUrl'],
                                         buyDate: item['buyDate'].toDate(),
                                         expiry: item['expiryDate'].toDate(),
                                         inCommunity: true);
-
                                     itemsList.add(i);
-
                                     final fw = FoodWidgetMarket(
                                       item: i,
                                       id: item.id,
                                       ownerid: item['ownerid'],
                                     );
                                     itemText.add(fw);
-
                                     //itemText.add(Text(item['name']));
+                                  }
                                   }
                                   return ListView(children: itemText);
                                 }
                                 return ListView(children: itemText);
                               }),
                         );
-                      } else {
-                        if (snapshotOuter.connectionState == ConnectionState.done) {
-                          return Center(child: Text("no items"));
-                        }
-                        return Center(
+                    } else{
+                      if (snapshotOuter.connectionState == ConnectionState.done){
+                        return Center(child: Text("no items"));
+                      }
+                      return Center(
                           child: CircularProgressIndicator(),
                         );
-                      }
+                    }
                     })
 
-      ),
-    );
-
-  }
+      )
+      );
+      }
 }
 
 
 
 double getDistance(dynamic userLocation, GeoPoint loc) {
-  double dx = loc.longitude - userLocation.longitude;
-  double dy = loc.longitude - userLocation.latitude;
-  return sqrt(dx * dx + dy * dy);
+  double dist = Geolocator.distanceBetween(loc.latitude, loc.longitude, userLocation.latitude, userLocation.longitude);
+  return dist;
 }
 
 Future<List<dynamic>> getClosest(var _auth, double limit) async {
@@ -192,10 +186,6 @@ Future<List<dynamic>> getClosest(var _auth, double limit) async {
       uLoc = data["location"];
     else
       buff.add(data);
-    //var loc = data["location"];
-    //double dist = getDistance(userLocation, loc);
-
-    //if (dist < limit) ret.add(data["uid"]);
   }
   if (uLoc == null) {
     uLoc = await LocationWrap.getLocation();
@@ -209,7 +199,13 @@ Future<List<dynamic>> getClosest(var _auth, double limit) async {
     var dist = getDistance(uLoc, loc as GeoPoint);
     if (dist < limit) ret.add(entry["uid"]);
   }
-
+  
   if (ret.isEmpty) return null;
   return ret;
+}
+
+Future<LocationData> getUserLocation() async{
+  var inst = LocationWrap();
+  var m = await inst.staticUserLocation();
+  return m;
 }
