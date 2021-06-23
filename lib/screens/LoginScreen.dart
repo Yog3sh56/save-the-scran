@@ -10,7 +10,6 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import 'PasswordResetScreen.dart';
 
-
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
 
@@ -59,12 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide:
-                              BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                              BorderSide(color: Colors.grey, width: 2.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(
-                                color: Color(0xFFc2075e), width: .5)),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: .5)),
                         hintText: 'Enter your email')),
                 SizedBox(
                   height: 8.0,
@@ -91,17 +90,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderSide: BorderSide(
                                 color: Color(0xFFc2075e), width: .5)),
                         hintText: "Password")),
-                SizedBox(height: 8.0,),
+                SizedBox(
+                  height: 8.0,
+                ),
                 Center(
                   child: GestureDetector(
                     child: Text("Forgot your password?"),
-                    onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordResetScreen() ));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PasswordResetScreen()));
                     },
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.005,
+                  height: MediaQuery.of(context).size.height * 0.005,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -155,17 +159,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 new GestureDetector(
-                  onTap: () {
-                    Navigator.popAndPushNamed(context, RegistrationScreen.id);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text("Don't have an account?  "),Text("Register here",style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center),])
-                ),
-
-                                SizedBox(
-                  height: MediaQuery.of(context).size.height*0.01,
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, RegistrationScreen.id);
+                    },
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Don't have an account?  "),
+                          Text("Register here",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center),
+                        ])),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Center(
                     child: Text(
@@ -173,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.01,
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Column(
                   children: [
@@ -195,7 +201,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () async {
                                 // function to allow sign in with google credentials
 
-
                                 // Trigger the authentication flow
                                 final GoogleSignInAccount googleUser =
                                     await GoogleSignIn().signIn();
@@ -213,7 +218,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 final user = FirebaseAuth.instance
                                     .signInWithCredential(credential);
 
-
                                 if (user != null) {
                                   print("succesfull login");
 
@@ -229,8 +233,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         IconButton(
                             onPressed: () async {
-
-
                               // Trigger the sign-in flow
                               final AccessToken result =
                                   await FacebookAuth.instance.login();
@@ -238,32 +240,32 @@ class _LoginScreenState extends State<LoginScreen> {
                               // Create a credential from the access token
                               final facebookAuthCredential =
                                   FacebookAuthProvider.credential(result.token);
-                              try{
-                              // Once signed in, return the UserCredential
-                              final user = await FirebaseAuth.instance
-                                  .signInWithCredential(facebookAuthCredential);
+                              try {
+                                // Once signed in, return the UserCredential
+                                final user = await FirebaseAuth.instance
+                                    .signInWithCredential(
+                                        facebookAuthCredential);
 
-                              if (user != null) {
-                                print("succesfull login");
+                                if (user != null) {
+                                  print("succesfull login");
 
-                                Navigator.popUntil(
-                                    context, (route) => route.isFirst);
-                              }}
-                              on FirebaseAuthException catch (e){
-                                if (e.code == "account-exists-with-different-credential"){
-                                  showAlert("Account already exists with different credentials, please use email or Google sign in.");
+                                  Navigator.popUntil(
+                                      context, (route) => route.isFirst);
+                                }
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code ==
+                                    "account-exists-with-different-credential") {
+                                  showAlert(
+                                      "Account already exists with different credentials, please use email or Google sign in.");
                                 }
                               }
-
-                              }
-                             ,
+                            },
                             icon: SvgPicture.asset("assets/icons/Facebook.svg",
                                 width: 30,
                                 height: 30,
                                 color: Color(0xff4267B2))),
                       ],
                     ),
-
                   ],
                 ),
               ]),
@@ -295,8 +297,4 @@ class _LoginScreenState extends State<LoginScreen> {
               ]);
         });
   }
-
-
 }
-
-

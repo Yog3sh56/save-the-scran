@@ -7,6 +7,7 @@ import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
 import 'package:save_the_scran/screens/TakePictureScreen.dart';
+import 'package:save_the_scran/utils/NotificationHandler.dart';
 import 'package:save_the_scran/widgets/FoodWidget.dart';
 import 'dart:async';
 
@@ -25,19 +26,20 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   void initState() {
     super.initState();
-    if (_auth.currentUser == null){
+    if (_auth.currentUser == null) {
       // it will navigate to Welcome page as soon as this state is built
       SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
       });
     }
   }
+
   //basic example of how objects are fetched
   void getUserItems() async {
     final userItems = await _firestore
         .collection("items")
         .where("ownerid",
-        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .get();
     for (var item in userItems.docs) {
       print(item.data());
@@ -50,7 +52,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
     await for (var snapshot in _firestore
         .collection("items")
         .where("ownerid",
-        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .snapshots()) {
       for (var i in snapshot.docs) {
         print(i.data());
@@ -111,36 +113,25 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
         elevation: 4,
       ),
-      /*
-      floatingActionButton: FloatingActionButton(
-        
-        onPressed: () {
-          Navigator.pushNamed(context, TakePictureScreen.id);
-          //addItem();
-        },
-        child: Icon(Icons.add),
-        backgroundColor:Colors.greenAccent[200],
-      ),
-      */
       body: Center(
         child: StreamBuilder(
-          //the stream provides a snapshot, to pass onto the builder
+            //the stream provides a snapshot, to pass onto the builder
             stream: _firestore
                 .collection("items")
                 .where("ownerid",
-                isEqualTo: (_auth.currentUser == null)
-                    ? ""
-                    : _auth.currentUser.uid)
+                    isEqualTo: (_auth.currentUser == null)
+                        ? ""
+                        : _auth.currentUser.uid)
                 .where("inCommunity", isEqualTo: false)
                 .snapshots(),
             //the builder takes in the stream
             builder: (context, snapshot) {
               List<Widget> itemText = [];
+              List<Item> itemsList = [];
               //make sure snapshot has data
               if (snapshot.hasData) {
                 //declare vars
                 final snapshotDocs = snapshot.data.docs;
-                List<Item> itemsList = [];
 
                 //parse data
                 for (var item in snapshotDocs) {
@@ -154,10 +145,12 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   itemText.add(fw);
                 }
               }
-              if (itemText.isEmpty){
+              if (itemText.isEmpty) {
                 return Center(child: Text("Fridge is empty"));
+              } else {
+                NotificationService().scheduleNotifications(itemsList);
+                return ListView(children: itemText);
               }
-              return ListView(children: itemText);
             }),
       ),
     );

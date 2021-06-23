@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'package:save_the_scran/utils/NotificationHandler.dart';
 import 'screens/News/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
@@ -18,15 +20,15 @@ void main() async {
   // can be called before `runApp()`
 
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Obtain a list of the available cameras on the device.
   final cameras = await availableCameras();
 
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
   await Firebase.initializeApp();
+  await NotificationService().init();
   return runApp(MyApp(firstCamera));
-
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +39,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Save the Scran',
@@ -74,7 +75,6 @@ class MyBottomNavigationBar extends StatefulWidget {
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-
   int _currentIndex = 0;
   final List<Widget> _children = [
     FridgeScreen(),
@@ -84,25 +84,23 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     ChatContacts(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
+    NotificationService().displayNotification();
     return new Scaffold(
         body: _children[_currentIndex],
-
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             onTabTapped(2);
           },
           tooltip: "Add Food",
-          child: Icon(Icons.add_circle_rounded, color: Colors.greenAccent[200], size: 55),
+          child: Icon(Icons.add_circle_rounded,
+              color: Colors.greenAccent[200], size: 55),
           elevation: 0.5,
           backgroundColor: Colors.white,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
         bottomNavigationBar: BottomNavigationBar(
-
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           selectedItemColor: Colors.black,
@@ -116,7 +114,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
           items: [
             BottomNavigationBarItem(
-              label:'Fridge',
+              label: 'Fridge',
               icon: new Icon(Icons.kitchen),
             ),
             BottomNavigationBarItem(
@@ -125,10 +123,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             ),
             BottomNavigationBarItem(
                 label: 'Add Food',
-                icon: new Icon(
-                  Icons.add_circle,
-                  color:Colors.white.withOpacity(0)
-                )),
+                icon: new Icon(Icons.add_circle,
+                    color: Colors.white.withOpacity(0))),
             BottomNavigationBarItem(
               label: 'Market',
               icon: new Icon(Icons.storefront),
@@ -139,7 +135,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             ),
           ],
         ));
-
   }
 
   void onTabTapped(int index) {
@@ -148,4 +143,3 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     });
   }
 }
-
