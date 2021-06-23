@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.06,
+                  height: MediaQuery.of(context).size.height*0.005,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -158,18 +158,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () {
                     Navigator.popAndPushNamed(context, RegistrationScreen.id);
                   },
-                  child: Text("Don't have an account? Register here",
-                      textAlign: TextAlign.center),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text("Don't have an account?  "),Text("Register here",style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center),])
                 ),
 
-                SizedBox(height: 25),
+                                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.01,
+                ),
                 Center(
                     child: Text(
                   "-OR-",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
                 SizedBox(
-                  height: 30,
+                  height: MediaQuery.of(context).size.height*0.01,
                 ),
                 Column(
                   children: [

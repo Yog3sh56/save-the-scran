@@ -143,13 +143,23 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                     //itemText.add(Text(item['name']));
                                   }
                                   }
+                                  if (itemText.isEmpty){
+                                    return Center(child: Text("no items"));
+                                  }
                                   return ListView(children: itemText);
                                 }
+                                if (itemText.isEmpty){
+                                    return Center(child: Text("no items"));
+                                  }
+                                  
                                 return ListView(children: itemText);
                               }),
                         );
                     } else{
+                      print("done");
+                      print(snapshotOuter.connectionState);
                       if (snapshotOuter.connectionState == ConnectionState.done){
+                        print("no items");
                         return Center(child: Text("no items"));
                       }
                       return Center(
