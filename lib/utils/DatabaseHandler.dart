@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import '../main.dart';
+
 class DbHandler {
   static pushtoMarket(
       _auth, _firestore, itemName, imageUrl, _expiry, context) async {
@@ -15,6 +17,8 @@ class DbHandler {
       "expiryDate": _expiry,
       "inCommunity": false,
     });
-    Navigator.popUntil(context, (route) => route.isFirst);
+    // Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushNamed(context, MyApp.id);
+
   }
 }

@@ -27,6 +27,10 @@ dependencies:
   firebase_analytics:
   flutter_svg: ^0.19.3
 
+  #introduction
+  introduction_screen: ^2.1.0
+
+
   #Slider:
   carousel_slider: ^3.0.0
 

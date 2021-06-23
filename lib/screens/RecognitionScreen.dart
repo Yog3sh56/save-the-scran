@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
+import '../main.dart';
+
 
 class TextRecognitionWidget extends StatefulWidget {
   final carryoverImage;
@@ -203,7 +205,9 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       "expiryDate": _expiry,
       "inCommunity": false,
     });
-    Navigator.popUntil(context, (route) => route.isFirst);
+    // Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushNamed(context, MyApp.id);
+    // Navigator.pushReplacementNamed(context, MyApp.id);
   }
 
   void clear() {

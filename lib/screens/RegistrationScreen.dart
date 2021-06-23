@@ -8,6 +8,7 @@ import 'package:location/location.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
+import '../main.dart';
 import 'LoginScreen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -32,6 +33,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         // backgroundColor: Colors.grey.withOpacity(0.3),
         backgroundColor: Colors.greenAccent[200],
         // title: Text("Register", style: TextStyle(color: Colors.black)),
@@ -154,7 +156,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                         if (newUser != null) {
                           insertLocationData(newUser.user.uid, location);
-                          Navigator.popUntil(context, (route) => route.isFirst);
+                          // Navigator.popUntil(context, (route) => route.isFirst);
+                          Navigator.pushNamed(context, MyApp.id);
+
                         }
                       }
                     } on FirebaseAuthException catch (e) {
@@ -244,8 +248,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             if (user != null) {
                               print("succesfull login");
 
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
+                              // Navigator.popUntil(
+                              //     context, (route) => route.isFirst);
+                              Navigator.pushNamed(context, MyApp.id);
+
                             }
                           },
                           icon: SvgPicture.asset(
@@ -273,8 +279,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             if (user != null) {
                               print("succesfull login");
 
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
+                              // Navigator.popUntil(
+                              //     context, (route) => route.isFirst);
+                              Navigator.pushNamed(context, MyApp.id);
+
                             }}
                           on FirebaseAuthException catch (e){
                             if (e.code == "account-exists-with-different-credential"){

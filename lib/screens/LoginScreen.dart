@@ -8,6 +8,7 @@ import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
+import '../main.dart';
 import 'PasswordResetScreen.dart';
 
 
@@ -26,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.greenAccent[200],
           // title: Text("Login", style: TextStyle(color: Colors.black)),
           elevation: 0,
@@ -123,8 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (user != null) {
                               print("succesfull login");
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
+                              // Navigator.popUntil(
+                              //     context, (route) => route.isFirst);
+                              Navigator.pushNamed(context, MyApp.id);
+
                             }
                           }
                         } on FirebaseAuthException catch (e) {
@@ -213,8 +217,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (user != null) {
                                   print("succesfull login");
 
-                                  Navigator.popUntil(
-                                      context, (route) => route.isFirst);
+                                  // Navigator.popUntil(
+                                  //     context, (route) => route.isFirst);
+                                  Navigator.pushNamed(context, MyApp.id);
+
                                 }
                               },
                               icon: SvgPicture.asset(
@@ -242,8 +248,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (user != null) {
                                 print("succesfull login");
 
-                                Navigator.popUntil(
-                                    context, (route) => route.isFirst);
+                                // Navigator.popUntil(
+                                //     context, (route) => route.isFirst);
+                                Navigator.pushNamed(context, MyApp.id);
+
                               }}
                               on FirebaseAuthException catch (e){
                                 if (e.code == "account-exists-with-different-credential"){

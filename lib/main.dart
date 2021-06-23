@@ -6,6 +6,7 @@ import 'package:location/location.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
+import 'package:save_the_scran/screens/OnboardingScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
@@ -40,19 +41,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Save the Scran',
-      theme: ThemeData(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xFFc2075e),
-            ),
-          ),
-          primaryColor: Color(0xFFc2075e),
-          accentColor: Colors.greenAccent[200]),
-      home: MyBottomNavigationBar(),
+
+      // debugShowCheckedModeBanner: false,
+      // title: 'Save the Scran',
+      // theme: ThemeData(
+      //     elevatedButtonTheme: ElevatedButtonThemeData(
+      //       style: ElevatedButton.styleFrom(
+      //         primary: Color(0xFFc2075e),
+      //       ),
+      //     ),
+      //     primaryColor: Color(0xFFc2075e),
+      //     accentColor: Colors.greenAccent[200]),
+
+
+      // home: MyBottomNavigationBar(),
+      home: OnboardingScreen(),
       routes: {
-        MyApp.id: (context) => MyApp(context),
+        // MyApp.id: (context) => MyApp(context),
+        MyApp.id: (context) => MyBottomNavigationBar(),
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),
         ChatContacts.id: (context) => ChatContacts(),
@@ -76,6 +82,18 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   goToOnboarding(context);
+  // }
+  // // goToOnboarding(context);
+  //
+  // void goToOnboarding(context) => Navigator.of(context).pushReplacement(
+  //   MaterialPageRoute(builder:(_) => OnboardingScreen()),
+  // );
+
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     FridgeScreen(),
@@ -91,6 +109,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
 
     return new Scaffold(
+
         body: _children[_currentIndex],
 
         floatingActionButton: FloatingActionButton(

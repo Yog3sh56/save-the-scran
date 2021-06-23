@@ -44,6 +44,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.greenAccent[200],
 
         shape: RoundedRectangleBorder(

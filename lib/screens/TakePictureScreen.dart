@@ -59,6 +59,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.greenAccent[200],
           title: Text('Add Food to Fridge',
               style: TextStyle(color: Colors.black))),
