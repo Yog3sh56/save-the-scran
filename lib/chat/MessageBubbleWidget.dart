@@ -16,7 +16,7 @@ class MessageBubble extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isMe ? Color(0xFFff79af) : Colors.white,
+            color: isMe ? Color(0xFFff79af) : Colors.grey,
             boxShadow: [
               BoxShadow(
                   color: isMe ? Colors.black.withOpacity(0.2) : Colors.grey,
@@ -29,7 +29,7 @@ class MessageBubble extends StatelessWidget {
               bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
             ),
           ),
-          width: 140,
+          width: MediaQuery.of(context).size.width * 0.6,
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: Text(
