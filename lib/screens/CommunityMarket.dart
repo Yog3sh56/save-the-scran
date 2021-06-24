@@ -122,8 +122,12 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   final snapshotDocs = snapshot.data.docs;
                                   List<Item> itemsList = [];
                                   //parse data
+                                  
                                   for (var item in snapshotDocs) {
+                                    
                                     var itemLocation = item["location"];
+                                    
+                                    
                                     var dist = getDistance(snapshotOuter.data, itemLocation);
                                     
                                     if (dist<maxDist && item["ownerid"] != _auth.currentUser.uid){

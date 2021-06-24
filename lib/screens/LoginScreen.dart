@@ -58,12 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0),
+                              BorderSide(color: Colors.lightBlue, width: 0.5),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide:
-                                BorderSide(color: Colors.grey, width: .5)),
+                                BorderSide(color: Colors.lightGreen, width: 0.9)),
                         hintText: 'Enter your email')),
                 SizedBox(
                   height: 8.0,
@@ -83,12 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide:
-                              BorderSide(color: Color(0xFFc2075e), width: 2.0),
+                              BorderSide(color: Colors.lightBlue, width: 0.5),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(
-                                color: Color(0xFFc2075e), width: .5)),
+                            borderSide:
+                                BorderSide(color: Colors.lightGreen, width: 0.9)),
                         hintText: "Password")),
                 SizedBox(
                   height: 8.0,

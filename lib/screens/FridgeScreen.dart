@@ -34,48 +34,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
     }
   }
 
-  //basic example of how objects are fetched
-  void getUserItems() async {
-    final userItems = await _firestore
-        .collection("items")
-        .where("ownerid",
-            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
-        .get();
-    for (var item in userItems.docs) {
-      print(item.data());
-    }
-  }
 
-  //example of how streams are handled
-  void itemStream() async {
-    //_firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()
-    await for (var snapshot in _firestore
-        .collection("items")
-        .where("ownerid",
-            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
-        .snapshots()) {
-      for (var i in snapshot.docs) {
-        print(i.data());
-      }
-    }
-  }
-
-  //add item function
-  void addItem() {
-    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid,
-        "asyncFood", "imageUrl");
-    _firestore.collection("items").add({
-      "ownerid": i.ownerid,
-      "name": i.name,
-      "imageUrl": i.imageUrl,
-      "buyDate": i.buyDate,
-      "expiryDate": i.expiry,
-      "inCommunity": i.inCommunity
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

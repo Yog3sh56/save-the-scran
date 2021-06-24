@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
+import 'package:save_the_scran/utils/LocationWrap.dart';
 import 'package:save_the_scran/utils/NotificationHandler.dart';
 import 'screens/News/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
@@ -18,16 +18,11 @@ import 'screens/ScranWelcomeScreen.dart';
 void main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
-
-  WidgetsFlutterBinding.ensureInitialized();
-
   // Obtain a list of the available cameras on the device.
   final cameras = await availableCameras();
-
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
-  await Firebase.initializeApp();
-  await NotificationService().init();
+  initializeApp();
   return runApp(MyApp(firstCamera));
 }
 
@@ -86,7 +81,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    NotificationService().displayNotification();
+    //NotificationService().displayNotification();
     return new Scaffold(
         body: _children[_currentIndex],
         floatingActionButton: FloatingActionButton(
@@ -142,4 +137,14 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       _currentIndex = index;
     });
   }
+}
+
+
+void initializeApp() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  // Obtain a list of the available cameras on the device.
+  // Get a specific camera from the list of available cameras.
+  await Firebase.initializeApp();
+  await NotificationService().init();
+  LocationWrap();
 }

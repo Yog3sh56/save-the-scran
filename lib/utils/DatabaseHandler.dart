@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:save_the_scran/models/Item.dart';
 
 class DbHandler {
   static pushtoMarket(
@@ -16,5 +17,44 @@ class DbHandler {
       "inCommunity": false,
     });
     Navigator.popUntil(context, (route) => route.isFirst);
+  }
+    //basic example of how objects are fetched
+  void getUserItems(_firestore,_auth) async {
+    final userItems = await _firestore
+        .collection("items")
+        .where("ownerid",
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+        .get();
+    for (var item in userItems.docs) {
+      print(item.data());
+    }
+  }
+
+  //example of how streams are handled
+  void itemStream(_firestore,_auth) async {
+    //_firestore.collection("items").where("ownerid",isEqualTo: _auth.currentUser.uid).snapshots()
+    await for (var snapshot in _firestore
+        .collection("items")
+        .where("ownerid",
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+        .snapshots()) {
+      for (var i in snapshot.docs) {
+        print(i.data());
+      }
+    }
+  }
+
+  //add item function
+  void addItem(_firestore,_auth) {
+    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid,
+        "asyncFood", "imageUrl");
+    _firestore.collection("items").add({
+      "ownerid": i.ownerid,
+      "name": i.name,
+      "imageUrl": i.imageUrl,
+      "buyDate": i.buyDate,
+      "expiryDate": i.expiry,
+      "inCommunity": i.inCommunity
+    });
   }
 }

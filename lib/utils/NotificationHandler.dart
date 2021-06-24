@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:save_the_scran/models/Item.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 
 class NotificationService {
   static final NotificationService _notificationService =
@@ -65,12 +68,21 @@ class NotificationService {
         'Some of your food is about to go bad!',
         "How about using it or letting someone else have it?",
         platformChannelSpecifics,
-        payload: '');
+        );
+
   }
 
   void scheduleNotifications(List<Item> items) {
+    DateTime currentDate = DateTime.now();
+    List<DateTime> datesToNotify=[];
+    
     for (Item i in items) {
+
       print(i.expiry);
+      tz.initializeTimeZones();
+      Duration d = i.expiry.difference(currentDate);
+      print(d);
+
     }
   }
 }
