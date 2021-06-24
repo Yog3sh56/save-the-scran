@@ -6,21 +6,22 @@ class LocationWrap {
 
   factory LocationWrap()=>_instance;
 
-  Future<LocationData> _uLocation;
+  static Future<LocationData> uLocation;
   double _lastMaxDistance;
 
   LocationWrap._internal(){
-    _uLocation = getLocation();
+    uLocation = getLocation();
     _lastMaxDistance = 2000;
   }
 
 
   double getLastDistance()=>_lastMaxDistance;
+  static Future<LocationData> get getCachedLocation => uLocation;
 
   void setLastDistance(double newDist) {_lastMaxDistance = newDist;}
 
   Future<LocationData> staticUserLocation() async{
-    var m = await _uLocation;
+    var m = await uLocation;
     return m;
   }
 
@@ -29,6 +30,7 @@ class LocationWrap {
 
 
   static Future<LocationData> getLocation() async {
+
     var _location = Location();
     bool isEnabled = await checkLocationEnabled();
     LocationData location;
