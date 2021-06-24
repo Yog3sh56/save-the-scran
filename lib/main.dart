@@ -29,6 +29,7 @@ void main() async {
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
   await Firebase.initializeApp();
+  LocationWrap();
   return runApp(MyApp(firstCamera));
 }
 
