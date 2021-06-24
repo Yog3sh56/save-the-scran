@@ -51,7 +51,7 @@ class FoodWidgetMarket extends StatelessWidget {
                   child: Container(
                     height: 50,
                     width: 50,
-                    child: item.imageUrl.isEmpty
+                    child: item.imageUrl == "No image"
                         ? Container(
                             decoration: new BoxDecoration(
                               shape: BoxShape.circle,
