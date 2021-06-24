@@ -105,7 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       //parse data
                       for (var item in snapshotDocs) {
-                        Item i = Item(item['ownerid'], item['name'],item['imageUrl'],
+                        
+                        Item i = Item(item['ownerid'], item['name'],item['imageUrl'],item.id,
                             buyDate: item['buyDate'].toDate(),
                             expiry: item['expiryDate'].toDate(),
                             inCommunity: true);
@@ -144,5 +145,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
       return value;
     });
+    return null;
   }
 }

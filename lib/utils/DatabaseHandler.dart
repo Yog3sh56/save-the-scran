@@ -45,16 +45,5 @@ class DbHandler {
   }
 
   //add item function
-  void addItem(_firestore,_auth) {
-    Item i = Item((_auth.currentUser == null) ? "" : _auth.currentUser.uid,
-        "asyncFood", "imageUrl");
-    _firestore.collection("items").add({
-      "ownerid": i.ownerid,
-      "name": i.name,
-      "imageUrl": i.imageUrl,
-      "buyDate": i.buyDate,
-      "expiryDate": i.expiry,
-      "inCommunity": i.inCommunity
-    });
-  }
+  
 }

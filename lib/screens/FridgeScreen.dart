@@ -100,7 +100,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
 
                 //parse data
                 for (var item in snapshotDocs) {
-                  Item i = Item(item['ownerid'], item['name'], item['imageUrl'],
+                  Item i = Item(item['ownerid'], item['name'], item['imageUrl'],item.id,
                       buyDate: item['buyDate'].toDate(),
                       expiry: item['expiryDate'].toDate(),
                       inCommunity: item['inCommunity']);
@@ -113,7 +113,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
               if (itemText.isEmpty) {
                 return Center(child: Text("Fridge is empty"));
               } else {
-                NotificationService().scheduleNotifications(itemsList);
+                // NotificationService().scheduleNotifications(itemsList);
                 return ListView(children: itemText);
               }
             }),

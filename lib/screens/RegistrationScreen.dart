@@ -20,7 +20,6 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   //firebase instances
   final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
   LocationData location;
   //variables to store
   String email, password, passwordRepeat, uid;

@@ -133,7 +133,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                     if (dist<maxDist && item["ownerid"] != _auth.currentUser.uid){
 
                                     Item i = Item(
-                                        item['ownerid'], item['name'], item['imageUrl'],
+                                        item['ownerid'], item['name'], item['imageUrl'],item.id,
                                         buyDate: item['buyDate'].toDate(),
                                         expiry: item['expiryDate'].toDate(),
                                         inCommunity: true);
@@ -160,10 +160,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                               }),
                         );
                     } else{
-                      print("done");
-                      print(snapshotOuter.connectionState);
                       if (snapshotOuter.connectionState == ConnectionState.done){
-                        print("no items");
                         return Center(child: Text("no items"));
                       }
                       return Center(

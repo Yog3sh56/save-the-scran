@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
@@ -19,10 +18,12 @@ void main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
   // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
+  // final cameras = await availableCameras();
   // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
-  initializeApp();
+  
+  // final firstCamera = cameras.first;
+  var firstCamera = null;
+  await initializeApp();
   return runApp(MyApp(firstCamera));
 }
 
@@ -81,7 +82,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    //NotificationService().displayNotification();
     return new Scaffold(
         body: _children[_currentIndex],
         floatingActionButton: FloatingActionButton(
@@ -142,9 +142,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
 void initializeApp() async{
   WidgetsFlutterBinding.ensureInitialized();
+  
   // Obtain a list of the available cameras on the device.
   // Get a specific camera from the list of available cameras.
   await Firebase.initializeApp();
   await NotificationService().init();
+  scheduleNotifications();
   LocationWrap();
 }

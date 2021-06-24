@@ -3,7 +3,7 @@ class Item {
   String name;
   DateTime buyDate;
   DateTime expiry;
-
+  String itemid;
   bool inCommunity;
 
   // add a property to store image urls
@@ -11,7 +11,7 @@ class Item {
 
 
   
-  Item(this.ownerid,this.name,this.imageUrl,{this.buyDate,this.expiry,this.inCommunity}){
+  Item(this.ownerid,this.name,this.imageUrl, this.itemid,{this.buyDate,this.expiry,this.inCommunity}){
     if (this.buyDate == null){
       buyDate = DateTime.now();
       this.buyDate = buyDate;

@@ -22,6 +22,7 @@ class StorageHelper {
       firebase_storage.TaskSnapshot snapshot = await task;
       print('Upload ${snapshot.bytesTransferred} bytes');
     } on firebase_core.FirebaseException catch (e) {
+      print(e);
       print(task.snapshot);
     }
     return null;
