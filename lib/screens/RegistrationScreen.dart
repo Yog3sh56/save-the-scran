@@ -156,8 +156,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                         if (newUser != null) {
                           insertLocationData(newUser.user.uid, location);
-                          // Navigator.popUntil(context, (route) => route.isFirst);
-                          Navigator.pushNamed(context, MyApp.id);
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                          // Navigator.pushNamed(context, MyApp.id);
 
                         }
                       }
@@ -248,9 +248,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             if (user != null) {
                               print("succesfull login");
 
-                              // Navigator.popUntil(
-                              //     context, (route) => route.isFirst);
-                              Navigator.pushNamed(context, MyApp.id);
+                              Navigator.popUntil(context, (route) => route.isFirst);
+                              // Navigator.pushNamed(context, MyApp.id);
 
                             }
                           },
@@ -279,9 +278,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             if (user != null) {
                               print("succesfull login");
 
-                              // Navigator.popUntil(
-                              //     context, (route) => route.isFirst);
-                              Navigator.pushNamed(context, MyApp.id);
+                              Navigator.popUntil(context, (route) => route.isFirst);
+                              // Navigator.pushNamed(context, MyApp.id);
 
                             }}
                           on FirebaseAuthException catch (e){

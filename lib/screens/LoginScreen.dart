@@ -125,9 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (user != null) {
                               print("succesfull login");
-                              // Navigator.popUntil(
-                              //     context, (route) => route.isFirst);
-                              Navigator.pushNamed(context, MyApp.id);
+                              Navigator.popUntil(context, (route) => route.isFirst);
+                              // Navigator.pushNamed(context, MyApp.id);
 
                             }
                           }
@@ -217,9 +216,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (user != null) {
                                   print("succesfull login");
 
-                                  // Navigator.popUntil(
-                                  //     context, (route) => route.isFirst);
-                                  Navigator.pushNamed(context, MyApp.id);
+                                  Navigator.popUntil(context, (route) => route.isFirst);
+                                  // Navigator.pushNamed(context, MyApp.id);
 
                                 }
                               },
@@ -248,9 +246,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (user != null) {
                                 print("succesfull login");
 
-                                // Navigator.popUntil(
-                                //     context, (route) => route.isFirst);
-                                Navigator.pushNamed(context, MyApp.id);
+                                Navigator.popUntil(context, (route) => route.isFirst);
+                                // Navigator.pushNamed(context, MyApp.id);
 
                               }}
                               on FirebaseAuthException catch (e){

@@ -17,8 +17,8 @@ class DbHandler {
       "expiryDate": _expiry,
       "inCommunity": false,
     });
-    // Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushNamed(context, MyApp.id);
+    Navigator.popUntil(context, (route) => route.isFirst);
+    // Navigator.pushNamed(context,MyApp.id);
 
   }
 }

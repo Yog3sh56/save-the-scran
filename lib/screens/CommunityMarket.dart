@@ -124,9 +124,11 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   List<Item> itemsList = [];
                                   //parse data
                                   for (var item in snapshotDocs) {
+                                    item = item.data();
+
                                     var itemLocation = item["location"];
                                     var dist = getDistance(snapshotOuter.data, itemLocation);
-                                    
+
                                     if (dist<maxDist && item["ownerid"] != _auth.currentUser.uid){
 
                                     Item i = Item(
@@ -194,7 +196,9 @@ Future<List<dynamic>> getClosest(var _auth, double limit) async {
   }
 
   if (buff.isEmpty) return null;
-  //userLocation = uLoc == null ? await LocationWrap.getLocation() : uLoc;
+
+  // if (buff.isEmpty)
+  //   userLocation = uLoc == null ? await LocationWrap.getLocation() : uLoc;
   for (var entry in buff) {
     var loc = entry["location"];
     var dist = getDistance(uLoc, loc as GeoPoint);

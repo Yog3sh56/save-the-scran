@@ -6,7 +6,6 @@ import 'package:location/location.dart';
 import 'package:save_the_scran/screens/AddItemScreen.dart';
 import 'package:save_the_scran/screens/ChooseAddMethod.dart';
 import 'package:save_the_scran/screens/LoginScreen.dart';
-import 'package:save_the_scran/screens/OnboardingScreen.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
@@ -42,23 +41,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-      // debugShowCheckedModeBanner: false,
-      // title: 'Save the Scran',
-      // theme: ThemeData(
-      //     elevatedButtonTheme: ElevatedButtonThemeData(
-      //       style: ElevatedButton.styleFrom(
-      //         primary: Color(0xFFc2075e),
-      //       ),
-      //     ),
-      //     primaryColor: Color(0xFFc2075e),
-      //     accentColor: Colors.greenAccent[200]),
+      debugShowCheckedModeBanner: false,
+      title: 'Save the Scran',
+      theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xFFc2075e),
+            ),
+          ),
+          primaryColor: Color(0xFFc2075e),
+          accentColor: Colors.greenAccent[200]),
 
 
-      // home: MyBottomNavigationBar(),
-      home: OnboardingScreen(),
+      home: MyBottomNavigationBar(),
+      // home: OnboardingScreen(),
       routes: {
-        // MyApp.id: (context) => MyApp(context),
-        MyApp.id: (context) => MyBottomNavigationBar(),
+        MyApp.id: (context) => MyApp(context),
+        // MyApp.id: (context) => MyBottomNavigationBar(),
         CommunityMarketScreen.id: (context) => CommunityMarketScreen(),
         FridgeScreen.id: (context) => FridgeScreen(),
         ChatContacts.id: (context) => ChatContacts(),
