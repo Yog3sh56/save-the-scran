@@ -139,7 +139,6 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                     itemsList.add(i);
                                     final fw = FoodWidgetMarket(
                                       item: i,
-                                      id: item.id,
                                       ownerid: item['ownerid'],
                                     );
                                     itemText.add(fw);

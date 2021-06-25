@@ -5,14 +5,13 @@ import 'package:save_the_scran/chat/ChatScreen.dart';
 
 class FoodWidgetMarket extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
-  final id;
   final ownerid;
   final item;
   double foodProgress;
   Color progressColor;
   final today = DateTime.now();
 
-  FoodWidgetMarket({this.item, this.id, this.ownerid});
+  FoodWidgetMarket({this.item, this.ownerid});
 
   void setExpiryProgress() {
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
