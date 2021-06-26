@@ -155,23 +155,31 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   final fw = FoodWidget(item: i, id: objectId);
                   itemText.add(fw);
                 }
+
+                if (itemsList.isEmpty) {
+                  return Container(
+                    width: 250,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      image: new DecorationImage(
+                          colorFilter: new ColorFilter.mode(
+                              Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                          image: AssetImage('images/strawberry.png'),
+                          fit: BoxFit.contain),
+                    ),
+                    child: const Align(
+                        alignment: FractionalOffset(0.5, -0.2),
+                        child: Text("It seems your fridge is empty.",
+                          style: TextStyle(fontSize: 15),)),
+                  );
+                } else {
+                  return ListView(children: itemText);
+                }
               }
-              if (itemText.isEmpty) {
-                return Container(
-                  width: 250,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    image: new DecorationImage(
-                      colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
-                        image: AssetImage('images/strawberry.png'),
-                        fit: BoxFit.contain),
-                  ),
-                  child: const Align(
-                    alignment: FractionalOffset(0.5, -0.2),
-                      child: Text("It seems your fridge is empty.", style: TextStyle(fontSize: 15),)),
-                );
-              }
-              return ListView(children: itemText);
+              return Container(
+                width: 0.0,
+                height: 0.0,
+              );
             }),
       ),
     );
