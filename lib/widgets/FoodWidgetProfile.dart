@@ -10,12 +10,11 @@ class FoodWidgetProfile extends StatelessWidget {
   Item item;
   double foodProgress;
   Color progressColor;
+  final today = DateTime.now();
 
   FoodWidgetProfile({this.item, this.id});
 
   void setExpiryProgress() {
-    final today = DateTime.now();
-
     int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
@@ -60,6 +59,7 @@ class FoodWidgetProfile extends StatelessWidget {
         _firestore.collection("items").doc(id).delete();
       },
       child: Card(
+          color: item.expiry.isBefore(today) ? Colors.red[200] : Colors.white,
           margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
           child: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),

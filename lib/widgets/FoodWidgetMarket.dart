@@ -39,6 +39,7 @@ class FoodWidgetMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     setExpiryProgress();
     return Card(
+        color: item.expiry.isBefore(today) ? Colors.red[200] : Colors.white,
         elevation: 10,
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Padding(
