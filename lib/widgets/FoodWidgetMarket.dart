@@ -50,7 +50,7 @@ class FoodWidgetMarket extends StatelessWidget {
                   child: Container(
                     height: 50,
                     width: 50,
-                    child: item.imageUrl == "No image"
+                    child: item.imageUrl == "No image" || item.imageUrl.isEmpty
                         ? Container(
                             decoration: new BoxDecoration(
                               shape: BoxShape.circle,
@@ -64,7 +64,6 @@ class FoodWidgetMarket extends StatelessWidget {
                                   image: NetworkImage(item.imageUrl)),
                             ),
                           ),
-
                   ),
                 ),
                 Expanded(
@@ -90,30 +89,31 @@ class FoodWidgetMarket extends StatelessWidget {
                     ])),
                 Expanded(
                   flex: 1,
-                  child: ownerid != _auth.currentUser.uid?
-                  InkResponse(
-                      radius: 50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(Icons.send),
-                          Text("Message "),
-                          Text("owner")
-                        ],
-                      ),
-                      onTap: () {
-                        _auth.currentUser != null
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChatScreen(
-                                      otherPerson: this.ownerid,
-                                      itemName: this.item.name),
-                                ),
-                              )
-                            : print("not signed in");
-                        ;
-                      }):SizedBox(),
+                  child: ownerid != _auth.currentUser.uid
+                      ? InkResponse(
+                          radius: 50,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(Icons.send),
+                              Text("Message "),
+                              Text("owner")
+                            ],
+                          ),
+                          onTap: () {
+                            _auth.currentUser != null
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatScreen(
+                                          otherPerson: this.ownerid,
+                                          itemName: this.item.name),
+                                    ),
+                                  )
+                                : print("not signed in");
+                            ;
+                          })
+                      : SizedBox(),
                 )
               ]),
               Padding(padding: EdgeInsets.only(bottom: 20)),

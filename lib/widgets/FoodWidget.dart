@@ -21,7 +21,8 @@ class FoodWidget extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress = (progress.isNaN || progress.isInfinite)? 0.1 : progress;
+    this.foodProgress =
+        (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -71,20 +72,20 @@ class FoodWidget extends StatelessWidget {
                       child: Container(
                         height: 50,
                         width: 50,
-
-                        child: item.imageUrl == "No image" ? Container(
-                                decoration: new BoxDecoration(
-                                  color: progressColor,
-                                    shape: BoxShape.circle
-                                ),
-                              )
-                            : Container(
-                                decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: NetworkImage(item.imageUrl)),
-                                ),
-                              ),
+                        child:
+                            item.imageUrl == "No image" || item.imageUrl.isEmpty
+                                ? Container(
+                                    decoration: new BoxDecoration(
+                                        color: progressColor,
+                                        shape: BoxShape.circle),
+                                  )
+                                : Container(
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: NetworkImage(item.imageUrl)),
+                                    ),
+                                  ),
                       ),
                     ),
                     Expanded(
