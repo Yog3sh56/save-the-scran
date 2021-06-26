@@ -144,8 +144,11 @@ class _ChatContactsState extends State<ChatContacts> {
                                   return Center(child: Text("no messages"));
                                 }
                               } else {
-                                return Center(
-                                  child: CircularProgressIndicator(),
+                                return Container(
+                                  margin: EdgeInsets.only(top: 200),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
                                 );
                               }
                               return null;
