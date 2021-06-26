@@ -25,19 +25,20 @@ class _FridgeScreenState extends State<FridgeScreen> {
   @override
   void initState() {
     super.initState();
-    if (_auth.currentUser == null){
+    if (_auth.currentUser == null) {
       // it will navigate to Welcome page as soon as this state is built
       SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushNamed(ScranWelcomeScreen.id);
       });
     }
   }
+
   //basic example of how objects are fetched
   void getUserItems() async {
     final userItems = await _firestore
         .collection("items")
         .where("ownerid",
-        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .get();
     for (var item in userItems.docs) {
       print(item.data());
@@ -50,7 +51,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
     await for (var snapshot in _firestore
         .collection("items")
         .where("ownerid",
-        isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+            isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
         .snapshots()) {
       for (var i in snapshot.docs) {
         print(i.data());
@@ -114,7 +115,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
       ),
       /*
       floatingActionButton: FloatingActionButton(
-        
+
         onPressed: () {
           Navigator.pushNamed(context, TakePictureScreen.id);
           //addItem();
@@ -125,13 +126,13 @@ class _FridgeScreenState extends State<FridgeScreen> {
       */
       body: Center(
         child: StreamBuilder(
-          //the stream provides a snapshot, to pass onto the builder
+            //the stream provides a snapshot, to pass onto the builder
             stream: _firestore
                 .collection("items")
                 .where("ownerid",
-                isEqualTo: (_auth.currentUser == null)
-                    ? ""
-                    : _auth.currentUser.uid)
+                    isEqualTo: (_auth.currentUser == null)
+                        ? ""
+                        : _auth.currentUser.uid)
                 .where("inCommunity", isEqualTo: false)
                 .snapshots(),
             //the builder takes in the stream
@@ -155,8 +156,20 @@ class _FridgeScreenState extends State<FridgeScreen> {
                   itemText.add(fw);
                 }
               }
-              if (itemText.isEmpty){
-                return Center(child: Text("Fridge is empty"));
+              if (itemText.isEmpty) {
+                return Container(
+                  width: 250,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: new DecorationImage(
+                      colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                        image: AssetImage('images/strawberry.png'),
+                        fit: BoxFit.contain),
+                  ),
+                  child: const Align(
+                    alignment: FractionalOffset(0.5, -0.2),
+                      child: Text("It seems your fridge is empty.", style: TextStyle(fontSize: 15),)),
+                );
               }
               return ListView(children: itemText);
             }),
