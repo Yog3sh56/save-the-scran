@@ -150,7 +150,24 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   //itemText.add(Text(item['name']));
                                 }
                               }
-                              return ListView(children: itemText);
+                              if (itemsList.isEmpty){
+                                return Container(
+                                  width: 250,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    image: new DecorationImage(
+                                        colorFilter: new ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                                        image: AssetImage('images/watermelon.png'),
+                                        fit: BoxFit.contain),
+                                  ),
+                                  child: const Align(
+                                      alignment: FractionalOffset(0.5, -0.2),
+                                      child: Text("There are no items near you.", style: TextStyle(fontSize: 15),)),
+                                );
+                              } else {
+                                return ListView(children: itemText);
+                              }
+
                             }
                             return ListView(children: itemText);
                           }),
