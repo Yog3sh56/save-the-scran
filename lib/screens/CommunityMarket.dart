@@ -76,7 +76,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   return Column(children: [
                                     Slider(
                                         min: 1,
-                                        max: 4476588,
+                                        max: 50,
                                         value: maxDist,
                                         divisions: 1000,
                                         label:

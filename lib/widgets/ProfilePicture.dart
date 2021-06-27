@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image/network.dart';
 
 class ProfilePicture extends StatelessWidget {
   final String downloadUrl;
