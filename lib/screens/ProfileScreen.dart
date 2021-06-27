@@ -19,8 +19,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   final _storageHelper = StorageHelper();
@@ -28,8 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -57,7 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     await _storageHelper.uploadFile(image);
                     downloadUrl = await _storageHelper.getProfileImage();
                   },
-                  downloadUrl: this.downloadUrl==null?getDownloadUrl():this.downloadUrl,
+                  downloadUrl: this.downloadUrl == null
+                      ? getProfilePicture()
+                      : this.downloadUrl,
                 ) // This trailing comma makes auto-formatting nicer for build methods.
                 ),
             Text(_auth.currentUser.email),
@@ -107,7 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       //parse data
                       for (var item in snapshotDocs) {
-                        Item i = Item(item['ownerid'], item['name'],item['imageUrl'],
+                        Item i = Item(
+                            item['ownerid'], item['name'], item['imageUrl'],
                             buyDate: item['buyDate'].toDate(),
                             expiry: item['expiryDate'].toDate(),
                             inCommunity: true);
@@ -138,13 +137,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  String getDownloadUrl() {
-    print("getting download url");
-    _storageHelper.getProfileImage().then((value) {
+  String getProfilePicture() {
+    _storageHelper.getProfileImage().then((String value) {
       setState(() {
-        this.downloadUrl=value;
+        this.downloadUrl = value;
       });
-      return value;
     });
     return null;
   }

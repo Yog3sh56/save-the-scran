@@ -10,12 +10,14 @@ class ProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: downloadUrl == null
-          ? Icon(Icons.person)
-          : CircleAvatar(
-            radius: 80,
-            backgroundImage: NetworkImage(downloadUrl)),
-    );
+        onTap: onTap,
+        child: downloadUrl == null
+            ? Icon(Icons.person)
+            : CircleAvatar(
+                radius: 80,
+                // child: Image(image: new NetworkImageWithRetry(downloadUrl)),
+                foregroundImage: NetworkImageWithRetry(downloadUrl),
+                // backgroundImage: Image(image: ),
+              ));
   }
 }

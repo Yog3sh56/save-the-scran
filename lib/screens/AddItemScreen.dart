@@ -50,76 +50,90 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
         elevation: 4,
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 16),
-          TextField(
-            cursorColor: Color(0xFFc2075e),
-            decoration: inputDecoration.copyWith(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(50),
+              width: 250,
+              height: 200,
+              decoration: BoxDecoration(
+                image: new DecorationImage(
+                    colorFilter: new ColorFilter.mode(
+                        Colors.white.withOpacity(0.4), BlendMode.dstATop),
+                    image: AssetImage('images/orange.png'),
+                    fit: BoxFit.contain),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              cursorColor: Color(0xFFc2075e),
+              decoration: inputDecoration.copyWith(
+                  focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide:
-                        BorderSide(color: Color(0xFFc2075e), width: .5)),
-                labelText: "Product Name"),
-            onChanged: (name) {
-              setState(() {
-                itemName = name;
-              });
-            },
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-              child: Text(_expiry.toString().split(" ")[0]),
-              style: ButtonStyle(
-                  textStyle: MaterialStateProperty.all(TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  )),
-                  minimumSize: MaterialStateProperty.all(Size(
-                      MediaQuery.of(context).size.width / 2,
-                      MediaQuery.of(context).size.width / 6)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ))),
-              onPressed: () {
-                DatePicker.showDatePicker(context,
-                    showTitleActions: true,
-                    minTime: DateTime.now(),
-                    maxTime: DateTime(2030, 6, 7),
-                    theme: DatePickerTheme(
-                        headerColor: Color(0xFFc2075e),
-                        backgroundColor: Colors.greenAccent[200],
-                        itemStyle: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22),
-                        doneStyle:
-                            TextStyle(color: Colors.white, fontSize: 16)),
-                    onConfirm: (date) {
-                  print('confirm $date');
-                  setState(() {
-                    _expiry = date;
-                  });
-                },
-                    currentTime: _expiry != null ? _expiry : DateTime.now(),
-                    locale: LocaleType.en);
-              }),
-          const SizedBox(height: 16),
-          PushtoMarketWidget(
-            onClickedPushtoMarket: () => DbHandler.pushtoMarket(
-                FirebaseAuth.instance,
-                FirebaseFirestore.instance,
-                itemName,
-                null,
-                _expiry,
-                context),
-          ),
-        ],
+                    borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide:
+                          BorderSide(color: Color(0xFFc2075e), width: .5)),
+                  labelText: "Product Name"),
+              onChanged: (name) {
+                setState(() {
+                  itemName = name;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+                child: Text(_expiry.toString().split(" ")[0]),
+                style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all(TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    )),
+                    minimumSize: MaterialStateProperty.all(Size(
+                        MediaQuery.of(context).size.width / 2,
+                        MediaQuery.of(context).size.width / 6)),
+                    backgroundColor: MaterialStateProperty.all(Color(0xFFc2075e)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ))),
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime.now(),
+                      maxTime: DateTime(2030, 6, 7),
+                      theme: DatePickerTheme(
+                          headerColor: Color(0xFFc2075e),
+                          backgroundColor: Colors.greenAccent[200],
+                          itemStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22),
+                          doneStyle:
+                              TextStyle(color: Colors.white, fontSize: 16)),
+                      onConfirm: (date) {
+                    print('confirm $date');
+                    setState(() {
+                      _expiry = date;
+                    });
+                  },
+                      currentTime: _expiry != null ? _expiry : DateTime.now(),
+                      locale: LocaleType.en);
+                }),
+            const SizedBox(height: 16),
+            PushtoMarketWidget(
+              onClickedPushtoMarket: () => DbHandler.pushtoMarket(
+                  FirebaseAuth.instance,
+                  FirebaseFirestore.instance,
+                  itemName,
+                  null,
+                  _expiry,
+                  context),
+            ),
+          ],
+        ),
       ),
     );
   }
