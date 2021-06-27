@@ -338,6 +338,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_image">
+          <value>
+            <list>
+              <option value="$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image-4.0.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_launcher_icons">
           <value>
             <list>
@@ -857,6 +864,7 @@
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-2.0.2+1/lib" />
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_platform_interface-1.0.1/lib" />
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-1.0.6/lib" />
+      <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image-4.0.1/lib" />
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.7.5/lib" />
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-4.0.1+2/lib" />
       <root url="file://$USER_HOME$/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications_platform_interface-2.0.0+1/lib" />
