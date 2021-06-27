@@ -16,34 +16,43 @@ class FoodWidget extends StatelessWidget {
   FoodWidget({this.item, this.id});
 
   void setExpiryProgress() {
-    int totalDuration = item.expiry.difference(item.buyDate).inDays;
+    // int totalDuration = item.expiry.difference(item.buyDate).inDays;
     int remaining = item.expiry.difference(today).inDays;
 
-    double progress = 1 - remaining / totalDuration;
-    // this.foodProgress =
-    //     (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
+    // double progress = 1 - remaining / totalDuration;
+    // // double progress = 1 / remaining;
+    // this.foodProgress = (progress.isNaN || progress.isInfinite) ? 1 : progress;
 
-    if (progress.isNaN) {
-      this.foodProgress = 0.1;
-    } else if (progress.isInfinite) {
-      this.foodProgress = 0.91;
-    } else {
-      this.foodProgress = progress;
-    }
+    // if (foodProgress <= 0.6) {
+    //   this.progressColor = Colors.green;
+    // }
+    // if (foodProgress > 0.6) {
+    //   this.progressColor = Colors.yellow;
+    // }
+    // if (foodProgress > 0.8) {
+    //   this.progressColor = Colors.orange;
+    // }
+    // if (foodProgress > 0.9) {
+    //   this.progressColor = Colors.red;
+    // }
+    // print("Progress" + progress.toString());
 
-    if (foodProgress <= 0.6) {
+    if (remaining > 7) {
       this.progressColor = Colors.green;
-    }
-    if (foodProgress > 0.6) {
+      this.foodProgress = 0.25;
+    } else if (remaining > 5) {
       this.progressColor = Colors.yellow;
-    }
-    if (foodProgress > 0.8) {
+      this.foodProgress = 0.5;
+    } else if (remaining > 3) {
       this.progressColor = Colors.orange;
-    }
-    if (foodProgress > 0.9) {
+      this.foodProgress = 0.75;
+    } else if (remaining > 0) {
+      this.foodProgress = 0.9;
+      this.progressColor = Colors.red;
+    } else {
+      this.foodProgress = 1;
       this.progressColor = Colors.red;
     }
-    print("Progress" + progress.toString());
   }
 
   @override
@@ -107,16 +116,27 @@ class FoodWidget extends StatelessWidget {
                             style: TextStyle(fontSize: 15),
                             textAlign: TextAlign.center,
                           ),
-                          Text(
-                            "Expires " +
-                                item.expiry.day.toString() +
-                                "/" +
-                                item.expiry.month.toString() +
-                                "/" +
-                                item.expiry.year.toString() +
-                                " (${item.expiry.difference(today).inDays.toString()} days)",
-                            style: TextStyle(fontSize: 11),
-                          ),
+                          item.expiry.isBefore(today)
+                              ? Text(
+                                  "Expired on " +
+                                      item.expiry.day.toString() +
+                                      "/" +
+                                      item.expiry.month.toString() +
+                                      "/" +
+                                      item.expiry.year.toString() +
+                                      " (${item.expiry.difference(today).inDays.abs().toString()} days ago)",
+                                  style: TextStyle(fontSize: 11),
+                                )
+                              : Text(
+                                  "Expires " +
+                                      item.expiry.day.toString() +
+                                      "/" +
+                                      item.expiry.month.toString() +
+                                      "/" +
+                                      item.expiry.year.toString() +
+                                      " (${item.expiry.difference(today).inDays.toString()} days)",
+                                  style: TextStyle(fontSize: 11),
+                                ),
                         ])),
                     Expanded(
                       flex: 1,
