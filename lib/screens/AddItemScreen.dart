@@ -54,7 +54,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(50),
+              margin: EdgeInsets.only(top: 180, bottom: 100),
               width: 250,
               height: 200,
               decoration: BoxDecoration(
