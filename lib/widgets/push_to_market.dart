@@ -22,7 +22,7 @@ class PushtoMarketWidget extends StatelessWidget {
                   )),
               //padding: MaterialStateProperty.all(EdgeInsetsGeometry.infinity),
               minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width/1.5,MediaQuery.of(context).size.width/5)),
-              backgroundColor: MaterialStateProperty.all(Colors.blueAccent) ,
+              backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent[700]) ,
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius:BorderRadius.all(Radius.circular(50)),
               ))

@@ -96,7 +96,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                   minimumSize: MaterialStateProperty.all(Size(
                       MediaQuery.of(context).size.width / 2,
                       MediaQuery.of(context).size.width / 6)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFc2075e)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ))),
