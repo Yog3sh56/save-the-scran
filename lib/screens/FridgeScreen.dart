@@ -6,9 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/ProfileScreen.dart';
 import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
-import 'package:save_the_scran/screens/TakePictureScreen.dart';
 import 'package:save_the_scran/widgets/FoodWidget.dart';
-import 'dart:async';
 
 class FridgeScreen extends StatefulWidget {
   static const String id = "fridge_screen";

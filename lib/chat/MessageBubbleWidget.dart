@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MessageBubble extends StatelessWidget {
   MessageBubble(this.message, this.myId);
   // MessageBubble(this.message, this.isMe, {key}) : super(key: key);

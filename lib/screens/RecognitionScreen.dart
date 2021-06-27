@@ -13,7 +13,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
-import '../main.dart';
 
 
 class TextRecognitionWidget extends StatefulWidget {
@@ -101,7 +100,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                   minimumSize: MaterialStateProperty.all(Size(
                       MediaQuery.of(context).size.width / 2,
                       MediaQuery.of(context).size.width / 6)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFc2075e)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ))),
