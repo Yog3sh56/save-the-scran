@@ -4,6 +4,7 @@ import 'package:save_the_scran/screens/RegistrationScreen.dart';
 
 import '../constants.dart';
 
+// ignore: must_be_immutable
 class LoginWidget extends StatelessWidget{
 
   String email;

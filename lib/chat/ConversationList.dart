@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/chat/ChatScreen.dart';
 
+// ignore: must_be_immutable
 class ConversationList extends StatefulWidget {
 
   static const String id = "chat_contacts";

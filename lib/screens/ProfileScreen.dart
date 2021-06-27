@@ -53,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     final imagePath = await ImagePicker()
                         .getImage(source: ImageSource.gallery);
                     File image = File(imagePath.path);
+                    // ignore: await_only_futures
                     await _storageHelper.uploadFile(image);
                     downloadUrl = await _storageHelper.getProfileImage();
                   },
@@ -145,5 +146,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
       return value;
     });
+    return null;
   }
 }

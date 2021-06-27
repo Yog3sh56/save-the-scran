@@ -8,7 +8,6 @@ import 'package:location/location.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
-import '../main.dart';
 import 'LoginScreen.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   //firebase instances
   final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
   LocationData location;
   //variables to store
   String email, password, passwordRepeat, uid;

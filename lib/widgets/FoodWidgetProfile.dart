@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/models/Item.dart';
 
+// ignore: must_be_immutable
 class FoodWidgetProfile extends StatelessWidget {
   final _firestore = FirebaseFirestore.instance;
 

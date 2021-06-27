@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_scran/utils/StorageHelper.dart';
 
 class ProfilePicture extends StatelessWidget {
   final String downloadUrl;
-  final _storageHelper = StorageHelper();
 
   final Function onTap;
 
