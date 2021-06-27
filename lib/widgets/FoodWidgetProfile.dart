@@ -96,7 +96,7 @@ class FoodWidgetProfile extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          "Expiry" +
+                          "Expiry " +
                               item.expiry.day.toString() +
                               "/" +
                               item.expiry.month.toString() +
