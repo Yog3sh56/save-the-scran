@@ -37,13 +37,13 @@ class FoodWidgetProfile extends StatelessWidget {
     // }
     // print("Progress" + progress.toString());
 
-    if (remaining > 7) {
+    if (remaining > 6) {
       this.progressColor = Colors.green;
       this.foodProgress = 0.25;
-    } else if (remaining > 5) {
+    } else if (remaining > 4) {
       this.progressColor = Colors.yellow;
       this.foodProgress = 0.5;
-    } else if (remaining > 3) {
+    } else if (remaining > 2) {
       this.progressColor = Colors.orange;
       this.foodProgress = 0.75;
     } else if (remaining > 0) {
@@ -78,6 +78,10 @@ class FoodWidgetProfile extends StatelessWidget {
         _firestore.collection("items").doc(id).delete();
       },
       child: Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15), topRight: Radius.circular(15))),
           color: item.expiry.isBefore(today) ? Colors.red[200] : Colors.white,
           margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
           child: Padding(
@@ -91,11 +95,26 @@ class FoodWidgetProfile extends StatelessWidget {
                       width: 50,
                       child:
                           item.imageUrl == "No image" || item.imageUrl.isEmpty
-                              ? Container(
+                              ?
+                              // Container(
+                              //     decoration: new BoxDecoration(
+                              //       shape: BoxShape.circle,
+                              //       color: progressColor,
+                              //     ),
+                              //   )
+                              Container(
+                                  child: Center(
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Icon(Icons.fastfood),
+                                          ))),
                                   decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: progressColor,
-                                  ),
+                                      color: progressColor,
+                                      shape: BoxShape.circle),
                                 )
                               : Container(
                                   decoration: new BoxDecoration(
@@ -111,7 +130,8 @@ class FoodWidgetProfile extends StatelessWidget {
                       child: Column(children: [
                         Text(
                           item.name[0].toUpperCase() + item.name.substring(1),
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w300),
                           textAlign: TextAlign.center,
                         ),
                         item.expiry.isBefore(today)
@@ -123,7 +143,8 @@ class FoodWidgetProfile extends StatelessWidget {
                                     "/" +
                                     item.expiry.year.toString() +
                                     " (${item.expiry.difference(today).inDays.abs().toString()} days ago)",
-                                style: TextStyle(fontSize: 11),
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
                               )
                             : Text(
                                 "Expires " +
@@ -133,7 +154,7 @@ class FoodWidgetProfile extends StatelessWidget {
                                     "/" +
                                     item.expiry.year.toString() +
                                     " (${item.expiry.difference(today).inDays.toString()} days)",
-                                style: TextStyle(fontSize: 11),
+                                style: TextStyle(fontSize: 12),
                               ),
                       ])),
                   Expanded(
