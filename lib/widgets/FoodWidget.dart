@@ -20,8 +20,16 @@ class FoodWidget extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress =
-        (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
+    // this.foodProgress =
+    //     (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
+
+    if (progress.isNaN) {
+      this.foodProgress = 0.1;
+    } else if (progress.isInfinite) {
+      this.foodProgress = 0.91;
+    } else {
+      this.foodProgress = progress;
+    }
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -35,7 +43,7 @@ class FoodWidget extends StatelessWidget {
     if (foodProgress > 0.9) {
       this.progressColor = Colors.red;
     }
-    print(progress);
+    print("Progress" + progress.toString());
   }
 
   @override
@@ -61,7 +69,9 @@ class FoodWidget extends StatelessWidget {
           _firestore.collection("items").doc(id).delete();
         },
         child: Card(
-            color: item.expiry.isBefore(today) ? Colors.red[200] : Colors.white,
+            color: item.expiry.isBefore(today) || item.expiry == today
+                ? Colors.red[200]
+                : Colors.white,
             elevation: 10,
             margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
             child: Padding(
@@ -103,7 +113,8 @@ class FoodWidget extends StatelessWidget {
                                 "/" +
                                 item.expiry.month.toString() +
                                 "/" +
-                                item.expiry.year.toString(),
+                                item.expiry.year.toString() +
+                                " (${item.expiry.difference(today).inDays.toString()} days)",
                             style: TextStyle(fontSize: 11),
                           ),
                         ])),

@@ -18,8 +18,16 @@ class FoodWidgetMarket extends StatelessWidget {
     int remaining = item.expiry.difference(today).inDays;
 
     double progress = 1 - remaining / totalDuration;
-    this.foodProgress =
-        (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
+    // this.foodProgress =
+    //     (progress.isNaN || progress.isInfinite) ? 0.1 : progress;
+
+    if (progress.isNaN) {
+      this.foodProgress = 0.1;
+    } else if (progress.isInfinite) {
+      this.foodProgress = 0.91;
+    } else {
+      this.foodProgress = progress;
+    }
 
     if (foodProgress <= 0.6) {
       this.progressColor = Colors.green;
@@ -33,6 +41,7 @@ class FoodWidgetMarket extends StatelessWidget {
     if (foodProgress > 0.9) {
       this.progressColor = Colors.red;
     }
+    print("Progress" + progress.toString());
   }
 
   @override
