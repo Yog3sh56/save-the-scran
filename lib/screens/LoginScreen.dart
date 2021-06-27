@@ -4,11 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:save_the_scran/screens/RegistrationScreen.dart';
-import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-import '../main.dart';
 import 'PasswordResetScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
-  final _storageHelper = StorageHelper();
   String email, password;
 
   @override

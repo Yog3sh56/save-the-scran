@@ -1,17 +1,11 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/dataAPI/categorydata.dart';
 import 'package:save_the_scran/models/ArticleModel.dart';
 import 'package:save_the_scran/dataAPI/newsdata.dart';
 import 'package:save_the_scran/models/CategoryModel.dart';
-import 'package:save_the_scran/models/Item.dart';
 import 'package:save_the_scran/screens/News/NewsCategory.dart';
-import 'package:save_the_scran/screens/RegistrationScreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'ArticleView.dart';
@@ -48,9 +42,8 @@ class _NewsScreenState extends State<NewsScreen> {
 
 
 
-  @override
   //image file
-  final List<String> imageSlides = [
+  List<String> get imageSlides => [
     "images/slide0.jpg",
     "images/slide1.jpg",
     "images/slide2.jpg",

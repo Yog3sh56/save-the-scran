@@ -1,5 +1,4 @@
 import 'package:save_the_scran/models/CategoryModel.dart';
-import 'package:save_the_scran/screens/News/NewsScreen.dart';
 
 List<CategoryModel> getCategory(){
 

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/chat/ChatScreen.dart';
 
+// ignore: must_be_immutable
 class FoodWidgetMarket extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
   final ownerid;
@@ -139,7 +140,7 @@ class FoodWidgetMarket extends StatelessWidget {
                                     ),
                                   )
                                 : print("not signed in");
-                            ;
+                            
                           })
                       : SizedBox(),
                 )

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/dataAPI/newsdata.dart';
 import 'package:save_the_scran/models/ArticleModel.dart';
-import 'package:save_the_scran/screens/News/ArticleView.dart';
 
 import 'NewsScreen.dart';
 
@@ -18,7 +17,7 @@ class _CategoryNewsState extends State<CategoryNews>{
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     getCateNews();
   }
