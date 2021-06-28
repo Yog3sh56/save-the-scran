@@ -33,7 +33,7 @@ class OpenFoodApi {
       final text = result.product.productName;
       final imageUrl = result.product.imgSmallUrl;
       //print(result.product.imgSmallUrl);
-      return text.isEmpty||imageUrl.isEmpty ? ['No information found in the Barcode', ""] : [text,imageUrl];
+      return text.isEmpty||imageUrl.isEmpty ? ['no information found in the Barcode', ""] : [text,imageUrl];
 
       // return result.product.productName;
     } else {

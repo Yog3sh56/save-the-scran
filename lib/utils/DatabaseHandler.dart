@@ -7,7 +7,7 @@ class DbHandler {
   static pushtoMarket(
       _auth, _firestore, itemName, imageUrl, _expiry, context) async {
     if (_auth.currentUser == null) return;
-    if (itemName.isEmpty) return;
+    if (itemName.isEmpty || itemName == "no barcode found" || itemName == "product not found!" || itemName == "no information found in the Barcode") return;
     LocationData loc = await LocationWrap.getCachedLocation;
     GeoPoint gp = GeoPoint(loc.latitude,loc.longitude);
 
