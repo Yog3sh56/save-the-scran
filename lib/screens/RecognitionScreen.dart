@@ -43,16 +43,16 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void initState() {
     super.initState();
     _controller.addListener(
-            ()
-        {
-      final String text = _controller.text.toLowerCase();
-      _controller.value = _controller.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    }
+            (setItemName)
+    //     {
+    //   final String text = _controller.text.toLowerCase();
+    //   _controller.value = _controller.value.copyWith(
+    //     text: text,
+    //     selection:
+    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
+    //     composing: TextRange.empty,
+    //   );
+    // }
     );
   }
 
@@ -60,6 +60,10 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void setItemName() {
+      itemName = _controller.text;
   }
 
   @override
@@ -83,11 +87,14 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                 labelText: "Product Name"),
             controller: _controller,
             onChanged: (name) {
-              setState(() {
-                _controller.text = name;
-              });
+              // setState(() {
+              //   _controller.text = name;
+              //
+              // });
+                itemName = name;
 
             },
+
           ),
           const SizedBox(height: 16),
           ElevatedButton(
@@ -230,7 +237,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void setText(String newText) {
     setState(() {
       _controller.text = newText;
-      itemName = newText;
+      // itemName = newText;
     });
 
   }
