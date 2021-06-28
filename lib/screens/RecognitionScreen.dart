@@ -43,16 +43,16 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void initState() {
     super.initState();
     _controller.addListener(
-            (){}
-    //     {
-    //   final String text = _controller.text.toLowerCase();
-    //   _controller.value = _controller.value.copyWith(
-    //     text: text,
-    //     selection:
-    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
-    //     composing: TextRange.empty,
-    //   );
-    // }
+            ()
+        {
+      final String text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    }
     );
   }
 
@@ -83,10 +83,10 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                 labelText: "Product Name"),
             controller: _controller,
             onChanged: (name) {
-              // setState(() {
-              //   // _controller.text = name;
-              // });
-              itemName = name;
+              setState(() {
+                _controller.text = name;
+              });
+
             },
           ),
           const SizedBox(height: 16),
@@ -196,7 +196,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     setImageUrl(text[1]);
   }
 
-  //conect with Leon's Market
+  //connect with Leon's Market
   void pushtoMarket() async {
     if (_auth.currentUser == null) return;
     if (itemName.isEmpty) return;
@@ -230,7 +230,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void setText(String newText) {
     setState(() {
       _controller.text = newText;
-      // itemName = newText;
+      itemName = newText;
     });
 
   }
