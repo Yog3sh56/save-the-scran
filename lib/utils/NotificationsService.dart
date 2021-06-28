@@ -87,6 +87,8 @@ void scheduleNotifications() async{
       int difference = expiry.difference(current).inDays;
       int dayBefore = difference -1;
       int fourDaysBefore = difference -4;
+
+      
       
       int notificationId = item.id.substring.hashCode;
       int secondNotificationId = notificationId-4;
