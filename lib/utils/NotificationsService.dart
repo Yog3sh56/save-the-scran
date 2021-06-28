@@ -4,12 +4,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-
 class NotificationService {
-
-
-  static final NotificationService _notificationService = NotificationService._internal();
-
+  static final NotificationService _notificationService =
+      NotificationService._internal();
 
   factory NotificationService() {
     return _notificationService;
@@ -17,13 +14,16 @@ class NotificationService {
 
   NotificationService._internal();
 
-  FlutterLocalNotificationsPlugin notificationPlugin = FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin notificationPlugin =
+      FlutterLocalNotificationsPlugin();
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
 
   Future<void> init() async {
-    final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    final AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
 
-    final IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings(
+    final IOSInitializationSettings initializationSettingsIOS =
+        IOSInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
@@ -57,88 +57,96 @@ class NotificationService {
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-        0,
-        'Some of your food is about to go bad!',
-        "How about using it or letting someone else have it?",
-        platformChannelSpecifics,
-        );
-
+      0,
+      'Some of your food is about to go bad!',
+      "How about using it or letting someone else have it?",
+      platformChannelSpecifics,
+    );
   }
 
-  
   /// Schedules a notification that specifies a different icon, sound and vibration pattern
 }
-void scheduleNotifications() async{
 
+void scheduleNotifications() async {
+  print("started notifications");
+  var _auth = FirebaseAuth.instance;
+  tz.initializeTimeZones();
+  List<PendingNotificationRequest> pending = await getPending();
+  //get query values
+  QuerySnapshot userItems = await FirebaseFirestore.instance
+      .collection("items")
+      .where("ownerid",
+          isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
+      .get();
 
-    var _auth = FirebaseAuth.instance;
-    tz.initializeTimeZones();
-    List<PendingNotificationRequest> pending = await getPending();
-    //get query values
-    QuerySnapshot userItems = await FirebaseFirestore.instance.collection("items")
-        .where("ownerid", isEqualTo: (_auth.currentUser == null) ? "" : _auth.currentUser.uid)
-        .get();
-      
-    for (var item in userItems.docs) {
-      
-      
-      DateTime current = tz.TZDateTime.now(tz.local);
-      DateTime expiry = item["expiryDate"].toDate();
-      int difference = expiry.difference(current).inDays;
-      int dayBefore = difference -1;
-      int fourDaysBefore = difference -4;
-      
-      int notificationId = item.id.substring.hashCode;
-      int secondNotificationId = notificationId-4;
-      
-      if (pending.isEmpty){
-        scheduleNotification(item["name"], notificationId, dayBefore, 1);
-        scheduleNotification(item["name"], secondNotificationId, fourDaysBefore,4);
-      } else{
-      for (var n in pending){
+  for (var item in userItems.docs) {
+    DateTime current = tz.TZDateTime.now(tz.local);
+
+    DateTime expiry = item["expiryDate"].toDate();
+
+    int difference = expiry.difference(current).inDays;
+
+    int dayBefore = difference - 1;
+    int fourDaysBefore = difference - 4;
+
+    int notificationId = item.id.substring.hashCode;
+    int secondNotificationId = notificationId - 4;
+
+    if (pending.isEmpty) {
+      scheduleNotification(item["name"], notificationId, dayBefore, 1);
+      scheduleNotification(
+          item["name"], secondNotificationId, fourDaysBefore, 4);
+    } else {
+      for (var n in pending) {
         //alreayd scheduled
-        if (n.id == notificationId || n.id == secondNotificationId){
-          break;  
+        if (n.id == notificationId || n.id == secondNotificationId) {
+          break;
         }
         scheduleNotification(item["name"], notificationId, dayBefore, 1);
-        scheduleNotification(item["name"], secondNotificationId, fourDaysBefore,4);
-
+        scheduleNotification(
+            item["name"], secondNotificationId, fourDaysBefore, 4);
       }
-      }
-    }    
-    printNotifications();
+    }
   }
-bool scheduleNotification(String itemName, int notificationId, int inDays, int left){
-  NotificationService().notificationPlugin.zonedSchedule(
+  printNotifications();
+}
+
+bool scheduleNotification(
+    String itemName, int notificationId, int inDays, int left) {
+  try {
+    NotificationService().notificationPlugin.zonedSchedule(
         notificationId,
         "$itemName is going to expire in $left days!",
         "How about using it or letting someone else have it?",
         tz.TZDateTime.now(tz.local).add(Duration(days: inDays)),
         const NotificationDetails(
             android: AndroidNotificationDetails(
-              "0", 
-              "Expiry",
-              "Notify of food expiring")),
+                "0", "Expiry", "Notify of food expiring")),
         androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
-        return true;
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+  } catch (e) {
+    print("invalid date");
+  }
+  print(tz.TZDateTime.now(tz.local).add(Duration(days: inDays)));
+  return true;
 }
 
-
-
-Future<List<PendingNotificationRequest>> getPending()async{
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  List<PendingNotificationRequest> pendingNotificationRequests =await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+Future<List<PendingNotificationRequest>> getPending() async {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  List<PendingNotificationRequest> pendingNotificationRequests =
+      await flutterLocalNotificationsPlugin.pendingNotificationRequests();
   return pendingNotificationRequests;
 }
 
-void deleteNotifications() async{
+void deleteNotifications() async {
   await NotificationService().notificationPlugin.cancelAll();
 }
+
 Future<void> printNotifications() async {
   List<PendingNotificationRequest> m = await getPending();
-  for (var p in m){
+  for (var p in m) {
     print(p.title);
-
   }
 }
