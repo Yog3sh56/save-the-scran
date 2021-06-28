@@ -98,6 +98,7 @@ class _ChatContactsState extends State<ChatContacts> {
                                 //if message chain from user has not been added yet
                                 if (!alreadyProcessed.contains(ids[0])) {
                                   //create Conversation Card
+                                  print(ids[0]);
                                   var c = ConversationList(
                                     name: ids[0],
                                     messageText: item['text'],
@@ -121,8 +122,8 @@ class _ChatContactsState extends State<ChatContacts> {
                                           colorFilter: new ColorFilter.mode(
                                               Colors.white.withOpacity(0.5),
                                               BlendMode.dstATop),
-                                          image: AssetImage(
-                                              'images/doughnut.png'),
+                                          image:
+                                              AssetImage('images/doughnut.png'),
                                           fit: BoxFit.contain),
                                     ),
                                     child: const Align(
