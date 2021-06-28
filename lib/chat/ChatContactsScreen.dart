@@ -17,7 +17,14 @@ class _ChatContactsState extends State<ChatContacts> {
   List<ChatUsers> chatUsers = [];
 
   @override
+  void reassemble() {
+    // TODO: implement reassemble
+    super.reassemble();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    reassemble();
     return Scaffold(
       backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
@@ -98,7 +105,6 @@ class _ChatContactsState extends State<ChatContacts> {
                                 //if message chain from user has not been added yet
                                 if (!alreadyProcessed.contains(ids[0])) {
                                   //create Conversation Card
-                                  print(ids[0]);
                                   var c = ConversationList(
                                     name: ids[0],
                                     messageText: item['text'],
