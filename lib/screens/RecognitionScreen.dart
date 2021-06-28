@@ -26,6 +26,7 @@ class TextRecognitionWidget extends StatefulWidget {
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+  
 
   String itemName = "";
   File image;
@@ -41,15 +42,18 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      final String text = _controller.text.toLowerCase();
-      _controller.value = _controller.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
+    _controller.addListener(
+            (){}
+    //     {
+    //   final String text = _controller.text.toLowerCase();
+    //   _controller.value = _controller.value.copyWith(
+    //     text: text,
+    //     selection:
+    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
+    //     composing: TextRange.empty,
+    //   );
+    // }
+    );
   }
 
   @override
@@ -79,9 +83,10 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                 labelText: "Product Name"),
             controller: _controller,
             onChanged: (name) {
-              setState(() {
-                _controller.text = name;
-              });
+              // setState(() {
+              //   // _controller.text = name;
+              // });
+              itemName = name;
             },
           ),
           const SizedBox(height: 16),
@@ -184,6 +189,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
         widget.carryoverImage == null
             ? image
             : File(widget.carryoverImage.path));
+
     setText(text[0]);
 
     // Set the imageUrl using returned list from line 170
@@ -224,8 +230,9 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   void setText(String newText) {
     setState(() {
       _controller.text = newText;
-      itemName = newText;
+      // itemName = newText;
     });
+
   }
 
   void setDate(DateTime expiry) {
