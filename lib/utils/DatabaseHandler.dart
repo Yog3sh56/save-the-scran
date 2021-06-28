@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:location/location.dart';
 import 'package:save_the_scran/utils/LocationWrap.dart';
 
-import '../main.dart';
-
 class DbHandler {
   static pushtoMarket(
       _auth, _firestore, itemName, imageUrl, DateTime _expiry, context) async {

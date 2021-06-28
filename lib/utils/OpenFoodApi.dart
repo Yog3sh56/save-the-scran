@@ -37,8 +37,8 @@ class OpenFoodApi {
 
       // return result.product.productName;
     } else {
-      final error_bar = "product not found!";
-      return [error_bar];
+      final errorBar = "product not found!";
+      return [errorBar];
       // throw new Exception("product not found!");
     }
     }

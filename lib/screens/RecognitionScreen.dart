@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/utils/FirebaseBarcodeApi.dart';
 import 'package:save_the_scran/utils/FirebaseMLApi.dart';
 
-import '../main.dart';
 
 
 class TextRecognitionWidget extends StatefulWidget {
@@ -27,6 +26,7 @@ class TextRecognitionWidget extends StatefulWidget {
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+  
 
   String itemName = "";
   File image;
@@ -42,7 +42,9 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
+    _controller.addListener(
+            ()
+        {
       final String text = _controller.text.toLowerCase();
       _controller.value = _controller.value.copyWith(
         text: text,
@@ -50,7 +52,8 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
             TextSelection(baseOffset: text.length, extentOffset: text.length),
         composing: TextRange.empty,
       );
-    });
+    }
+    );
   }
 
   @override
@@ -83,6 +86,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
               setState(() {
                 _controller.text = name;
               });
+
             },
           ),
           const SizedBox(height: 16),
@@ -96,7 +100,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                   minimumSize: MaterialStateProperty.all(Size(
                       MediaQuery.of(context).size.width / 2,
                       MediaQuery.of(context).size.width / 6)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFc2075e)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ))),
@@ -185,13 +189,14 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
         widget.carryoverImage == null
             ? image
             : File(widget.carryoverImage.path));
+
     setText(text[0]);
 
     // Set the imageUrl using returned list from line 170
     setImageUrl(text[1]);
   }
 
-  //conect with Leon's Market
+  //connect with Leon's Market
   void pushtoMarket() async {
     if (_auth.currentUser == null) return;
     if (itemName.isEmpty) return;
@@ -227,6 +232,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       _controller.text = newText;
       itemName = newText;
     });
+
   }
 
   void setDate(DateTime expiry) {

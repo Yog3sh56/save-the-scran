@@ -3,15 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_scran/chat/ChatScreen.dart';
 
+// ignore: must_be_immutable
 class ConversationList extends StatefulWidget {
-
   static const String id = "chat_contacts";
 
   String name;
   String messageText;
   final otherPerson;
   String time;
-  bool isMessageRead=true;
+  bool isMessageRead = true;
   String itemName;
   ConversationList(
       {@required this.name,
@@ -28,7 +28,7 @@ class ConversationList extends StatefulWidget {
 class _ConversationListState extends State<ConversationList> {
   final otherPerson;
   final _firestore = FirebaseFirestore.instance;
-  final _auth  = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
 
   _ConversationListState(this.otherPerson);
   @override
@@ -50,81 +50,89 @@ class _ConversationListState extends State<ConversationList> {
                 color: Colors.red)),
         key: UniqueKey(),
         onDismissed: (DismissDirection direction) async {
-          List<String> vals = [_auth.currentUser.uid,otherPerson.toString()];
+          List<String> vals = [_auth.currentUser.uid, otherPerson.toString()];
           vals.sort();
 
-          _firestore.collection("messages")
-          .where("twoIds",isEqualTo: vals).
-          get().then((value) => value.docs.forEach((element) {
-            print(element.id);
-            _firestore.collection("messages").doc(element.id).delete();
-          }));
-        
+          _firestore
+              .collection("messages")
+              .where("twoIds", isEqualTo: vals)
+              .get()
+              .then((value) => value.docs.forEach((element) {
+                    print(element.id);
+                    _firestore.collection("messages").doc(element.id).delete();
+                  }));
+
           //_firestore.collection("items").doc(id).delete();
         },
-        child:GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ChatScreen(otherPerson: otherPerson,itemName: widget.itemName,);
-        }));
-      },
-      child: Container(
-        padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    // backgroundImage: NetworkImage(widget.imageUrl),
-                    maxRadius: 30,
-                  ),
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            widget.itemName==null?"":widget.itemName,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-
-                            widget.messageText==null?"":widget.messageText,
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey.shade600,
-                                fontWeight: widget.isMessageRead
-                                    ? FontWeight.bold
-                                    : FontWeight.normal),
-                          ),
-                        ],
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ChatScreen(
+                otherPerson: otherPerson,
+                itemName: widget.itemName,
+              );
+            }));
+          },
+          child: Container(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        // backgroundImage: NetworkImage(widget.imageUrl),
+                        child: Icon(Icons.person),
+                        foregroundColor: Colors.greenAccent[200],
+                        maxRadius: 30,
                       ),
-                    ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                widget.itemName == null ? "" : widget.itemName,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                widget.messageText == null
+                                    ? ""
+                                    : widget.messageText,
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey.shade600,
+                                    fontWeight: widget.isMessageRead
+                                        ? FontWeight.bold
+                                        : FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  widget.time == null
+                      ? ""
+                      : widget.time.toString().split(" ")[0],
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: widget.isMessageRead
+                          ? FontWeight.bold
+                          : FontWeight.normal),
+                ),
+              ],
             ),
-            Text(
-              widget.time==null?"":
-              widget.time.toString().split(" ")[0],
-              
-              style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: widget.isMessageRead
-                      ? FontWeight.bold
-                      : FontWeight.normal),
-            ),
-          ],
-        ),
-      ),
-  ));
+          ),
+        ));
   }
 }
