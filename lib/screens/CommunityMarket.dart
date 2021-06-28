@@ -78,7 +78,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                         min: 1,
                                         max: 50,
                                         value: maxDist,
-                                        divisions: 1000,
+                                        divisions: 10,
                                         label:
                                             maxDist.toInt().toString() + " km",
                                         onChanged: (changed) => setState(() {

@@ -11,7 +11,7 @@ class LocationWrap {
 
   LocationWrap._internal(){
     uLocation = getLocation();
-    _lastMaxDistance = 2000;
+    _lastMaxDistance = 10;
   }
 
 
