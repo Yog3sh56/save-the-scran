@@ -27,14 +27,11 @@ class ChooseAddMethod extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-          ),
+
           centerTitle: true,
           // backgroundColor: Colors.white,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
               gradient: LinearGradient(
                 colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
                 begin: Alignment.bottomRight,
