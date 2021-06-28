@@ -5,11 +5,11 @@ import 'package:save_the_scran/utils/LocationWrap.dart';
 
 class DbHandler {
   static pushtoMarket(
-      _auth, _firestore, itemName, imageUrl, _expiry, context) async {
+      _auth, _firestore, itemName, imageUrl, DateTime _expiry, context) async {
     if (_auth.currentUser == null) return;
     if (itemName.isEmpty) return;
     LocationData loc = await LocationWrap.getCachedLocation;
-    GeoPoint gp = GeoPoint(loc.latitude,loc.longitude);
+    GeoPoint gp = GeoPoint(loc.latitude, loc.longitude);
 
     // Changed it to account for imageUrl -- Yogi
     _firestore.collection("items").add({
@@ -19,10 +19,9 @@ class DbHandler {
       "buyDate": DateTime.now(),
       "expiryDate": _expiry,
       "inCommunity": false,
-      "location": gp, 
+      "location": gp,
     });
     Navigator.popUntil(context, (route) => route.isFirst);
     // Navigator.pushNamed(context,MyApp.id);
-
   }
 }

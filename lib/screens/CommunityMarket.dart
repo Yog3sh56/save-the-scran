@@ -76,9 +76,10 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                   return Column(children: [
                                     Slider(
                                         min: 1,
-                                        max: 4476588,
+                                        max: 4000,
+                                        // value: 20,
                                         value: maxDist,
-                                        divisions: 1000,
+                                        divisions: 10,
                                         label:
                                             maxDist.toInt().toString() + " km",
                                         onChanged: (changed) => setState(() {

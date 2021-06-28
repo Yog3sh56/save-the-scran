@@ -113,7 +113,7 @@ class _ChatContactsState extends State<ChatContacts> {
                               if (conversations.isEmpty) {
                                 return Center(
                                   child: Container(
-                                    margin: EdgeInsets.only(top: 200),
+                                    margin: EdgeInsets.only(top: 300),
                                     width: 250,
                                     height: 200,
                                     decoration: BoxDecoration(
