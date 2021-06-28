@@ -16,15 +16,8 @@ class ChooseAddMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.green, Colors.green],
-          begin: Alignment.topRight,
-          end: Alignment.topLeft,
-        )
-      ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFFc2075e),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           shape: RoundedRectangleBorder(
@@ -79,7 +72,7 @@ class ChooseAddMethod extends StatelessWidget {
                   ]),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.greenAccent[200], Colors.green],
+                      colors: [ Color(0xFFc2075e),  Color(0xFFc2075e)],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                     ),
@@ -108,7 +101,7 @@ class ChooseAddMethod extends StatelessWidget {
                   ]),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.blueAccent[100], Colors.lightBlue],
+                      colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                     ),

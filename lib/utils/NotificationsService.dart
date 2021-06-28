@@ -113,21 +113,26 @@ void scheduleNotifications() async {
 
 bool scheduleNotification(
     String itemName, int notificationId, int inDays, int left) {
-  try {
+
+
+
+    DateTime setDate = tz.TZDateTime.now(tz.local).add(Duration(days: inDays));
+    if (setDate.compareTo(DateTime.now()) < 0){
+      return false;
+    }
+
+    
     NotificationService().notificationPlugin.zonedSchedule(
         notificationId,
         "$itemName is going to expire in $left days!",
         "How about using it or letting someone else have it?",
-        tz.TZDateTime.now(tz.local).add(Duration(days: inDays)),
+        setDate,
         const NotificationDetails(
             android: AndroidNotificationDetails(
                 "0", "Expiry", "Notify of food expiring")),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
-  } catch (e) {
-    print("invalid date");
-  }
   print(tz.TZDateTime.now(tz.local).add(Duration(days: inDays)));
   return true;
 }
