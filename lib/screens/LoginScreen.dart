@@ -23,7 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.greenAccent[200],
           // title: Text("Login", style: TextStyle(color: Colors.black)),
           elevation: 0,

@@ -31,7 +31,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: Colors.black),
         // backgroundColor: Colors.grey.withOpacity(0.3),
         backgroundColor: Colors.greenAccent[200],
         // title: Text("Register", style: TextStyle(color: Colors.black)),
@@ -198,9 +199,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(height: 25),
             Center(
                 child: Text(
-                  "-OR-",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
+              "-OR-",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )),
             SizedBox(
               height: 30,
             ),
@@ -215,8 +216,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(20)),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: Colors.white),
                       height: 40,
                       width: 40,
@@ -224,29 +224,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           onPressed: () async {
                             // function to allow sign in with google credentials
 
-
                             // Trigger the authentication flow
                             final GoogleSignInAccount googleUser =
-                            await GoogleSignIn().signIn();
+                                await GoogleSignIn().signIn();
 
                             // Obtain the auth details from the request
                             final GoogleSignInAuthentication googleAuth =
-                            await googleUser.authentication;
+                                await googleUser.authentication;
 
                             // Create a new credential
-                            final credential =
-                            GoogleAuthProvider.credential(
+                            final credential = GoogleAuthProvider.credential(
                               accessToken: googleAuth.accessToken,
                               idToken: googleAuth.idToken,
                             );
                             final user = FirebaseAuth.instance
                                 .signInWithCredential(credential);
 
-
                             if (user != null) {
                               print("succesfull login");
 
-                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
                               // Navigator.pushNamed(context, MyApp.id);
 
                             }
@@ -259,16 +257,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     IconButton(
                         onPressed: () async {
-
-
                           // Trigger the sign-in flow
                           final AccessToken result =
-                          await FacebookAuth.instance.login();
+                              await FacebookAuth.instance.login();
 
                           // Create a credential from the access token
                           final facebookAuthCredential =
-                          FacebookAuthProvider.credential(result.token);
-                          try{
+                              FacebookAuthProvider.credential(result.token);
+                          try {
                             // Once signed in, return the UserCredential
                             final user = await FirebaseAuth.instance
                                 .signInWithCredential(facebookAuthCredential);
@@ -276,25 +272,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             if (user != null) {
                               print("succesfull login");
 
-                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
                               // Navigator.pushNamed(context, MyApp.id);
 
-                            }}
-                          on FirebaseAuthException catch (e){
-                            if (e.code == "account-exists-with-different-credential"){
-                              showAlert("Account already exists with different credentials, please use email or Google sign in.");
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code ==
+                                "account-exists-with-different-credential") {
+                              showAlert(
+                                  "Account already exists with different credentials, please use email or Google sign in.");
                             }
                           }
-
-                        }
-                        ,
+                        },
                         icon: SvgPicture.asset("assets/icons/Facebook.svg",
-                            width: 30,
-                            height: 30,
-                            color: Color(0xff4267B2))),
+                            width: 30, height: 30, color: Color(0xff4267B2))),
                   ],
                 ),
-
               ],
             ),
           ],
