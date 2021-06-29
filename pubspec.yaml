@@ -39,6 +39,9 @@ dependencies:
   cached_network_image: ^2.5.0
   webview_flutter: ^1.0.7
 
+  #flutter barcode scanner
+  flutter_barcode_scanner: ^1.0.2
+
 
 
   #text recognition

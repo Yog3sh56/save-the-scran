@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:save_the_scran/constants.dart';
 import 'package:save_the_scran/utils/DatabaseHandler.dart';
+import 'package:save_the_scran/utils/OpenFoodApi.dart';
 import 'package:save_the_scran/widgets/push_to_market.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +27,8 @@ class TextRecognitionWidget extends StatefulWidget {
 }
 
 class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
+  String scanRes;
+
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   
@@ -42,18 +47,15 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(
-            (setItemName)
-    //     {
-    //   final String text = _controller.text.toLowerCase();
-    //   _controller.value = _controller.value.copyWith(
-    //     text: text,
-    //     selection:
-    //         TextSelection(baseOffset: text.length, extentOffset: text.length),
-    //     composing: TextRange.empty,
-    //   );
-    // }
-    );
+    _controller.addListener(() {
+      final String text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: text,
+        selection:
+        TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
   }
 
   @override
@@ -83,7 +85,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide:
-                        BorderSide(color: Color(0xFFc2075e), width: .5)),
+                    BorderSide(color: Color(0xFFc2075e), width: .5)),
                 labelText: "Product Name"),
             controller: _controller,
             onChanged: (name) {
@@ -124,13 +126,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                             fontWeight: FontWeight.bold,
                             fontSize: 22),
                         doneStyle:
-                            TextStyle(color: Colors.white, fontSize: 16)),
+                        TextStyle(color: Colors.white, fontSize: 16)),
                     onConfirm: (date) {
-                  print('confirm $date');
-                  setState(() {
-                    _expiry = date;
-                  });
-                },
+                      print('confirm $date');
+                      setState(() {
+                        _expiry = date;
+                      });
+                    },
                     currentTime: _expiry != null ? _expiry : DateTime.now(),
                     locale: LocaleType.en);
               }),
@@ -157,13 +159,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       child: image != null
           ? Image.file(image)
           : widget.carryoverImage == null
-              ? Icon(Icons.photo_size_select_actual,
-                  size: 160, color: Colors.blue[300])
-              : Image.file(File(widget.carryoverImage.path)),
+          ? Icon(Icons.photo_size_select_actual,
+          size: 160, color: Colors.blue[300])
+          : Image.file(File(widget.carryoverImage.path)),
     );
   }
 
-  //async function to pick and set image, deprecated
+  // async function to pick and set image, deprecated
   Future pickImage() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
     setImage(File(file.path));
@@ -171,7 +173,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   //scan text on the image
   //async function returns a future
-  Future scanText() async {
+  Future  scanText() async {
     /*
     showDialog(
       context: context,
@@ -189,19 +191,54 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     }
   }
 
-  //async function to scan barcode
+  // async function to scan barcode
+  // Future scanBarcode() async {
+  //   barcodeHasBeenScanned = true;
+  //   final text = await FirebaseBarcodeApi.recogniseBar(
+  //       widget.carryoverImage == null
+  //           ? image
+  //           : File(widget.carryoverImage.path));
+  //   setText(text[0]);
+  //
+  //   // Set the imageUrl using returned list from line 170
+  //   setImageUrl(text[1]);
+  // }
+
   Future scanBarcode() async {
     barcodeHasBeenScanned = true;
-    final text = await FirebaseBarcodeApi.recogniseBar(
-        widget.carryoverImage == null
-            ? image
-            : File(widget.carryoverImage.path));
+    String scanRes = 'Platform version not found.';
 
-    setText(text[0]);
 
-    // Set the imageUrl using returned list from line 170
-    setImageUrl(text[1]);
+    try{
+      final scanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,);
+
+
+      // rawBarcode = scanRes[0].rawValue;
+
+
+      final foodname = await OpenFoodApi.getProduct(scanRes);
+
+      setText(foodname[0]);
+
+
+
+    }
+    on PlatformException{
+
+      setText(scanRes);
+    }
+    if (!mounted) return;
+
+
   }
+
+
+
+
 
   //connect with Leon's Market
   void pushtoMarket() async {
