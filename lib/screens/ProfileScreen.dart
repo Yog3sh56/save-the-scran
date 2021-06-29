@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:save_the_scran/models/Item.dart';
+import 'package:save_the_scran/screens/ScranWelcomeScreen.dart';
 import 'package:save_the_scran/utils/StorageHelper.dart';
 import 'package:save_the_scran/widgets/FoodWidgetProfile.dart';
 import 'package:save_the_scran/widgets/ProfilePicture.dart';
@@ -68,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     _auth.signOut();
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, ScranWelcomeScreen.id);
                   },
                   minWidth: 200.0,
                   height: 42.0,
