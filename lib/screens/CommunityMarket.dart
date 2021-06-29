@@ -82,6 +82,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
                                         divisions: 10,
                                         label:
                                             maxDist.toInt().toString() + " km",
+                                        
                                         onChanged: (changed) => setState(() {
                                               maxDist = changed;
                                               LocationWrap()
@@ -133,7 +134,7 @@ class _CommunityMarketScreenState extends State<CommunityMarketScreen> {
 
                                 var itemLocation = item["location"];
                                 var dist = getDistance(
-                                    snapshotOuter.data, itemLocation);
+                                    snapshotOuter.data, itemLocation) /1000;
 
                                 if (dist < maxDist &&
                                     item["ownerid"] != _auth.currentUser.uid) {

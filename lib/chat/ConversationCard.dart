@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:save_the_scran/chat/ChatScreen.dart';
 
 // ignore: must_be_immutable
-class ConversationList extends StatefulWidget {
+class ConversationCard extends StatefulWidget {
   static const String id = "chat_contacts";
 
   String name;
@@ -13,24 +13,24 @@ class ConversationList extends StatefulWidget {
   String time;
   bool isMessageRead = true;
   String itemName;
-  ConversationList(
+  ConversationCard(
       {@required this.name,
       @required this.messageText,
       @required this.time,
       @required this.otherPerson,
       @required this.itemName});
   @override
-  _ConversationListState createState() => _ConversationListState(otherPerson);
+  _ConversationCardState createState() => _ConversationCardState(otherPerson);
 }
 
 //,@required this.imageUrl
 
-class _ConversationListState extends State<ConversationList> {
+class _ConversationCardState extends State<ConversationCard> {
   final otherPerson;
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  _ConversationListState(this.otherPerson);
+  _ConversationCardState(this.otherPerson);
   @override
   Widget build(BuildContext context) {
     return Dismissible(

@@ -20,14 +20,11 @@ class ChooseAddMethod extends StatelessWidget {
         backgroundColor: Color(0xFFc2075e),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-          ),
+
           centerTitle: true,
           // backgroundColor: Colors.white,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
               gradient: LinearGradient(
                 colors: [Colors.greenAccent[200], Colors.greenAccent[200]],
                 begin: Alignment.bottomRight,
@@ -72,7 +69,7 @@ class ChooseAddMethod extends StatelessWidget {
                   ]),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [ Color(0xFFc2075e),  Color(0xFFc2075e)],
+                      colors: [ Colors.blueAccent[200],Colors.blueAccent[200]],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                     ),

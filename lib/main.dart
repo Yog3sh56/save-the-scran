@@ -12,7 +12,7 @@ import 'screens/News/NewsScreen.dart';
 import 'screens/FridgeScreen.dart';
 import 'screens/CommunityMarket.dart';
 import 'screens/TakePictureScreen.dart';
-import 'chat/ChatContactsScreen.dart';
+import 'chat/ChatListScreen.dart';
 import 'screens/ScranWelcomeScreen.dart';
 
 void main() async {

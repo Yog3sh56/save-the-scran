@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:save_the_scran/chat/ConversationCard.dart';
 import 'package:save_the_scran/models/ChatUserModel.dart';
+import 'ConversationCard.dart';
 
 class ChatContacts extends StatefulWidget {
   static const String id = "chat_contacts";
@@ -45,19 +45,7 @@ class _ChatContactsState extends State<ChatContacts> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Container(
-            //   height: MediaQuery.of(context).size.height * 0.25,
-            //   // decoration: BoxDecoration(
-            //   //   borderRadius:
-            //   //       BorderRadius.vertical(bottom: Radius.circular(18)),
-            //   color: Colors.greenAccent[200],
-            //   child: Center(
-            //       child: Text('Saviours',
-            //           style: TextStyle(
-            //             color: Colors.black,
-            //             fontSize: 24,
-            //           ))),
-            // ),
+
             Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -94,11 +82,12 @@ class _ChatContactsState extends State<ChatContacts> {
                                 for (var val in item['twoIds']) {
                                   ids.add(val.toString());
                                 }
+                                print(ids);
                                 ids.remove(_auth.currentUser?.uid);
+                                print(ids);
                                 //if message chain from user has not been added yet
                                 if (!alreadyProcessed.contains(ids[0])) {
                                   //create Conversation Card
-                                  print(ids[0]);
                                   var c = ConversationCard(
                                     name: ids[0],
                                     messageText: item['text'],
@@ -122,8 +111,8 @@ class _ChatContactsState extends State<ChatContacts> {
                                           colorFilter: new ColorFilter.mode(
                                               Colors.white.withOpacity(0.5),
                                               BlendMode.dstATop),
-                                          image:
-                                              AssetImage('images/doughnut.png'),
+                                          image: AssetImage(
+                                              'images/doughnut.png'),
                                           fit: BoxFit.contain),
                                     ),
                                     child: const Align(
