@@ -17,7 +17,14 @@ class _ChatContactsState extends State<ChatContacts> {
   List<ChatUsers> chatUsers = [];
 
   @override
+  void reassemble() {
+    // TODO: implement reassemble
+    super.reassemble();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    reassemble();
     return Scaffold(
       backgroundColor: Colors.greenAccent[200],
       appBar: AppBar(
