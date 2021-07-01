@@ -17,7 +17,7 @@ Our solution will help households to prevent food waste by implementing two stra
 Our app will therefore focus on the **prevention of food waste and redistribution of food**.
 
 ## Demo
-- 🎈This project's demo video has already been published on 🎥[Youtube](https://youtu.be/U7k1jD9Mhyc)
+- 🎈This project's demo video has already been published on 🎥[Youtube](https://www.youtube.com/watch?v=hUDbdqj3iZc)
 
 ## Features
 -	Secure login using firebase authentication🔒
