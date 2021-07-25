@@ -93,7 +93,6 @@ class _NewsScreenState extends State<NewsScreen> {
                       children: [
                         Image.asset(e,
                           // fit: BoxFit.fitHeight,
-                          color: ,
                           fit: BoxFit.contain,
                         )
                       ],
