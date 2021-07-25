@@ -81,7 +81,7 @@ class _NewsScreenState extends State<NewsScreen> {
               SizedBox(height:20),
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 200,
+                  height: 500,
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false,
                   autoPlay: true,
@@ -93,7 +93,8 @@ class _NewsScreenState extends State<NewsScreen> {
                       children: [
                         Image.asset(e,
                           // fit: BoxFit.fitHeight,
-                          fit: BoxFit.fill,
+                          color: ,
+                          fit: BoxFit.contain,
                         )
                       ],
 
@@ -101,47 +102,47 @@ class _NewsScreenState extends State<NewsScreen> {
                 )).toList(),
               ),
 
-              SizedBox(height:10),
-              Container(
-                height: 70,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-
-                child: ListView.builder(
-                  itemCount: categories.length,
-                  shrinkWrap: true,
-                  scrollDirection:Axis.horizontal,
-                  itemBuilder: (context, index){
-                    return CategoryStyle(
-                      imageUrl: categories[index].imageUrl,
-                      categoryId: categories[index].categoryId,
-                    );}
-                )
-
-              ),
-
-              SizedBox(height:10),
-              //news
-              _loading ? Center(
-                child: Container(
-                  child: CircularProgressIndicator(),
-                ),
-              ): Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-
-                child: ListView.builder(
-                  itemCount: articles.length,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context,index){
-                    return NewsStyle(
-                      imageUrl: articles[index].urlToImage,
-                      title: articles[index].title,
-                      desc: articles[index].description,
-                      url: articles[index].url
-                    );
-                  }
-                )
-              )
+              // SizedBox(height:10),
+              // Container(
+              //   height: 70,
+              //   padding: EdgeInsets.symmetric(horizontal: 16),
+              //
+              //   child: ListView.builder(
+              //     itemCount: categories.length,
+              //     shrinkWrap: true,
+              //     scrollDirection:Axis.horizontal,
+              //     itemBuilder: (context, index){
+              //       return CategoryStyle(
+              //         imageUrl: categories[index].imageUrl,
+              //         categoryId: categories[index].categoryId,
+              //       );}
+              //   )
+              //
+              // ),
+              //
+              // SizedBox(height:10),
+              // //news
+              // _loading ? Center(
+              //   child: Container(
+              //     child: CircularProgressIndicator(),
+              //   ),
+              // ): Container(
+              //     padding: EdgeInsets.symmetric(horizontal: 16),
+              //
+              //   child: ListView.builder(
+              //     itemCount: articles.length,
+              //     shrinkWrap: true,
+              //     physics: ClampingScrollPhysics(),
+              //     itemBuilder: (context,index){
+              //       return NewsStyle(
+              //         imageUrl: articles[index].urlToImage,
+              //         title: articles[index].title,
+              //         desc: articles[index].description,
+              //         url: articles[index].url
+              //       );
+              //     }
+              //   )
+              // )
             ]
           )
         ),
