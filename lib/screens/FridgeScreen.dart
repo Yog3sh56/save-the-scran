@@ -124,6 +124,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
       */
       body: Center(
         child: StreamBuilder(
+
             //the stream provides a snapshot, to pass onto the builder
             stream: _firestore
                 .collection("items")
@@ -167,8 +168,10 @@ class _FridgeScreenState extends State<FridgeScreen> {
                     ),
                     child: const Align(
                         alignment: FractionalOffset(0.5, -0.2),
-                        child: Text("It seems your fridge is empty.",
-                          style: TextStyle(fontSize: 15),)),
+                        child: Text(
+                          "It seems your fridge is empty.",
+                          style: TextStyle(fontSize: 15),
+                        )),
                   );
                 } else {
                   return ListView(children: itemText);
